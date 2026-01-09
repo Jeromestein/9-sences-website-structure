@@ -2,16 +2,18 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function DreamHunterSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   })
 
-  const x1 = useTransform(scrollYProgress, [0, 1], [0, -100])
-  const x2 = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const x1 = useTransform(scrollYProgress, [0, 1], [0, isMobile ? -30 : -100])
+  const x2 = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 30 : 100])
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 5])
 
   return (
