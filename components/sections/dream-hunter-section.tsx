@@ -2,102 +2,69 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import { useIsMobile } from "@/hooks/use-mobile"
 
 export function DreamHunterSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   })
 
-  const x1 = useTransform(scrollYProgress, [0, 1], [0, isMobile ? -30 : -100])
-  const x2 = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 30 : 100])
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 5])
+  // Subtle parallax
+  const y = useTransform(scrollYProgress, [0, 1], [30, -30])
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-offwhite py-32 md:py-48">
-      {/* Broken grid layout */}
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
-        {/* Section label - positioned unconventionally */}
-        <motion.div
+    <section id="ecosystem" ref={sectionRef} className="relative min-h-screen bg-white py-24 md:py-32 text-black">
+      <div className="mx-auto max-w-4xl px-6 md:px-12">
+        {/* Category */}
+        <motion.span
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="mb-16 md:mb-0 md:absolute md:right-12 md:top-48"
+          className="block mb-8 text-xs uppercase tracking-[0.4em] text-black/60"
         >
-          <span className="text-xs uppercase tracking-[0.4em] text-charcoal/40">The Artistic Wing</span>
-        </motion.div>
+          Cultural IP & Narrative Layer
+        </motion.span>
 
-        {/* Main title - broken across grid */}
-        <div className="relative">
-          <motion.h2
-            style={{ x: x1 }}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true }}
-            className="font-serif text-5xl font-light tracking-tight text-charcoal md:text-7xl lg:text-8xl"
-          >
-            Dream
-          </motion.h2>
-
-          <motion.h2
-            style={{ x: x2 }}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true }}
-            className="ml-auto w-fit font-serif text-5xl font-light tracking-tight text-charcoal md:mr-24 md:text-7xl lg:text-8xl"
-          >
-            Hunter
-          </motion.h2>
-        </div>
-
-        {/* Overlapping image */}
-        <motion.div
-          style={{ rotate }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="relative z-10 mx-auto my-16 w-full max-w-md md:-mt-12 md:ml-24 lg:-mt-24"
-        >
-          <div className="aspect-[3/4] overflow-hidden">
-            <img
-              src="/abstract-dreamlike-ethereal-portrait-shadow-silhou.jpg"
-              alt=""
-              className="h-full w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
-            />
-          </div>
-        </motion.div>
-
-        {/* Description text - offset position */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+        {/* Brand Name */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.4 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
-          className="ml-auto max-w-lg md:-mt-32 md:mr-12"
+          className="mb-12 font-serif text-5xl font-light tracking-tight md:text-7xl"
         >
-          <p className="text-sm font-light leading-loose text-charcoal/70 md:text-base">
-            An artistic dimension exploring dreams, symbols, and inner dialogue. Not instructional, not outcome-driven.
-            Just pure narrative—a space where the subconscious speaks through visual poetry.
-          </p>
-        </motion.div>
+          <a href="#" className="border-b border-blue-600 text-black hover:text-blue-600 transition-colors">
+            Dream Hunter
+          </a>
+        </motion.h2>
 
-        {/* Abstract decorative elements */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.1 }}
-          transition={{ duration: 2 }}
-          viewport={{ once: true }}
-          className="pointer-events-none absolute bottom-24 left-0 font-serif text-[20vw] leading-none text-charcoal"
-        >
-          91
-        </motion.div>
+        {/* Content Layout */}
+        <div className="grid gap-12 md:grid-cols-2">
+          {/* Key Offerings */}
+          <motion.ul
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="space-y-4 font-light text-black/80"
+          >
+            <li>Dream Archive</li>
+            <li>Art & storytelling</li>
+            <li>Long-term cultural IP</li>
+          </motion.ul>
+
+          {/* Tagline */}
+          <motion.div
+            style={{ y }}
+            className="flex items-center md:justify-end"
+          >
+            <p className="font-serif text-2xl italic tracking-wide text-black/60">
+              "Culture remembered."
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
