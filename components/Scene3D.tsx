@@ -24,9 +24,11 @@ function smoothstep(min: number, max: number, value: number) {
 function ScrollRig({
   explosionFactor,
   introTarget,
+  dreamTarget,
 }: {
   explosionFactor: MotionValue<number>;
   introTarget: React.MutableRefObject<HTMLElement | null>;
+  dreamTarget: React.MutableRefObject<HTMLElement | null>;
 }) {
   const { camera, pointer, scene } = useThree();
   const { scrollYProgress } = useScrollProgress();
@@ -40,12 +42,15 @@ function ScrollRig({
     const zoomPhase = THREE.MathUtils.clamp(progress / 0.3, 0, 1);
     let glowProgress = 0;
 
-    if (introTarget.current) {
-      const rect = introTarget.current.getBoundingClientRect();
+    if (introTarget.current && dreamTarget.current) {
+      const introRect = introTarget.current.getBoundingClientRect();
+      const dreamRect = dreamTarget.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight || 1;
-      const start = viewportHeight;
-      const end = -rect.height;
-      glowProgress = THREE.MathUtils.clamp((start - rect.top) / (start - end), 0, 1);
+      const start = viewportHeight * 0.9;
+      const end = viewportHeight * 0.2;
+      const denominator = Math.max(1, dreamRect.top - introRect.top + (start - end));
+      glowProgress = (start - introRect.top) / denominator;
+      glowProgress = THREE.MathUtils.clamp(glowProgress, 0, 1);
       glowProgress = smoothstep(0, 1, glowProgress);
     }
 
@@ -57,7 +62,7 @@ function ScrollRig({
     camera.position.lerp(target.current, 0.1);
     camera.lookAt(0, 0, 0);
 
-    mixedColor.current.copy(baseColor).lerp(deepColor, glowProgress);
+    mixedColor.current.copy(baseColor).lerp(deepColor, Math.pow(glowProgress, 1.2));
     scene.background = mixedColor.current;
 
     explosionFactor.set(glowProgress);
@@ -122,8 +127,9 @@ function GlowOrb({ progress }: { progress: MotionValue<number> }) {
   useFrame(() => {
     if (!spriteRef.current || !materialRef.current) return;
     const t = smoothstep(0, 1, progress.get());
-    const scale = THREE.MathUtils.lerp(0.05, 28, t);
-    const opacity = THREE.MathUtils.lerp(0, 0.9, t);
+    const eased = Math.pow(t, 2.3);
+    const scale = THREE.MathUtils.lerp(0.02, 30, eased);
+    const opacity = THREE.MathUtils.lerp(0, 0.9, smoothstep(0.05, 0.6, t));
     spriteRef.current.scale.set(scale, scale, 1);
     materialRef.current.opacity = opacity;
   });
@@ -147,6 +153,7 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
   const [target, setTarget] = React.useState<HTMLElement | null>(null);
   const explosionFactor = useMotionValue(0);
   const introTarget = React.useRef<HTMLElement | null>(null);
+  const dreamTarget = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
     if (!eventSource) {
@@ -156,6 +163,7 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
 
   React.useEffect(() => {
     introTarget.current = document.getElementById("intro");
+    dreamTarget.current = document.getElementById("dream-hunter");
   }, []);
 
   return (
@@ -188,7 +196,7 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
         <Model size={25} rotation={[0, Math.PI / 1.8, 0]} />
       </Float>
 
-      <ScrollRig explosionFactor={explosionFactor} introTarget={introTarget} />
+      <ScrollRig explosionFactor={explosionFactor} introTarget={introTarget} dreamTarget={dreamTarget} />
 
       <Environment preset="city" />
     </Canvas>
