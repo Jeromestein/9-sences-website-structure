@@ -46,10 +46,8 @@ function ScrollRig({
       const introRect = introTarget.current.getBoundingClientRect();
       const dreamRect = dreamTarget.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight || 1;
-      const start = viewportHeight * 0.9;
-      const end = viewportHeight * 0.2;
-      const denominator = Math.max(1, dreamRect.top - introRect.top + (start - end));
-      glowProgress = (start - introRect.top) / denominator;
+      const denominator = Math.max(1, dreamRect.top - introRect.top);
+      glowProgress = (viewportHeight - introRect.top) / denominator;
       glowProgress = THREE.MathUtils.clamp(glowProgress, 0, 1);
       glowProgress = smoothstep(0, 1, glowProgress);
     }
@@ -128,8 +126,8 @@ function GlowOrb({ progress }: { progress: MotionValue<number> }) {
     if (!spriteRef.current || !materialRef.current) return;
     const t = smoothstep(0, 1, progress.get());
     const eased = Math.pow(t, 2.3);
-    const scale = THREE.MathUtils.lerp(0.02, 30, eased);
-    const opacity = THREE.MathUtils.lerp(0, 0.9, smoothstep(0.05, 0.6, t));
+    const scale = THREE.MathUtils.lerp(0.01, 28, eased);
+    const opacity = THREE.MathUtils.lerp(0, 0.9, smoothstep(0.08, 0.45, t));
     spriteRef.current.scale.set(scale, scale, 1);
     materialRef.current.opacity = opacity;
   });
