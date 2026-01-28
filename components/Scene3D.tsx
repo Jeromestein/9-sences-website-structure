@@ -73,6 +73,86 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
     );
 }
 
+function ScrollScaleGroup({
+    children,
+    minScale = 1,
+    maxScale = 5,
+    headingText = 'What Is 9Sences',
+}: {
+    children: React.ReactNode;
+    minScale?: number;
+    maxScale?: number;
+    headingText?: string;
+}) {
+    const groupRef = useRef<THREE.Group>(null);
+    const scrollRange = useRef<{ start: number; end: number } | null>(null);
+
+    React.useEffect(() => {
+        const resolveRange = () => {
+            const sections = Array.from(document.querySelectorAll('main section'));
+            const heroSection = sections[0] ?? document.querySelector('section');
+            const headingNodes = Array.from(document.querySelectorAll('h1, h2, h3'));
+            const introHeading = headingNodes.find((node) => {
+                const text = node.textContent?.trim().toLowerCase();
+                return text === headingText.toLowerCase();
+            });
+            const introSection =
+                introHeading?.closest('section') ?? sections[1] ?? null;
+
+            if (!heroSection || !introSection) {
+                scrollRange.current = null;
+                return;
+            }
+
+            const heroTop = heroSection.getBoundingClientRect().top + window.scrollY;
+            const introTop = introSection.getBoundingClientRect().top + window.scrollY;
+
+            if (Number.isFinite(heroTop) && Number.isFinite(introTop) && introTop > heroTop + 1) {
+                scrollRange.current = { start: heroTop, end: introTop };
+            } else {
+                scrollRange.current = null;
+            }
+        };
+
+        const handleResize = () => {
+            resolveRange();
+        };
+
+        const handleLoad = () => {
+            resolveRange();
+        };
+
+        const rafId = window.requestAnimationFrame(resolveRange);
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('load', handleLoad);
+
+        return () => {
+            window.cancelAnimationFrame(rafId);
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('load', handleLoad);
+        };
+    }, [headingText]);
+
+    useFrame((state, delta) => {
+        if (!groupRef.current) return;
+        const range = scrollRange.current;
+        const scrollY = window.scrollY;
+        const progress = range
+            ? THREE.MathUtils.clamp((scrollY - range.start) / (range.end - range.start), 0, 1)
+            : 0;
+        const targetScale = THREE.MathUtils.lerp(minScale, maxScale, progress);
+        const nextScale = THREE.MathUtils.damp(groupRef.current.scale.x, targetScale, 3, delta);
+        groupRef.current.scale.setScalar(nextScale);
+    });
+
+    return (
+        <group ref={groupRef} scale={[minScale, minScale, minScale]}>
+            {children}
+        </group>
+    );
+}
+
 export default function Scene3D({ eventSource }: { eventSource?: React.RefObject<HTMLElement> }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const [target, setTarget] = React.useState<HTMLElement | null>(null);
@@ -106,17 +186,19 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
             <directionalLight position={[-3, 2, -2]} intensity={0.6} color={0xffffff} />
 
             {/* Float adds object-level floating separate from camera movement */}
-            <Float
-                speed={2}
-                rotationIntensity={0.2}
-                floatIntensity={0.2}
-                floatingRange={[-0.1, 0.1]}
-            >
-                <Model
-                    size={25}
-                    rotation={[0, Math.PI / 1.8, 0]}
-                />
-            </Float>
+            <ScrollScaleGroup minScale={1} maxScale={5} headingText="What Is 9Sences">
+                <Float
+                    speed={2}
+                    rotationIntensity={0.2}
+                    floatIntensity={0.2}
+                    floatingRange={[-0.1, 0.1]}
+                >
+                    <Model
+                        size={25}
+                        rotation={[0, Math.PI / 1.8, 0]}
+                    />
+                </Float>
+            </ScrollScaleGroup>
 
             <Rig />
 
