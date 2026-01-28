@@ -16,13 +16,26 @@ import { useScrollProgress } from "@/components/ScrollProgressContext";
  * 2. Ambient Drift: Continuous, subtle sine-wave movement to simulate a "handheld" or "floating" lens.
  * TODO: Add more detial to make 3D model look like better (https://sketchfab.com/3d-models/the-creation-of-adam-4d1727c7b83e4e6284bbadb63dbb537e)
  */
-function ScrollRig({ explosionFactor }: { explosionFactor: MotionValue<number> }) {
+function ScrollRig({
+  explosionFactor,
+  glowProgress,
+}: {
+  explosionFactor: MotionValue<number>;
+  glowProgress: MotionValue<number>;
+}) {
   const { camera, pointer, scene } = useThree();
   const { scrollYProgress } = useScrollProgress();
   const target = useRef(new THREE.Vector3());
   const baseColor = useMemo(() => new THREE.Color("#f6f1e8"), []);
   const deepColor = useMemo(() => new THREE.Color("#05050a"), []);
   const mixedColor = useRef(new THREE.Color());
+  const introSection = useRef<HTMLElement | null>(null);
+  const dreamSection = useRef<HTMLElement | null>(null);
+
+  React.useEffect(() => {
+    introSection.current = document.getElementById("intro-section");
+    dreamSection.current = document.getElementById("dream-hunter-section");
+  }, []);
 
   useFrame(() => {
     const progress = scrollYProgress.get();
@@ -41,6 +54,18 @@ function ScrollRig({ explosionFactor }: { explosionFactor: MotionValue<number> }
     scene.background = mixedColor.current;
 
     explosionFactor.set(explosionPhase);
+
+    if (introSection.current && dreamSection.current) {
+      const introTop = introSection.current.getBoundingClientRect().top + window.scrollY;
+      const dreamTop = dreamSection.current.getBoundingClientRect().top + window.scrollY;
+      const start = introTop - window.innerHeight;
+      const end = dreamTop - window.innerHeight;
+      const range = end - start;
+      const rawProgress = range > 0 ? (window.scrollY - start) / range : 0;
+      glowProgress.set(THREE.MathUtils.clamp(rawProgress, 0, 1));
+    } else {
+      glowProgress.set(0);
+    }
   });
 
   return null;
@@ -70,9 +95,74 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
     );
 }
 
+function GlowOrb({ progress }: { progress: MotionValue<number> }) {
+  const spriteRef = useRef<THREE.Sprite>(null);
+
+  const texture = useMemo(() => {
+    const size = 256;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+    if (!context) {
+      return new THREE.Texture();
+    }
+    const gradient = context.createRadialGradient(
+      size / 2,
+      size / 2,
+      0,
+      size / 2,
+      size / 2,
+      size / 2
+    );
+    gradient.addColorStop(0, "rgba(255, 244, 214, 1)");
+    gradient.addColorStop(0.35, "rgba(255, 220, 180, 0.9)");
+    gradient.addColorStop(0.7, "rgba(255, 220, 180, 0.3)");
+    gradient.addColorStop(1, "rgba(255, 220, 180, 0)");
+
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, size, size);
+
+    const glowTexture = new THREE.CanvasTexture(canvas);
+    glowTexture.minFilter = THREE.LinearFilter;
+    glowTexture.magFilter = THREE.LinearFilter;
+    glowTexture.needsUpdate = true;
+    return glowTexture;
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (!spriteRef.current) return;
+    const material = spriteRef.current.material as THREE.SpriteMaterial;
+    const rawProgress = progress.get();
+    const eased = THREE.MathUtils.smoothstep(rawProgress, 0, 1);
+    const pulse = 1 + Math.sin(clock.getElapsedTime() * 2.2) * 0.015;
+    const scale = THREE.MathUtils.lerp(0.05, 30, eased) * pulse;
+    spriteRef.current.scale.setScalar(scale);
+    material.opacity = THREE.MathUtils.clamp(rawProgress * 1.2, 0, 1);
+    spriteRef.current.visible = rawProgress > 0.001;
+  });
+
+  return (
+    <sprite
+      ref={spriteRef}
+      position={[0.4, 0.35, 0.3]}
+      scale={[0.05, 0.05, 0.05]}
+    >
+      <spriteMaterial
+        map={texture}
+        transparent
+        opacity={0}
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
+      />
+    </sprite>
+  );
+}
+
 export default function Scene3D({ eventSource }: { eventSource?: React.RefObject<HTMLElement> }) {
   const [target, setTarget] = React.useState<HTMLElement | null>(null);
   const explosionFactor = useMotionValue(0);
+  const glowProgress = useMotionValue(0);
 
   React.useEffect(() => {
     if (!eventSource) {
@@ -109,7 +199,9 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
         <Model size={25} rotation={[0, Math.PI / 1.8, 0]} />
       </Float>
 
-      <ScrollRig explosionFactor={explosionFactor} />
+      <GlowOrb progress={glowProgress} />
+
+      <ScrollRig explosionFactor={explosionFactor} glowProgress={glowProgress} />
 
       <Environment preset="city" />
     </Canvas>
