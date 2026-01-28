@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
+import CosmicParticles from './CosmicParticles';
+import { useScrollProgress } from './ScrollProgressContext';
 
 /**
  * Camera Rig Component
@@ -12,38 +14,33 @@ import * as THREE from 'three';
  * 2. Ambient Drift: Continuous, subtle sine-wave movement to simulate a "handheld" or "floating" lens.
  * TODO: Add more detial to make 3D model look like better (https://sketchfab.com/3d-models/the-creation-of-adam-4d1727c7b83e4e6284bbadb63dbb537e)
  */
-function Rig() {
-    const { camera, pointer } = useThree();
-    const vec = new THREE.Vector3();
+function ScrollDrivenRig({
+    explosionFactor,
+}: {
+    explosionFactor: React.MutableRefObject<number>;
+}) {
+    const { camera, scene } = useThree();
+    const { scrollYProgress } = useScrollProgress();
+    const baseBackground = useMemo(() => new THREE.Color('#f6f1e8'), []);
+    const cosmicBackground = useMemo(() => new THREE.Color('#05050f'), []);
+    const blendedBackground = useMemo(() => new THREE.Color(), []);
 
     useFrame((state) => {
-        // 1. Mouse Parallax (Interactive)
-        // Multipliers determine how much the camera moves relative to cursor
-        const parallaxX = state.pointer.x * 1.5;
-        const parallaxY = state.pointer.y * 1.5;
+        const progress = scrollYProgress.get();
+        const introPhase = THREE.MathUtils.clamp(progress / 0.3, 0, 1);
+        const explosionPhase = THREE.MathUtils.clamp((progress - 0.4) / 0.2, 0, 1);
 
-        // 2. Ambient Drift (Automatic)
-        // Uses time to create organic, non-repeating feel
-        const t = state.clock.elapsedTime;
-        const driftX = Math.sin(t * 0.3) * 0.4; // Horizontal ease
-        const driftY = Math.cos(t * 0.25) * 0.4; // Vertical ease
-        const driftZ = Math.sin(t * 0.1) * 0.5; // Subtle zoom breathing
+        const cameraZ = THREE.MathUtils.lerp(10, 2.5, introPhase);
+        const parallaxX = state.pointer.x * 0.6;
+        const parallaxY = state.pointer.y * 0.6;
 
-        // Combine inputs into target position
-        // Base Z is 8 (from initial camera prop)
-        const targetPos = new THREE.Vector3(
-            parallaxX + driftX,
-            parallaxY + driftY,
-            8 + driftZ
-        );
+        camera.position.set(parallaxX, parallaxY, cameraZ);
+        camera.lookAt(0, 0, 0);
 
-        // Smoothly interpolate (Lerp) current position to target
-        // 0.02 factor = very heavy, smooth cinematic weight
-        state.camera.position.lerp(targetPos, 0.02);
+        blendedBackground.lerpColors(baseBackground, cosmicBackground, explosionPhase);
+        scene.background = blendedBackground;
 
-        // Make camera look slightly offset from center to maintain "glance" feel
-        // or just look at center. Looking at center keeps subject in focus.
-        state.camera.lookAt(0, 0, 0);
+        explosionFactor.current = explosionPhase;
     });
 
     return null;
@@ -74,8 +71,8 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
 }
 
 export default function Scene3D({ eventSource }: { eventSource?: React.RefObject<HTMLElement> }) {
-    const containerRef = useRef<HTMLDivElement>(null);
     const [target, setTarget] = React.useState<HTMLElement | null>(null);
+    const explosionFactor = useRef(0);
 
     React.useEffect(() => {
         if (!eventSource) {
@@ -107,10 +104,10 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
 
             {/* Float adds object-level floating separate from camera movement */}
             <Float
-                speed={2}
-                rotationIntensity={0.2}
-                floatIntensity={0.2}
-                floatingRange={[-0.1, 0.1]}
+                speed={1}
+                rotationIntensity={0.1}
+                floatIntensity={0.08}
+                floatingRange={[-0.05, 0.05]}
             >
                 <Model
                     size={25}
@@ -118,7 +115,8 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
                 />
             </Float>
 
-            <Rig />
+            <CosmicParticles explosionFactor={explosionFactor} />
+            <ScrollDrivenRig explosionFactor={explosionFactor} />
 
             <Environment preset="city" />
         </Canvas>
