@@ -1,21 +1,15 @@
-import { HeroSection } from "@/components/sections/hero-section"
-import { IntroductionSection } from "@/components/sections/introduction-section"
-import { DreamHunterSection } from "@/components/sections/dream-hunter-section"
-import { MaisonSection } from "@/components/sections/maison-section"
-import { WellhausSection } from "@/components/sections/wellhaus-section"
-import { MethodologySection } from "@/components/sections/methodology-section"
-import { FooterSection } from "@/components/sections/footer-section"
+import HeroSection from "@/components/home/HeroSection"
+import IntroSection from "@/components/home/IntroSection"
+import EcosystemSection from "@/components/home/EcosystemSection"
+import MethodologySection from "@/components/home/MethodologySection"
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="flex min-h-screen flex-col w-full overflow-x-hidden bg-offwhite">
       <HeroSection />
-      <IntroductionSection />
-      <DreamHunterSection />
-      <MaisonSection />
-      <WellhausSection />
+      <IntroSection />
+      <EcosystemSection />
       <MethodologySection />
-      <FooterSection />
     </main>
   )
 }
