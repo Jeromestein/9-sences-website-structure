@@ -46,11 +46,12 @@ function ScrollRig({
       const introRect = introTarget.current.getBoundingClientRect();
       const dreamRect = dreamTarget.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight || 1;
-      const start = viewportHeight * 0.9;
-      const end = viewportHeight * 0.2;
-      const denominator = Math.max(1, dreamRect.top - introRect.top + (start - end));
-      glowProgress = (start - introRect.top) / denominator;
-      glowProgress = THREE.MathUtils.clamp(glowProgress, 0, 1);
+      const scrollY = window.scrollY || 0;
+      const introOffset = scrollY + introRect.top;
+      const dreamOffset = scrollY + dreamRect.top;
+      const range = Math.max(1, dreamOffset - introOffset);
+      const rawProgress = (scrollY + viewportHeight - introOffset) / range;
+      glowProgress = THREE.MathUtils.clamp(rawProgress, 0, 1);
       glowProgress = smoothstep(0, 1, glowProgress);
     }
 
@@ -113,9 +114,9 @@ function GlowOrb({ progress }: { progress: MotionValue<number> }) {
         size / 2,
         size / 2
       );
-      gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-      gradient.addColorStop(0.4, "rgba(255, 248, 240, 0.7)");
-      gradient.addColorStop(1, "rgba(255, 248, 240, 0)");
+      gradient.addColorStop(0, "rgba(28, 18, 16, 0.9)");
+      gradient.addColorStop(0.35, "rgba(30, 20, 18, 0.6)");
+      gradient.addColorStop(1, "rgba(10, 6, 6, 0)");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, size, size);
     }
@@ -128,8 +129,8 @@ function GlowOrb({ progress }: { progress: MotionValue<number> }) {
     if (!spriteRef.current || !materialRef.current) return;
     const t = smoothstep(0, 1, progress.get());
     const eased = Math.pow(t, 2.3);
-    const scale = THREE.MathUtils.lerp(0.02, 30, eased);
-    const opacity = THREE.MathUtils.lerp(0, 0.9, smoothstep(0.05, 0.6, t));
+    const scale = THREE.MathUtils.lerp(0.004, 28, eased);
+    const opacity = THREE.MathUtils.lerp(0, 0.75, smoothstep(0.02, 0.6, t));
     spriteRef.current.scale.set(scale, scale, 1);
     materialRef.current.opacity = opacity;
   });
@@ -139,11 +140,11 @@ function GlowOrb({ progress }: { progress: MotionValue<number> }) {
       <spriteMaterial
         ref={materialRef}
         map={texture}
-        color={new THREE.Color("#fff8f0")}
+        color={new THREE.Color("#2a1b16")}
         transparent
         opacity={0}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={THREE.NormalBlending}
       />
     </sprite>
   );
