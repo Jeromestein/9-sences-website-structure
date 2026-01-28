@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function WellhausLayer() {
     return (
-        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 bg-void text-offwhite overflow-hidden">
+        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 text-offwhite overflow-hidden">
             {/* Bio-lume accent */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-bio-lume/5 blur-[120px] rounded-full pointer-events-none" />
 

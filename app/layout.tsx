@@ -47,8 +47,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased">
-        <Scene3D />
+      <body className="font-sans antialiased relative">
+        <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
+          <Scene3D />
+          {/* eventSource handling might be needed if we want interaction, but for background 'pointer-events-none' is good for the wrapper so it doesn't block clicks.
+               If Scene3D needs mouse for parallax, it listens to window by default or we can pass a ref. 
+               However, if the wrapper is pointer-events-none, the Canvas might not receive events if it relies on its own DOM element. 
+               R3F usually attaches to the canvas. 
+               Let's try just the fixed positioning first. The parallax depends on `state.pointer`.
+               If the canvas is covered by content, we might need to use `eventSource={document.body}` (in client comp)
+           */}
+        </div>
         <SmoothScroll>
           {children}
         </SmoothScroll>

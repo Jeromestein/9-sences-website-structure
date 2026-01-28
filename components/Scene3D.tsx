@@ -73,10 +73,20 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
     );
 }
 
-export default function Scene3D({ eventSource }: { eventSource?: React.RefObject<any> }) {
+export default function Scene3D({ eventSource }: { eventSource?: React.RefObject<HTMLElement> }) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [target, setTarget] = React.useState<HTMLElement | null>(null);
+
+    React.useEffect(() => {
+        if (!eventSource) {
+            setTarget(document.body);
+        }
+    }, [eventSource]);
+
     return (
         <Canvas
-            eventSource={eventSource}
+            // Connect to body to capture mouse events even if overlaying content blocks the canvas
+            eventSource={eventSource && eventSource.current ? eventSource : ({ current: target } as any)}
             eventPrefix="client"
             camera={{ position: [0, 0, 10], fov: 45 }}
             gl={{
@@ -88,6 +98,7 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
             }}
             dpr={[1, 2]}
             className="w-full h-full"
+            style={{ pointerEvents: 'none' }} // Ensure the canvas itself doesn't block clicks
         >
             {/* Key Light */}
             <directionalLight position={[3, 4, 2]} intensity={2.0} color={0xffffff} />

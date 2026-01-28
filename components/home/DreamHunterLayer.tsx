@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function DreamHunterLayer() {
     return (
-        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 bg-background text-foreground overflow-hidden">
+        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 text-foreground overflow-hidden">
             <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 {/* Content Side */}
                 <motion.div

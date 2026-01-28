@@ -5,7 +5,7 @@ import { ArrowDown } from "lucide-react"
 
 export default function HeroSection() {
     return (
-        <section className="relative h-screen w-full flex flex-col justify-between p-8 md:p-12 lg:p-16 bg-background text-foreground">
+        <section className="relative h-screen w-full flex flex-col justify-between p-8 md:p-12 lg:p-16 text-foreground">
             {/* Header / Logo Component could go here, but putting text for now as per minimal requirement */}
             <header className="flex justify-between items-start">
                 <h1 className="font-serif text-2xl md:text-3xl tracking-tight">9Sences</h1>
