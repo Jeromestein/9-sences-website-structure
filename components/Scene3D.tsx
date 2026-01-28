@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Float, useGLTF } from "@react-three/drei";
 import type { MotionValue } from "framer-motion";
@@ -8,6 +8,9 @@ import { useMotionValue } from "framer-motion";
 import * as THREE from "three";
 import CosmicParticles from "@/components/CosmicParticles";
 import { useScrollProgress } from "@/components/ScrollProgressContext";
+
+const INTRO_SECTION_ID = "what-is-9sences";
+const DREAM_HUNTER_SECTION_ID = "dream-hunter";
 
 /**
  * Camera Rig Component
@@ -44,6 +47,95 @@ function ScrollRig({ explosionFactor }: { explosionFactor: MotionValue<number> }
   });
 
   return null;
+}
+
+function GlowOrb() {
+  const spriteRef = useRef<THREE.Sprite>(null);
+  const materialRef = useRef<THREE.SpriteMaterial>(null);
+  const introSectionRef = useRef<HTMLElement | null>(null);
+  const dreamHunterSectionRef = useRef<HTMLElement | null>(null);
+
+  const glowTexture = useMemo(() => {
+    const size = 256;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+
+    if (context) {
+      const gradient = context.createRadialGradient(
+        size / 2,
+        size / 2,
+        0,
+        size / 2,
+        size / 2,
+        size / 2
+      );
+      gradient.addColorStop(0, "rgba(255, 242, 214, 1)");
+      gradient.addColorStop(0.35, "rgba(255, 236, 200, 0.8)");
+      gradient.addColorStop(0.7, "rgba(255, 226, 170, 0.25)");
+      gradient.addColorStop(1, "rgba(255, 226, 170, 0)");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, size, size);
+    }
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }, []);
+
+  useEffect(() => {
+    introSectionRef.current = document.getElementById(INTRO_SECTION_ID);
+    dreamHunterSectionRef.current = document.getElementById(DREAM_HUNTER_SECTION_ID);
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (!spriteRef.current || !materialRef.current) {
+      return;
+    }
+
+    const introSection = introSectionRef.current;
+    const dreamHunterSection = dreamHunterSectionRef.current;
+
+    if (!introSection || !dreamHunterSection) {
+      return;
+    }
+
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.scrollY || window.pageYOffset;
+
+    const introTop = introSection.getBoundingClientRect().top + scrollY;
+    const dreamHunterTop = dreamHunterSection.getBoundingClientRect().top + scrollY;
+
+    const start = introTop - viewportHeight;
+    const end = dreamHunterTop - viewportHeight;
+    const range = Math.max(end - start, 1);
+    const rawProgress = (scrollY - start) / range;
+    const progress = THREE.MathUtils.clamp(rawProgress, 0, 1);
+    const eased = THREE.MathUtils.smoothstep(progress, 0, 1);
+
+    const pulse = 1 + Math.sin(clock.elapsedTime * 2.2) * 0.02;
+    const scale = THREE.MathUtils.lerp(0.08, 28, eased) * pulse;
+
+    spriteRef.current.scale.setScalar(scale);
+    materialRef.current.opacity = THREE.MathUtils.lerp(0, 1, eased);
+    spriteRef.current.visible = materialRef.current.opacity > 0.001;
+  });
+
+  return (
+    <sprite ref={spriteRef} position={[0.6, 0.1, 0.6]}>
+      <spriteMaterial
+        ref={materialRef}
+        map={glowTexture}
+        color={new THREE.Color("#fff4df")}
+        transparent
+        opacity={0}
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+        depthTest={true}
+      />
+    </sprite>
+  );
 }
 
 interface ModelProps {
@@ -107,6 +199,7 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
       {/* Float adds object-level floating separate from camera movement */}
       <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2} floatingRange={[-0.1, 0.1]}>
         <Model size={25} rotation={[0, Math.PI / 1.8, 0]} />
+        <GlowOrb />
       </Float>
 
       <ScrollRig explosionFactor={explosionFactor} />
