@@ -12,7 +12,7 @@ export default function MaisonLayer() {
             <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 {/* Visual / Sanctuary Side - Left */}
                 <motion.div
-                    initial={{ opacity: 0, opacity: 0 }}
+                    initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1 }}
