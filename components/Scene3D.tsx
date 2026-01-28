@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useGLTF, Environment, Float } from '@react-three/drei';
-import * as THREE from 'three';
+import React, { useMemo, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Environment, Float, useGLTF } from "@react-three/drei";
+import type { MotionValue } from "framer-motion";
+import { useMotionValue } from "framer-motion";
+import * as THREE from "three";
+import CosmicParticles from "@/components/CosmicParticles";
+import { useScrollProgress } from "@/components/ScrollProgressContext";
 
 /**
  * Camera Rig Component
@@ -12,41 +16,34 @@ import * as THREE from 'three';
  * 2. Ambient Drift: Continuous, subtle sine-wave movement to simulate a "handheld" or "floating" lens.
  * TODO: Add more detial to make 3D model look like better (https://sketchfab.com/3d-models/the-creation-of-adam-4d1727c7b83e4e6284bbadb63dbb537e)
  */
-function Rig() {
-    const { camera, pointer } = useThree();
-    const vec = new THREE.Vector3();
+function ScrollRig({ explosionFactor }: { explosionFactor: MotionValue<number> }) {
+  const { camera, pointer, scene } = useThree();
+  const { scrollYProgress } = useScrollProgress();
+  const target = useRef(new THREE.Vector3());
+  const baseColor = useMemo(() => new THREE.Color("#f6f1e8"), []);
+  const deepColor = useMemo(() => new THREE.Color("#05050a"), []);
+  const mixedColor = useRef(new THREE.Color());
 
-    useFrame((state) => {
-        // 1. Mouse Parallax (Interactive)
-        // Multipliers determine how much the camera moves relative to cursor
-        const parallaxX = state.pointer.x * 1.5;
-        const parallaxY = state.pointer.y * 1.5;
+  useFrame(() => {
+    const progress = scrollYProgress.get();
+    const zoomPhase = THREE.MathUtils.clamp(progress / 0.3, 0, 1);
+    const explosionPhase = THREE.MathUtils.clamp((progress - 0.4) / 0.2, 0, 1);
 
-        // 2. Ambient Drift (Automatic)
-        // Uses time to create organic, non-repeating feel
-        const t = state.clock.elapsedTime;
-        const driftX = Math.sin(t * 0.3) * 0.4; // Horizontal ease
-        const driftY = Math.cos(t * 0.25) * 0.4; // Vertical ease
-        const driftZ = Math.sin(t * 0.1) * 0.5; // Subtle zoom breathing
+    const cameraZ = THREE.MathUtils.lerp(10, 2.5, zoomPhase);
+    const parallaxX = pointer.x * 0.6;
+    const parallaxY = pointer.y * 0.6;
 
-        // Combine inputs into target position
-        // Base Z is 8 (from initial camera prop)
-        const targetPos = new THREE.Vector3(
-            parallaxX + driftX,
-            parallaxY + driftY,
-            8 + driftZ
-        );
+    target.current.set(parallaxX, parallaxY, cameraZ);
+    camera.position.lerp(target.current, 0.1);
+    camera.lookAt(0, 0, 0);
 
-        // Smoothly interpolate (Lerp) current position to target
-        // 0.02 factor = very heavy, smooth cinematic weight
-        state.camera.position.lerp(targetPos, 0.02);
+    mixedColor.current.copy(baseColor).lerp(deepColor, explosionPhase);
+    scene.background = mixedColor.current;
 
-        // Make camera look slightly offset from center to maintain "glance" feel
-        // or just look at center. Looking at center keeps subject in focus.
-        state.camera.lookAt(0, 0, 0);
-    });
+    explosionFactor.set(explosionPhase);
+  });
 
-    return null;
+  return null;
 }
 
 interface ModelProps {
@@ -74,55 +71,49 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
 }
 
 export default function Scene3D({ eventSource }: { eventSource?: React.RefObject<HTMLElement> }) {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [target, setTarget] = React.useState<HTMLElement | null>(null);
+  const [target, setTarget] = React.useState<HTMLElement | null>(null);
+  const explosionFactor = useMotionValue(0);
 
-    React.useEffect(() => {
-        if (!eventSource) {
-            setTarget(document.body);
-        }
-    }, [eventSource]);
+  React.useEffect(() => {
+    if (!eventSource) {
+      setTarget(document.body);
+    }
+  }, [eventSource]);
 
-    return (
-        <Canvas
-            // Connect to body to capture mouse events even if overlaying content blocks the canvas
-            eventSource={eventSource && eventSource.current ? eventSource : ({ current: target } as any)}
-            eventPrefix="client"
-            camera={{ position: [0, 0, 10], fov: 45 }}
-            gl={{
-                antialias: true,
-                alpha: true,
-                toneMapping: THREE.ACESFilmicToneMapping,
-                toneMappingExposure: 1.1,
-                outputColorSpace: THREE.SRGBColorSpace
-            }}
-            dpr={[1, 2]}
-            className="w-full h-full"
-            style={{ pointerEvents: 'none' }} // Ensure the canvas itself doesn't block clicks
-        >
-            {/* Key Light */}
-            <directionalLight position={[3, 4, 2]} intensity={2.0} color={0xffffff} />
-            {/* Fill Light */}
-            <directionalLight position={[-3, 2, -2]} intensity={0.6} color={0xffffff} />
+  return (
+    <Canvas
+      // Connect to body to capture mouse events even if overlaying content blocks the canvas
+      eventSource={eventSource && eventSource.current ? eventSource : ({ current: target } as any)}
+      eventPrefix="client"
+      camera={{ position: [0, 0, 10], fov: 45 }}
+      gl={{
+        antialias: true,
+        alpha: true,
+        toneMapping: THREE.ACESFilmicToneMapping,
+        toneMappingExposure: 1.1,
+        outputColorSpace: THREE.SRGBColorSpace,
+      }}
+      dpr={[1, 2]}
+      className="w-full h-full"
+      style={{ pointerEvents: "none" }} // Ensure the canvas itself doesn't block clicks
+    >
+      {/* Key Light */}
+      <directionalLight position={[3, 4, 2]} intensity={2.0} color={0xffffff} />
+      {/* Fill Light */}
+      <directionalLight position={[-3, 2, -2]} intensity={0.6} color={0xffffff} />
 
-            {/* Float adds object-level floating separate from camera movement */}
-            <Float
-                speed={2}
-                rotationIntensity={0.2}
-                floatIntensity={0.2}
-                floatingRange={[-0.1, 0.1]}
-            >
-                <Model
-                    size={25}
-                    rotation={[0, Math.PI / 1.8, 0]}
-                />
-            </Float>
+      <CosmicParticles explosionFactor={explosionFactor} />
 
-            <Rig />
+      {/* Float adds object-level floating separate from camera movement */}
+      <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2} floatingRange={[-0.1, 0.1]}>
+        <Model size={25} rotation={[0, Math.PI / 1.8, 0]} />
+      </Float>
 
-            <Environment preset="city" />
-        </Canvas>
-    );
+      <ScrollRig explosionFactor={explosionFactor} />
+
+      <Environment preset="city" />
+    </Canvas>
+  );
 }
 
 // Preload the model
