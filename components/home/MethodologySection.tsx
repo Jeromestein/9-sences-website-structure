@@ -22,7 +22,7 @@ export default function MethodologySection() {
     ]
 
     return (
-        <section className="w-full py-24 md:py-32 px-8 md:px-12 lg:px-16 bg-offwhite text-charcoal border-t border-charcoal/10">
+        <section className="w-full py-24 md:py-32 px-8 md:px-12 lg:px-16 bg-background text-foreground border-t border-white/10">
             <div className="max-w-screen-xl mx-auto space-y-16">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export default function MethodologySection() {
                     How We Work
                 </motion.h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-charcoal/30 pt-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-12">
                     {pillars.map((pillar, index) => (
                         <motion.div
                             key={pillar.title}

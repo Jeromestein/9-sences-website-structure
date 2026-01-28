@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function MaisonLayer() {
     return (
-        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 bg-stone text-charcoal">
+        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 bg-charcoal text-stone">
             {/* Background accent to evoke 'Sanctuary/Warmth' */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-sage/5 to-transparent pointer-events-none" />
 

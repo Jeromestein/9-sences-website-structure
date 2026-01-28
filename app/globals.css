@@ -15,26 +15,26 @@
   --charcoal: #1c1c1c;
   --amber: #d4a574;
 
-  /* System tokens */
-  --background: var(--offwhite);
-  --foreground: var(--charcoal);
-  --card: var(--offwhite);
-  --card-foreground: var(--charcoal);
-  --popover: var(--offwhite);
-  --popover-foreground: var(--charcoal);
-  --primary: var(--charcoal);
-  --primary-foreground: var(--offwhite);
-  --secondary: var(--stone);
-  --secondary-foreground: var(--charcoal);
-  --muted: var(--stone);
-  --muted-foreground: #6b6b6b;
+  /* System tokens - Defaulting to Dark/Void Theme */
+  --background: var(--void);
+  --foreground: var(--stone);
+  --card: var(--charcoal);
+  --card-foreground: var(--stone);
+  --popover: var(--charcoal);
+  --popover-foreground: var(--stone);
+  --primary: var(--stone);
+  --primary-foreground: var(--charcoal);
+  --secondary: var(--charcoal);
+  --secondary-foreground: var(--stone);
+  --muted: var(--charcoal);
+  --muted-foreground: #a1a1aa;
   --accent: var(--sage);
   --accent-foreground: var(--charcoal);
-  --destructive: #dc2626;
+  --destructive: #7f1d1d;
   --destructive-foreground: var(--offwhite);
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: var(--charcoal);
+  --border: #333333;
+  --input: #333333;
+  --ring: var(--sage);
   --radius: 0rem;
   --bio-lume: #ccff00;
 }
@@ -129,6 +129,8 @@
 
   body {
     @apply bg-background text-foreground;
+    background-color: var(--void) !important;
+    color: var(--stone) !important;
   }
 }
 

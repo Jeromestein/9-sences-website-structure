@@ -20,7 +20,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-white text-black">
+    <section className="relative h-screen w-full overflow-hidden bg-background text-foreground">
       {/* Logo */}
       <motion.div
         initial={{ opacity: 0 }}
