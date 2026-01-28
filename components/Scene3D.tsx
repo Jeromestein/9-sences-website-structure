@@ -46,6 +46,85 @@ function ScrollRig({ explosionFactor }: { explosionFactor: MotionValue<number> }
   return null;
 }
 
+function smoothstep(edge0: number, edge1: number, value: number) {
+  const t = THREE.MathUtils.clamp((value - edge0) / (edge1 - edge0), 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
+function GlowOrb({ progressRef }: { progressRef: React.MutableRefObject<number> }) {
+  const spriteRef = useRef<THREE.Sprite>(null);
+  const texture = useMemo(() => {
+    const size = 128;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+    if (context) {
+      const gradient = context.createRadialGradient(
+        size / 2,
+        size / 2,
+        0,
+        size / 2,
+        size / 2,
+        size / 2
+      );
+      gradient.addColorStop(0, "rgba(255, 245, 235, 1)");
+      gradient.addColorStop(0.4, "rgba(255, 230, 200, 0.75)");
+      gradient.addColorStop(0.7, "rgba(255, 210, 170, 0.35)");
+      gradient.addColorStop(1, "rgba(255, 210, 170, 0)");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, size, size);
+    }
+    const glowTexture = new THREE.CanvasTexture(canvas);
+    glowTexture.colorSpace = THREE.SRGBColorSpace;
+    return glowTexture;
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (!spriteRef.current) return;
+    const progress = THREE.MathUtils.clamp(progressRef.current, 0, 1);
+    const scale = THREE.MathUtils.lerp(0.05, 24, progress);
+    const opacity = smoothstep(0.02, 0.18, progress);
+    const pulse = 1 + Math.sin(clock.getElapsedTime() * 2.2) * 0.03;
+    spriteRef.current.scale.setScalar(scale * pulse);
+    const material = spriteRef.current.material as THREE.SpriteMaterial;
+    material.opacity = opacity;
+  });
+
+  return (
+    <sprite ref={spriteRef} position={[0.05, 0.15, 0.6]}>
+      <spriteMaterial
+        map={texture}
+        transparent
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
+        opacity={0}
+      />
+    </sprite>
+  );
+}
+
+function GlowProgressController({
+  progressRef,
+  scrollRangeRef,
+}: {
+  progressRef: React.MutableRefObject<number>;
+  scrollRangeRef: React.MutableRefObject<{ start: number; end: number }>;
+}) {
+  useFrame(() => {
+    const { start, end } = scrollRangeRef.current;
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) {
+      progressRef.current = 0;
+      return;
+    }
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const progress = (scrollBottom - start) / (end - start);
+    progressRef.current = THREE.MathUtils.clamp(progress, 0, 1);
+  });
+
+  return null;
+}
+
 interface ModelProps {
     size?: number;
     rotation?: [number, number, number];
@@ -73,12 +152,32 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
 export default function Scene3D({ eventSource }: { eventSource?: React.RefObject<HTMLElement> }) {
   const [target, setTarget] = React.useState<HTMLElement | null>(null);
   const explosionFactor = useMotionValue(0);
+  const glowProgressRef = useRef(0);
+  const scrollRangeRef = useRef({ start: Number.NaN, end: Number.NaN });
 
   React.useEffect(() => {
     if (!eventSource) {
       setTarget(document.body);
     }
   }, [eventSource]);
+
+  React.useEffect(() => {
+    const introSection = document.querySelector<HTMLElement>("[data-glow-start]");
+    const dreamSection = document.querySelector<HTMLElement>("[data-glow-end]");
+
+    const updateRange = () => {
+      if (!introSection || !dreamSection) return;
+      const introTop = introSection.getBoundingClientRect().top + window.scrollY;
+      const dreamTop = dreamSection.getBoundingClientRect().top + window.scrollY;
+      scrollRangeRef.current = { start: introTop, end: dreamTop };
+    };
+
+    updateRange();
+    window.addEventListener("resize", updateRange);
+    return () => {
+      window.removeEventListener("resize", updateRange);
+    };
+  }, []);
 
   return (
     <Canvas
@@ -108,6 +207,9 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
       <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2} floatingRange={[-0.1, 0.1]}>
         <Model size={25} rotation={[0, Math.PI / 1.8, 0]} />
       </Float>
+
+      <GlowOrb progressRef={glowProgressRef} />
+      <GlowProgressController progressRef={glowProgressRef} scrollRangeRef={scrollRangeRef} />
 
       <ScrollRig explosionFactor={explosionFactor} />
 
