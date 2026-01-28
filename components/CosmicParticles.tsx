@@ -23,7 +23,8 @@ void main() {
   gl_PointSize = aSize * (1.0 + uExplosionFactor * 2.0);
   gl_PointSize *= (300.0 / -viewPosition.z);
 
-  vOpacity = 1.0 - uExplosionFactor * 0.2;
+  float appear = smoothstep(0.02, 0.2, uExplosionFactor);
+  vOpacity = appear * (1.0 - uExplosionFactor * 0.2);
 }
 `;
 

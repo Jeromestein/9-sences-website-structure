@@ -4,7 +4,10 @@ import { motion } from "framer-motion"
 
 export default function IntroSection() {
     return (
-        <section className="w-full min-h-[160vh] py-24 md:py-32 px-8 md:px-12 lg:px-16 text-foreground border-b border-white/10">
+        <section
+            id="intro"
+            className="w-full min-h-[160vh] py-24 md:py-32 px-8 md:px-12 lg:px-16 text-foreground border-b border-white/10"
+        >
             <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
                 <div className="md:col-span-4">
                     <motion.h3
