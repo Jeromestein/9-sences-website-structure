@@ -2,13 +2,26 @@
 
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
+import Image from "next/image"
 
 export default function HeroSection() {
     return (
         <section className="relative h-screen w-full flex flex-col justify-between p-8 md:p-12 lg:p-16 text-foreground">
-            {/* Header / Logo Component could go here, but putting text for now as per minimal requirement */}
-            <header className="flex justify-between items-start">
-                <h1 className="font-serif text-2xl md:text-3xl tracking-tight text-foreground font-medium">9Sences</h1>
+            {/* Header / Logo */}
+            <header className="flex items-start justify-between gap-6">
+                <div className="flex items-center">
+                    <div className="relative w-36 sm:w-44 md:w-52 lg:w-60 aspect-[816/328]">
+                        <Image
+                            src="/logo_transparent_light_v3.png"
+                            alt=""
+                            fill
+                            priority
+                            sizes="(min-width: 1024px) 15rem, (min-width: 768px) 13rem, 9rem"
+                            aria-hidden="true"
+                        />
+                    </div>
+                    <span className="sr-only">9Sences</span>
+                </div>
             </header>
 
             {/* Main Content */}
