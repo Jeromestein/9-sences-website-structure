@@ -73,81 +73,152 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
     );
 }
 
-function ScrollScaleGroup({
+function HandScrollAnimator({
     children,
-    minScale = 1,
-    maxScale = 5,
-    headingText = 'What Is 9Sences',
+    introHeadingText = 'What Is 9Sences',
+    targetSectionId = 'ecosystem', // Dream Hunter section ID
 }: {
     children: React.ReactNode;
-    minScale?: number;
-    maxScale?: number;
-    headingText?: string;
+    introHeadingText?: string;
+    targetSectionId?: string;
 }) {
     const groupRef = useRef<THREE.Group>(null);
-    const scrollRange = useRef<{ start: number; end: number } | null>(null);
+    const scrollRanges = useRef<{
+        introStart: number;
+        introEnd: number;
+        targetStart: number;
+        targetEnd: number;
+    } | null>(null);
 
     React.useEffect(() => {
-        const resolveRange = () => {
-            const sections = Array.from(document.querySelectorAll('main section'));
-            const heroSection = sections[0] ?? document.querySelector('section');
+        const resolveRanges = () => {
+            // 1. Find Intro Section ("What Is 9Sences")
             const headingNodes = Array.from(document.querySelectorAll('h1, h2, h3'));
             const introHeading = headingNodes.find((node) => {
                 const text = node.textContent?.trim().toLowerCase();
-                return text === headingText.toLowerCase();
+                return text === introHeadingText.toLowerCase();
             });
-            const introSection =
-                introHeading?.closest('section') ?? sections[1] ?? null;
+            const introSection = introHeading?.closest('section');
 
-            if (!heroSection || !introSection) {
-                scrollRange.current = null;
+            // 2. Find Target Section ("Dream Hunter" / ID: ecosystem)
+            const targetElement = document.getElementById(targetSectionId);
+            const targetSection = targetElement?.closest('section') ?? targetElement;
+
+            // 3. Find Hero/Start (Top of page)
+            const startY = 0;
+
+            if (!introSection || !targetSection) {
+                console.warn('HandScrollAnimator: Sections not found', { introSection, targetSection });
+                scrollRanges.current = null;
                 return;
             }
 
-            const heroTop = heroSection.getBoundingClientRect().top + window.scrollY;
-            const introTop = introSection.getBoundingClientRect().top + window.scrollY;
+            const getAbsTop = (el: Element) => el.getBoundingClientRect().top + window.scrollY;
 
-            if (Number.isFinite(heroTop) && Number.isFinite(introTop) && introTop > heroTop + 1) {
-                scrollRange.current = { start: heroTop, end: introTop };
-            } else {
-                scrollRange.current = null;
+            // Intro Range: Start -> Intro Section
+            const introTop = getAbsTop(introSection);
+
+            // Target Range: Intro Section -> Target Section
+            const targetTop = getAbsTop(targetSection);
+
+            // Safety check
+            if (introTop > startY && targetTop > introTop) {
+                scrollRanges.current = {
+                    introStart: startY,
+                    introEnd: introTop,
+                    targetStart: introTop,
+                    targetEnd: targetTop, // Start fading out as we approach this
+                };
             }
         };
 
-        const handleResize = () => {
-            resolveRange();
-        };
-
-        const handleLoad = () => {
-            resolveRange();
-        };
-
-        const rafId = window.requestAnimationFrame(resolveRange);
-
+        const handleResize = () => resolveRanges();
+        // Delay slightly to ensure layout is settled
+        const timer = setTimeout(resolveRanges, 500);
         window.addEventListener('resize', handleResize);
-        window.addEventListener('load', handleLoad);
 
         return () => {
-            window.cancelAnimationFrame(rafId);
+            clearTimeout(timer);
             window.removeEventListener('resize', handleResize);
-            window.removeEventListener('load', handleLoad);
         };
-    }, [headingText]);
+    }, [introHeadingText, targetSectionId]);
 
     useFrame((state, delta) => {
-        if (!groupRef.current) return;
-        const range = scrollRange.current;
+        if (!groupRef.current || !scrollRanges.current) return;
+
+        const { introStart, introEnd, targetStart, targetEnd } = scrollRanges.current;
         const scrollY = window.scrollY;
-        const progress = range
-            ? THREE.MathUtils.clamp((scrollY - range.start) / (range.end - range.start), 0, 1)
-            : 0;
-        const targetScale = THREE.MathUtils.lerp(minScale, maxScale, progress);
-        const nextScale = THREE.MathUtils.damp(groupRef.current.scale.x, targetScale, 3, delta);
+
+        let targetScale = 2.5; // Default base scale
+        let targetOpacity = 1.0;
+        let targetEmissive = 0.0;
+
+        if (scrollY < introEnd) {
+            // PHASE 1: Start -> Intro (Scale 25 -> 125)
+            // Normalized progress 0 -> 1
+            const progress = THREE.MathUtils.clamp(
+                (scrollY - introStart) / (introEnd - introStart),
+                0,
+                1
+            );
+            // Ease in out for smoother start
+            const eased = THREE.MathUtils.smoothstep(progress, 0, 1);
+
+            // Note: The Model component multiplies this scale by its own size (25). 
+            // So if we want 25 -> 125, we need multipliers 1 -> 5.
+            targetScale = THREE.MathUtils.lerp(1, 5, eased);
+
+        } else {
+            // PHASE 2: Intro -> Dream Hunter (Scale 125 -> 300, Fade Out, Glow)
+            const progress = THREE.MathUtils.clamp(
+                (scrollY - targetStart) / (targetEnd - targetStart) * 1.5, // Accelerate slightly
+                0,
+                1
+            );
+
+            // Scale: 5 -> 12 (Result: 125 -> 300)
+            targetScale = THREE.MathUtils.lerp(5, 12, progress);
+
+            // Opacity: 1 -> 0
+            // We want it to be fully gone slightly before the end
+            targetOpacity = THREE.MathUtils.lerp(1, 0, THREE.MathUtils.smoothstep(progress, 0.2, 0.9));
+
+            // Glow: 0 -> 2
+            targetEmissive = THREE.MathUtils.lerp(0, 5, THREE.MathUtils.smoothstep(progress, 0, 0.8));
+        }
+
+        // Apply Scale with Damping
+        const currentScale = groupRef.current.scale.x;
+        const nextScale = THREE.MathUtils.damp(currentScale, targetScale, 3, delta);
         groupRef.current.scale.setScalar(nextScale);
+
+        // Apply Material Effects (Opacity & Emissive)
+        groupRef.current.traverse((child) => {
+            if (child instanceof THREE.Mesh && child.material) {
+                // Ensure material is capable of transparency
+                if (!child.userData.isMaterialSetup) {
+                    child.material = child.material.clone();
+                    child.material.transparent = true;
+                    child.material.depthWrite = true; // Keep depth write on for correct self-occlusion
+                    // child.material.blending = THREE.AdditiveBlending; // Optional: Makes it look more like light
+                    child.userData.isMaterialSetup = true;
+                    child.userData.originalEmissive = child.material.emissive ? child.material.emissive.clone() : new THREE.Color(0, 0, 0);
+                }
+
+                // Smoothly update opacity
+                child.material.opacity = THREE.MathUtils.lerp(child.material.opacity, targetOpacity, 0.1); // Fast lerp
+
+                // Update Emissive
+                if (child.material.emissive) {
+                    // Tint it white/gold as it glows
+                    child.material.emissive.setScalar(targetEmissive);
+                }
+            }
+        });
     });
 
     return (
-        <group ref={groupRef} scale={[minScale, minScale, minScale]}>
+        <group ref={groupRef} scale={[1, 1, 1]}>
             {children}
         </group>
     );
@@ -186,7 +257,7 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
             <directionalLight position={[-3, 2, -2]} intensity={0.6} color={0xffffff} />
 
             {/* Float adds object-level floating separate from camera movement */}
-            <ScrollScaleGroup minScale={1} maxScale={5} headingText="What Is 9Sences">
+            <HandScrollAnimator>
                 <Float
                     speed={2}
                     rotationIntensity={0.2}
@@ -198,7 +269,7 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
                         rotation={[0, Math.PI / 1.8, 0]}
                     />
                 </Float>
-            </ScrollScaleGroup>
+            </HandScrollAnimator>
 
             <Rig />
 
@@ -208,4 +279,4 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
 }
 
 // Preload the model
-useGLTF.preload('/the_creation_of_adam_by_miguelangelo.glb');
+useGLTF.preload('/the_creation_of_adam_hand.glb');
