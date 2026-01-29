@@ -31,17 +31,17 @@ export default function MaisonLayer() {
                     className="space-y-8"
                 >
                     <div className="space-y-4">
-                        <span className="block text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                        <span className="block text-xs font-bold tracking-widest uppercase text-gray-400">
                             Practice & Experience Layer
                         </span>
                         <Link href="#" className="block group">
-                            <h2 className="font-serif text-5xl md:text-6xl border-b-2 border-charcoal/80 inline-block pb-2 hover:border-sage transition-colors">
+                            <h2 className="font-serif text-5xl md:text-6xl border-b-2 border-white/20 text-white font-medium inline-block pb-2 hover:border-sage transition-colors">
                                 SenceMaison
                             </h2>
                         </Link>
                     </div>
 
-                    <ul className="space-y-4 text-lg font-light">
+                    <ul className="space-y-4 text-lg font-medium text-gray-200">
                         <li className="flex items-center gap-3">
                             <span className="w-1.5 h-1.5 rounded-full bg-sage"></span>
                             Music-led practice

@@ -12,7 +12,7 @@ export default function IntroSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="font-serif text-2xl md:text-3xl"
+                        className="font-serif text-2xl md:text-3xl text-white font-medium"
                     >
                         What Is 9Sences
                     </motion.h3>
@@ -24,12 +24,12 @@ export default function IntroSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed space-y-8"
+                        className="text-xl md:text-2xl lg:text-3xl font-normal leading-relaxed space-y-8 text-white"
                     >
                         <p>
                             9Sences is an investment and incubation entity focused on building and stewarding culture-led ventures.
                         </p>
-                        <p className="text-muted-foreground">
+                        <p className="text-gray-200 font-medium">
                             We operate at the intersection of narrative, physical practice, and exclusive experience, creating value through depth and resonance rather than scale.
                         </p>
                     </motion.div>

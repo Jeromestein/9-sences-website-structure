@@ -28,7 +28,7 @@ export default function MethodologySection() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="font-serif text-3xl md:text-4xl"
+                    className="font-serif text-3xl md:text-4xl text-white font-medium"
                 >
                     How We Work
                 </motion.h2>
@@ -43,17 +43,17 @@ export default function MethodologySection() {
                             transition={{ delay: pillar.delay, duration: 0.6 }}
                             className="space-y-4"
                         >
-                            <h3 className="text-xl font-medium uppercase tracking-wide">{pillar.title}</h3>
-                            <p className="text-muted-foreground font-light text-lg">"{pillar.description}"</p>
+                            <h3 className="text-xl font-bold uppercase tracking-wide text-white">{pillar.title}</h3>
+                            <p className="text-gray-200 font-medium text-lg">"{pillar.description}"</p>
                         </motion.div>
                     ))}
                 </div>
 
-                <div className="border-t border-charcoal/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-muted-foreground uppercase tracking-widest gap-4">
+                <div className="border-t border-charcoal/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 uppercase tracking-widest gap-4">
                     <p>© {new Date().getFullYear()} 9Sences. All rights reserved.</p>
                     <div className="flex gap-6">
-                        <span className="cursor-pointer hover:text-charcoal transition-colors">Privacy</span>
-                        <span className="cursor-pointer hover:text-charcoal transition-colors">Contact</span>
+                        <span className="cursor-pointer hover:text-white transition-colors">Privacy</span>
+                        <span className="cursor-pointer hover:text-white transition-colors">Contact</span>
                     </div>
                 </div>
             </div>

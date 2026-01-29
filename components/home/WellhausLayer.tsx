@@ -16,7 +16,7 @@ export default function WellhausLayer() {
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ duration: 1 }}
-                            className="block text-xs font-medium tracking-widest uppercase text-gray-500"
+                            className="block text-xs font-bold tracking-widest uppercase text-gray-400"
                         >
                             Experiential Platform
                         </motion.span>
@@ -27,27 +27,27 @@ export default function WellhausLayer() {
                             transition={{ duration: 0.8 }}
                         >
                             <Link href="#" className="block group">
-                                <h2 className="font-serif text-5xl md:text-6xl text-offwhite group-hover:text-bio-lume transition-colors duration-500">
+                                <h2 className="font-serif text-5xl md:text-6xl text-offwhite font-medium group-hover:text-bio-lume transition-colors duration-500">
                                     Sence 91. <br />
-                                    <span className="italic text-gray-500 group-hover:text-white transition-colors">Wellhaus</span>
+                                    <span className="italic text-gray-400 group-hover:text-white transition-colors">Wellhaus</span>
                                 </h2>
                             </Link>
                         </motion.div>
 
-                        <p className="text-xl font-light text-gray-400 max-w-md">
+                        <p className="text-xl font-normal text-gray-200 max-w-md">
                             An invite-only cultural and experiential platform.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm text-gray-500">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm text-gray-300 font-medium">
                         <ul className="space-y-2">
                             <li>Strategic Collaborations</li>
                             <li>Pop-up Environments</li>
                             <li>Long-term Brand Value</li>
                         </ul>
 
-                        <div className="border-l border-white/10 pl-6">
-                            <p className="uppercase tracking-widest text-xs mb-2 text-bio-lume">Exclusivity</p>
+                        <div className="border-l border-white/20 pl-6">
+                            <p className="uppercase tracking-widest text-xs mb-2 text-bio-lume font-bold">Exclusivity</p>
                             <p>Not public-facing.</p>
                             <p>Not ticketed.</p>
                         </div>
@@ -59,10 +59,10 @@ export default function WellhausLayer() {
                         transition={{ delay: 0.4 }}
                         className="pt-8"
                     >
-                        <button className="px-8 py-4 border border-white/20 hover:border-bio-lume hover:bg-bio-lume/10 hover:text-bio-lume transition-all text-sm tracking-widest uppercase">
+                        <button className="px-8 py-4 border border-white/20 hover:border-bio-lume hover:bg-bio-lume/10 hover:text-bio-lume transition-all text-sm tracking-widest uppercase font-bold text-white">
                             Request Access
                         </button>
-                        <p className="mt-4 text-xs text-gray-600">
+                        <p className="mt-4 text-xs text-gray-400">
                             Based on curated access, cultural positioning, brand & creator alignment.
                         </p>
                     </motion.div>
