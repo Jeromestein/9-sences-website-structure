@@ -108,6 +108,13 @@ function ParticleBackground() {
                 onLeaveBack: () => {
                     gsap.to(animState.current, { count: 0, duration: 1, ease: "power2.out" });
                 },
+                onRefresh: (self) => {
+                    if (self.isActive) {
+                        animState.current.count = 90;
+                    } else if (self.progress === 0 && window.scrollY < self.start) {
+                        animState.current.count = 0;
+                    }
+                },
             });
 
             // 3. "Dream Hunter": transition from 90 to 90000
@@ -120,21 +127,23 @@ function ParticleBackground() {
             const endNode = document.querySelector("#dream-hunter-section");
 
             if (startNode && endNode) {
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#intro-section",
-                        start: "center center",
-                        endTrigger: "#dream-hunter-section",
-                        end: "center center",
-                        scrub: 1, // Smooth scrub
-                    }
-                })
-                    .fromTo(animState.current,
-                        { count: 90 },
-                        { count: 90000, ease: "power1.inOut" }
-                    );
+                ScrollTrigger.create({
+                    trigger: "#intro-section",
+                    start: "center center",
+                    endTrigger: "#dream-hunter-section",
+                    end: "center center",
+                    scrub: 1,
+                    onUpdate: (self) => {
+                        animState.current.count = THREE.MathUtils.lerp(90, PARTICLE_COUNT, self.progress);
+                    },
+                    onRefresh: (self) => {
+                        animState.current.count = THREE.MathUtils.lerp(90, PARTICLE_COUNT, self.progress);
+                    },
+                });
             }
         });
+
+        const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 0);
 
         return () => ctx.revert();
     }, []);

@@ -239,7 +239,7 @@ function HandParticles({
 function HandScrollAnimator({
     children,
     introHeadingText = 'What Is 9Sences',
-    targetSectionId = 'ecosystem', // Dream Hunter section ID
+    targetSectionId = 'dream-hunter-section', // Dream Hunter section ID
     particleRotation = [0, Math.PI / 1.8, 0],
 }: {
     children: React.ReactNode;
@@ -261,12 +261,11 @@ function HandScrollAnimator({
     React.useEffect(() => {
         const resolveRanges = () => {
             // 1. Find Intro Section ("What Is 9Sences")
-            const headingNodes = Array.from(document.querySelectorAll('h1, h2, h3'));
-            const introHeading = headingNodes.find((node) => {
-                const text = node.textContent?.trim().toLowerCase();
-                return text === introHeadingText.toLowerCase();
-            });
-            const introSection = introHeading?.closest('section');
+            const introSection =
+                document.getElementById('intro-section') ??
+                Array.from(document.querySelectorAll('h1, h2, h3'))
+                    .find((node) => node.textContent?.trim().toLowerCase() === introHeadingText.toLowerCase())
+                    ?.closest('section');
 
             // 2. Find Target Section ("Dream Hunter" / ID: ecosystem)
             const targetElement = document.getElementById(targetSectionId);
@@ -278,7 +277,7 @@ function HandScrollAnimator({
             if (!introSection || !targetSection) {
                 console.warn('HandScrollAnimator: Sections not found', { introSection, targetSection });
                 scrollRanges.current = null;
-                return;
+                return false;
             }
 
             const getAbsTop = (el: Element) => el.getBoundingClientRect().top + window.scrollY;
@@ -297,16 +296,48 @@ function HandScrollAnimator({
                     targetStart: introTop,
                     targetEnd: targetTop, // Start fading out as we approach this
                 };
+                return true;
             }
+            return false;
         };
 
-        const handleResize = () => resolveRanges();
-        // Delay slightly to ensure layout is settled
-        const timer = setTimeout(resolveRanges, 500);
+        let rafId = 0;
+        let retries = 0;
+        const maxRetries = 10;
+
+        const scheduleResolve = () => {
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                const ok = resolveRanges();
+                if (!ok && retries < maxRetries) {
+                    retries += 1;
+                    scheduleResolve();
+                }
+            });
+        };
+
+        const handleResize = () => scheduleResolve();
+
+        // Delay slightly to ensure layout/fonts are settled
+        const timer = setTimeout(scheduleResolve, 200);
+        if (document.fonts?.ready) {
+            document.fonts.ready.then(scheduleResolve).catch(() => undefined);
+        }
+
+        let resizeObserver: ResizeObserver | null = null;
+        const introNode = document.getElementById('intro-section');
+        const targetNode = document.getElementById(targetSectionId);
+        if (introNode || targetNode) {
+            resizeObserver = new ResizeObserver(() => scheduleResolve());
+            if (introNode) resizeObserver.observe(introNode);
+            if (targetNode) resizeObserver.observe(targetNode);
+        }
         window.addEventListener('resize', handleResize);
 
         return () => {
             clearTimeout(timer);
+            cancelAnimationFrame(rafId);
+            resizeObserver?.disconnect();
             window.removeEventListener('resize', handleResize);
         };
     }, [introHeadingText, targetSectionId]);
