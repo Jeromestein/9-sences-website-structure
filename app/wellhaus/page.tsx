@@ -1,9 +1,11 @@
 import Link from "next/link";
 import VideoBackground from "@/components/VideoBackground";
+import AudioControl from "@/components/ui/AudioControl";
 
 export default function WellhausPage() {
     return (
         <main className="min-h-screen bg-[#0A0A0A] text-stone-300 selection:bg-stone-300 selection:text-black overflow-x-hidden">
+            <AudioControl src="/neon-dreams-280430.mp3" />
             {/* Navigation / Header */}
             <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference">
                 <Link href="/" className="text-xl font-serif italic hover:opacity-70 transition-opacity text-white">

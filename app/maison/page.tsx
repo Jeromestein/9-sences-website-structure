@@ -1,9 +1,11 @@
 import Link from "next/link";
 import VideoBackground from "@/components/VideoBackground";
+import AudioControl from "@/components/ui/AudioControl";
 
 export default function MaisonPage() {
     return (
         <main className="min-h-screen bg-[#F0EFEB] text-stone-800 overflow-x-hidden selection:bg-stone-300 selection:text-stone-900">
+            <AudioControl src="/meditation-yoga-relaxing-music-380330.mp3" />
             {/* Navigation / Header */}
             <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center">
                 <Link href="/" className="text-xl font-serif italic hover:opacity-70 transition-opacity">
