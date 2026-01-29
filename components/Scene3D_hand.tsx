@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -73,16 +73,184 @@ function Model({ size = 2.5, rotation = [0, 0, 0], ...props }: ModelProps) {
     );
 }
 
+const HAND_PARTICLE_COUNT = 30000;
+const HAND_PARTICLE_POINT_SIZE = 180;
+
+const handParticleVertexShader = `
+uniform float uTime;
+uniform float uPointSize;
+uniform float uScatter;
+attribute vec3 color;
+attribute vec3 aBase;
+attribute float aSeed;
+varying vec3 vColor;
+varying float vDistance;
+
+void main() {
+    vColor = color;
+    vec3 pos = aBase;
+
+    float noise = sin(uTime * 1.5 + pos.x * 0.3) * cos(uTime * 1.5 + pos.y * 0.3);
+    pos += normalize(pos + vec3(0.001)) * noise * 0.2;
+    pos.x += sin(uTime * 0.3 + pos.z) * 0.1;
+    pos.y += cos(uTime * 0.3 + pos.x) * 0.1;
+
+    // Scatter outward during dissolve phase
+    vec3 dir = normalize(pos + vec3(0.001)) + vec3(
+        sin(aSeed * 12.3),
+        cos(aSeed * 7.7),
+        sin(aSeed * 4.9)
+    ) * 0.35;
+    pos += dir * uScatter * (1.0 + noise);
+
+    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+    float dist = length(pos);
+    vDistance = dist;
+    gl_PointSize = (uPointSize / -mvPosition.z) * (1.2 + sin(uTime * 3.0 + dist * 0.15) * 0.5);
+    gl_Position = projectionMatrix * mvPosition;
+}
+`;
+
+const handParticleFragmentShader = `
+uniform float uTime;
+uniform float uOpacity;
+varying vec3 vColor;
+varying float vDistance;
+
+void main() {
+    float dist = distance(gl_PointCoord, vec2(0.5));
+    if (dist > 0.5) discard;
+    float strength = pow(1.0 - dist * 2.0, 1.6);
+    vec3 finalColor = vColor * 2.0;
+    float alpha = strength * (0.8 + sin(vDistance * 0.3 + uTime) * 0.2);
+    gl_FragColor = vec4(finalColor, alpha * uOpacity);
+}
+`;
+
+function HandParticles({
+    opacityRef,
+    scatterRef,
+    countRef,
+    rotation = [0, 0, 0],
+}: {
+    opacityRef: React.MutableRefObject<number>;
+    scatterRef: React.MutableRefObject<number>;
+    countRef: React.MutableRefObject<number>;
+    rotation?: [number, number, number];
+}) {
+    const pointsRef = useRef<THREE.Points>(null);
+    const materialRef = useRef<THREE.ShaderMaterial>(null);
+    const { scene } = useGLTF('/the_creation_of_adam_hand.glb');
+
+    const geometry = useMemo(() => {
+        const firstMesh = scene.getObjectByProperty('type', 'Mesh') as THREE.Mesh | null;
+        const sourceGeometry = (firstMesh?.geometry as THREE.BufferGeometry | undefined) ?? null;
+        const positionAttr = sourceGeometry?.getAttribute('position') as THREE.BufferAttribute | undefined;
+
+        if (!sourceGeometry || !positionAttr) {
+            return new THREE.BufferGeometry();
+        }
+
+        const sourcePositions = positionAttr.array as Float32Array;
+        const sourceCount = positionAttr.count;
+        const sampleCount = Math.min(HAND_PARTICLE_COUNT, sourceCount);
+
+        const positions = new Float32Array(sampleCount * 3);
+        const bases = new Float32Array(sampleCount * 3);
+        const colors = new Float32Array(sampleCount * 3);
+        const seeds = new Float32Array(sampleCount);
+        const greenColor = new THREE.Color(0x00ff66);
+        const brightWhite = new THREE.Color(0xffffff);
+
+        for (let i = 0; i < sampleCount; i += 1) {
+            const i3 = i * 3;
+            const sourceIndex = Math.floor(Math.random() * sourceCount) * 3;
+            const x = sourcePositions[sourceIndex];
+            const y = sourcePositions[sourceIndex + 1];
+            const z = sourcePositions[sourceIndex + 2];
+
+            positions[i3] = x;
+            positions[i3 + 1] = y;
+            positions[i3 + 2] = z;
+            bases[i3] = x;
+            bases[i3 + 1] = y;
+            bases[i3 + 2] = z;
+
+            const color = Math.random() > 0.7 ? greenColor : brightWhite;
+            colors[i3] = color.r;
+            colors[i3 + 1] = color.g;
+            colors[i3 + 2] = color.b;
+            seeds[i] = Math.random();
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('aBase', new THREE.BufferAttribute(bases, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        geometry.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 1));
+        geometry.setDrawRange(0, 0);
+        return geometry;
+    }, [scene]);
+
+    useFrame((state) => {
+        const time = state.clock.elapsedTime;
+        if (materialRef.current) {
+            materialRef.current.uniforms.uTime.value = time;
+            materialRef.current.uniforms.uOpacity.value = opacityRef.current;
+            materialRef.current.uniforms.uScatter.value = scatterRef.current;
+        }
+
+        if (pointsRef.current) {
+            pointsRef.current.rotation.y += 0.0015;
+            pointsRef.current.rotation.z += 0.0008;
+            pointsRef.current.rotation.x = Math.sin(time * 0.15) * 0.08;
+
+            const visibleCount = Math.floor(countRef.current);
+            const maxCount = geometry.getAttribute('position')?.count ?? 0;
+            const clampedCount = Math.max(0, Math.min(visibleCount, maxCount));
+            pointsRef.current.geometry.setDrawRange(0, clampedCount);
+        }
+    });
+
+    return (
+        <points ref={pointsRef} geometry={geometry} rotation={rotation} frustumCulled={false}>
+            <shaderMaterial
+                ref={materialRef}
+                vertexShader={handParticleVertexShader}
+                fragmentShader={handParticleFragmentShader}
+                uniforms={useMemo(
+                    () => ({
+                        uTime: { value: 0 },
+                        uPointSize: { value: HAND_PARTICLE_POINT_SIZE },
+                        uOpacity: { value: 0 },
+                        uScatter: { value: 0 },
+                    }),
+                    []
+                )}
+                transparent
+                depthWrite={false}
+                depthTest={false}
+                blending={THREE.AdditiveBlending}
+            />
+        </points>
+    );
+}
+
 function HandScrollAnimator({
     children,
     introHeadingText = 'What Is 9Sences',
     targetSectionId = 'ecosystem', // Dream Hunter section ID
+    particleRotation = [0, Math.PI / 1.8, 0],
 }: {
     children: React.ReactNode;
     introHeadingText?: string;
     targetSectionId?: string;
+    particleRotation?: [number, number, number];
 }) {
     const groupRef = useRef<THREE.Group>(null);
+    const particleOpacityRef = useRef(0);
+    const particleScatterRef = useRef(0);
+    const particleCountRef = useRef(0);
     const scrollRanges = useRef<{
         introStart: number;
         introEnd: number;
@@ -152,6 +320,9 @@ function HandScrollAnimator({
         let targetScale = 2.5; // Default base scale
         let targetOpacity = 1.0;
         let targetEmissive = 0.0;
+        let targetParticleOpacity = 0.0;
+        let targetParticleScatter = 0.0;
+        let targetParticleCount = 0.0;
 
         if (scrollY < introEnd) {
             // PHASE 1: Start -> Intro (Scale 25 -> 125)
@@ -185,6 +356,11 @@ function HandScrollAnimator({
 
             // Glow: 0 -> 2
             targetEmissive = THREE.MathUtils.lerp(0, 5, THREE.MathUtils.smoothstep(progress, 0, 0.8));
+
+            // Particles crossfade in and then soften
+            targetParticleOpacity = THREE.MathUtils.smoothstep(progress, 0.1, 0.6);
+            targetParticleScatter = THREE.MathUtils.smoothstep(progress, 0.35, 1.0) * 1.8;
+            targetParticleCount = THREE.MathUtils.lerp(1500, HAND_PARTICLE_COUNT, THREE.MathUtils.smoothstep(progress, 0.2, 0.9));
         }
 
         // Apply Scale with Damping
@@ -215,11 +391,21 @@ function HandScrollAnimator({
                 }
             }
         });
+
+        particleOpacityRef.current = THREE.MathUtils.damp(particleOpacityRef.current, targetParticleOpacity, 4, delta);
+        particleScatterRef.current = THREE.MathUtils.damp(particleScatterRef.current, targetParticleScatter, 3, delta);
+        particleCountRef.current = THREE.MathUtils.damp(particleCountRef.current, targetParticleCount, 3, delta);
     });
 
     return (
         <group ref={groupRef} scale={[1, 1, 1]}>
             {children}
+            <HandParticles
+                opacityRef={particleOpacityRef}
+                scatterRef={particleScatterRef}
+                countRef={particleCountRef}
+                rotation={particleRotation}
+            />
         </group>
     );
 }
