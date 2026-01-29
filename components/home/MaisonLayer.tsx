@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function MaisonLayer() {
     return (
-        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 text-stone">
+        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 text-foreground">
             {/* Background accent to evoke 'Sanctuary/Warmth' */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-sage/5 to-transparent pointer-events-none" />
 
@@ -16,7 +16,7 @@ export default function MaisonLayer() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1 }}
-                    className="relative aspect-square md:aspect-[4/3] bg-white/50 backdrop-blur-sm border border-white/40 shadow-sm flex items-center justify-center overflow-hidden"
+                    className="relative aspect-square md:aspect-[4/3] bg-white/50 backdrop-blur-sm border border-foreground/10 shadow-sm flex items-center justify-center overflow-hidden"
                 >
                     <span className="font-mono text-sm text-sage">[Diffused Light / Sanctuary]</span>
                     <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-transparent"></div>
@@ -28,20 +28,20 @@ export default function MaisonLayer() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="space-y-8"
+                    className="readable-panel space-y-8"
                 >
                     <div className="space-y-4">
-                        <span className="block text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                        <span className="block text-xs font-bold tracking-widest uppercase text-muted-foreground">
                             Practice & Experience Layer
                         </span>
                         <Link href="#" className="block group">
-                            <h2 className="font-serif text-5xl md:text-6xl border-b-2 border-charcoal/80 inline-block pb-2 hover:border-sage transition-colors">
+                            <h2 className="font-serif text-5xl md:text-6xl border-b-2 border-foreground/20 text-foreground font-medium inline-block pb-2 hover:border-sage transition-colors">
                                 SenceMaison
                             </h2>
                         </Link>
                     </div>
 
-                    <ul className="space-y-4 text-lg font-light">
+                    <ul className="space-y-4 text-lg font-medium text-muted-foreground">
                         <li className="flex items-center gap-3">
                             <span className="w-1.5 h-1.5 rounded-full bg-sage"></span>
                             Music-led practice

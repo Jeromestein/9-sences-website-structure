@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function DreamHunterLayer() {
     return (
-        <section className="relative w-full py-32 px-8 md:px-12 lg:px-16 text-foreground overflow-hidden">
+        <section id="dream-hunter-section" className="relative w-full py-32 px-8 md:px-12 lg:px-16 text-foreground overflow-hidden">
             <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 {/* Content Side */}
                 <motion.div
@@ -13,20 +13,20 @@ export default function DreamHunterLayer() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="order-2 md:order-1 space-y-8"
+                    className="readable-panel order-2 md:order-1 space-y-8"
                 >
                     <div className="space-y-4">
-                        <span className="block text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                        <span className="block text-xs font-bold tracking-widest uppercase text-muted-foreground">
                             Cultural IP & Narrative Layer
                         </span>
                         <Link href="#" className="block group">
-                            <h2 className="font-serif text-5xl md:text-6xl italic text-foreground group-hover:text-amber transition-colors duration-300">
+                            <h2 className="font-serif text-5xl md:text-6xl italic text-foreground font-medium group-hover:text-amber transition-colors duration-300">
                                 Dream Hunter
                             </h2>
                         </Link>
                     </div>
 
-                    <ul className="space-y-4 text-lg font-light border-l-2 border-foreground/10 pl-6">
+                    <ul className="space-y-4 text-lg font-medium text-muted-foreground border-l-2 border-foreground/20 pl-6">
                         <li>Dream Archive</li>
                         <li>Art & Storytelling</li>
                         <li>Long-term Cultural IP</li>

@@ -15,28 +15,82 @@
   --charcoal: #1c1c1c;
   --amber: #d4a574;
 
-  /* System tokens - Defaulting to Dark/Void Theme */
-  --background: var(--void);
-  --foreground: var(--stone);
-  --card: var(--charcoal);
-  --card-foreground: var(--stone);
-  --popover: var(--charcoal);
-  --popover-foreground: var(--stone);
-  --primary: var(--stone);
-  --primary-foreground: var(--charcoal);
-  --secondary: var(--charcoal);
-  --secondary-foreground: var(--stone);
-  --muted: var(--charcoal);
-  --muted-foreground: #a1a1aa;
+  /* System tokens - Switched to Light/Sanctuary Theme */
+  --background: var(--offwhite);
+  --foreground: var(--charcoal);
+  --card: var(--stone);
+  --card-foreground: var(--charcoal);
+  --popover: var(--stone);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--charcoal);
+  --primary-foreground: var(--offwhite);
+  --secondary: var(--stone);
+  --secondary-foreground: var(--charcoal);
+  --muted: var(--stone);
+  --muted-foreground: #737373;
   --accent: var(--sage);
   --accent-foreground: var(--charcoal);
   --destructive: #7f1d1d;
   --destructive-foreground: var(--offwhite);
-  --border: #333333;
-  --input: #333333;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
   --ring: var(--sage);
   --radius: 0rem;
   --bio-lume: #ccff00;
+  --readable-panel-bg: rgba(255, 255, 255, 0.78);
+  --readable-panel-border: rgba(0, 0, 0, 0.06);
+  --readable-panel-shadow: rgba(0, 0, 0, 0.12);
+  --readable-panel-grad: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+}
+
+body.light-theme {
+  --background: #f5f5f7;
+  --foreground: var(--charcoal);
+  --card: var(--stone);
+  --card-foreground: var(--charcoal);
+  --popover: var(--stone);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--charcoal);
+  --primary-foreground: var(--offwhite);
+  --secondary: var(--stone);
+  --secondary-foreground: var(--charcoal);
+  --muted: var(--stone);
+  --muted-foreground: #737373;
+  --accent: var(--sage);
+  --accent-foreground: var(--charcoal);
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: var(--sage);
+  color-scheme: light;
+  --readable-panel-bg: rgba(255, 255, 255, 0.8);
+  --readable-panel-border: rgba(0, 0, 0, 0.06);
+  --readable-panel-shadow: rgba(0, 0, 0, 0.12);
+  --readable-panel-grad: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+}
+
+body.dark-theme {
+  --background: #050505;
+  --foreground: var(--offwhite);
+  --card: var(--charcoal);
+  --card-foreground: var(--offwhite);
+  --popover: var(--charcoal);
+  --popover-foreground: var(--offwhite);
+  --primary: var(--offwhite);
+  --primary-foreground: var(--charcoal);
+  --secondary: var(--charcoal);
+  --secondary-foreground: var(--offwhite);
+  --muted: var(--charcoal);
+  --muted-foreground: #bdbdbd;
+  --accent: var(--amber);
+  --accent-foreground: var(--charcoal);
+  --border: #2a2a2a;
+  --input: #2a2a2a;
+  --ring: var(--amber);
+  color-scheme: dark;
+  --readable-panel-bg: rgba(6, 6, 6, 0.68);
+  --readable-panel-border: rgba(255, 255, 255, 0.08);
+  --readable-panel-shadow: rgba(0, 0, 0, 0.45);
+  --readable-panel-grad: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
 }
 
 .dark {
@@ -129,14 +183,38 @@
 
   body {
     @apply bg-background text-foreground;
-    background-color: var(--void) !important;
-    color: var(--stone) !important;
+    color: var(--foreground);
+    background-color: var(--background);
+    transition: color 0.6s ease, background-color 0.6s ease;
   }
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+.readable-panel {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  border-radius: 16px;
+  background: var(--readable-panel-bg);
+  border: 1px solid var(--readable-panel-border);
+  box-shadow: 0 12px 40px var(--readable-panel-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.readable-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--readable-panel-grad);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Selection styling */
