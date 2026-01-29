@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useLayoutEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PARTICLE_COUNT = 90000;
 const PARTICLE_POINT_SIZE = 200;
@@ -50,6 +54,10 @@ function ParticleBackground() {
     const pointsRef = useRef<THREE.Points>(null);
     const materialRef = useRef<THREE.ShaderMaterial>(null);
 
+    // Animation state to be tweened by GSAP
+    // Start with 0 visible particles
+    const animState = useRef({ count: 0 });
+
     const geometry = useMemo(() => {
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(PARTICLE_COUNT * 3);
@@ -79,16 +87,57 @@ function ParticleBackground() {
 
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        // Only draw the current count
+        geometry.setDrawRange(0, 0);
         return geometry;
     }, []);
 
-    const uniforms = useMemo(
-        () => ({
-            uTime: { value: 0 },
-            uPointSize: { value: PARTICLE_POINT_SIZE },
-        }),
-        []
-    );
+    useLayoutEffect(() => {
+        // ScrollTriggers logic
+        const ctx = gsap.context(() => {
+            // 1. Initial State: 0 particles
+
+            // 2. "What Is 9Sences" (IntroSection): set to 90
+            ScrollTrigger.create({
+                trigger: "#intro-section",
+                start: "top bottom", // When intro coming into view
+                end: "bottom top",
+                onEnter: () => {
+                    gsap.to(animState.current, { count: 90, duration: 1.5, ease: "power2.out" });
+                },
+                onLeaveBack: () => {
+                    gsap.to(animState.current, { count: 0, duration: 1, ease: "power2.out" });
+                },
+            });
+
+            // 3. "Dream Hunter": transition from 90 to 90000
+            // We want this to be gradual as we scroll towards it? 
+            // Or only when we reach it? 
+            // User requirement: "从移动到 dream hunter 的过程中，之间增加到 90000"
+            // So we can use scrub linked to the scroll distance between sections
+
+            const startNode = document.querySelector("#intro-section");
+            const endNode = document.querySelector("#dream-hunter-section");
+
+            if (startNode && endNode) {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#intro-section",
+                        start: "center center",
+                        endTrigger: "#dream-hunter-section",
+                        end: "center center",
+                        scrub: 1, // Smooth scrub
+                    }
+                })
+                    .fromTo(animState.current,
+                        { count: 90 },
+                        { count: 90000, ease: "power1.inOut" }
+                    );
+            }
+        });
+
+        return () => ctx.revert();
+    }, []);
 
     useFrame((state) => {
         const time = state.clock.elapsedTime;
@@ -100,6 +149,12 @@ function ParticleBackground() {
             pointsRef.current.rotation.y += 0.0025;
             pointsRef.current.rotation.z += 0.001;
             pointsRef.current.rotation.x = Math.sin(time * 0.15) * 0.12;
+
+            // Update visible particle count
+            const visibleCount = Math.floor(animState.current.count);
+            // Ensure we don't exceed max or go below 0
+            const clampedCount = Math.max(0, Math.min(visibleCount, PARTICLE_COUNT));
+            pointsRef.current.geometry.setDrawRange(0, clampedCount);
         }
     });
 
@@ -109,7 +164,8 @@ function ParticleBackground() {
                 ref={materialRef}
                 vertexShader={particleVertexShader}
                 fragmentShader={particleFragmentShader}
-                uniforms={uniforms}
+                // ... same as before
+                uniforms={useMemo(() => ({ uTime: { value: 0 }, uPointSize: { value: PARTICLE_POINT_SIZE } }), [])}
                 transparent
                 depthWrite={false}
                 depthTest={false}
@@ -144,9 +200,6 @@ export default function Scene3D({ eventSource }: { eventSource?: React.RefObject
             dpr={[1, 2]}
             className="w-full h-full"
             style={{ pointerEvents: 'none' }}
-            onCreated={({ gl }) => {
-                gl.setClearColor(0x000000, 0);
-            }}
         >
             <ParticleBackground />
         </Canvas>
