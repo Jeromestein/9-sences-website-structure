@@ -12,7 +12,13 @@ export default function BackgroundManager() {
     useEffect(() => {
         if (!bgRef.current) return;
 
+        const setTheme = (theme: "light" | "dark") => {
+            document.body.classList.remove("light-theme", "dark-theme");
+            document.body.classList.add(`${theme}-theme`);
+        };
+
         // Initial state: Light theme
+        setTheme("light");
         gsap.set(bgRef.current, { backgroundColor: "#F5F5F7" }); // Light gray/whiteish
 
         // Find the "Dream Hunter" section to trigger the dark theme
@@ -36,12 +42,14 @@ export default function BackgroundManager() {
         // or simpler: just toggle at a certain section.
 
         // Let's try to find the specific section "Dream Hunter"
-        let triggerElement = null;
-        sections.forEach(sec => {
-            if (sec.textContent?.includes("Dream Hunter")) {
-                triggerElement = sec;
-            }
-        });
+        let triggerElement: HTMLElement | null = document.querySelector<HTMLElement>("#dream-hunter-section");
+        if (!triggerElement) {
+            sections.forEach(sec => {
+                if (sec.textContent?.includes("Dream Hunter")) {
+                    triggerElement = sec as HTMLElement;
+                }
+            });
+        }
 
         if (triggerElement) {
             ScrollTrigger.create({
@@ -50,13 +58,11 @@ export default function BackgroundManager() {
                 end: "bottom center",
                 onEnter: () => {
                     gsap.to(bgRef.current, { backgroundColor: "#050505", duration: 1.0, ease: "power2.inOut" });
-                    document.body.classList.add('dark-theme');
-                    document.body.classList.remove('light-theme');
+                    setTheme("dark");
                 },
                 onLeaveBack: () => {
                     gsap.to(bgRef.current, { backgroundColor: "#F5F5F7", duration: 1.0, ease: "power2.inOut" });
-                    document.body.classList.add('light-theme');
-                    document.body.classList.remove('dark-theme');
+                    setTheme("light");
                 },
                 // markers: true // For debugging
             });
@@ -68,6 +74,7 @@ export default function BackgroundManager() {
 
         return () => {
             ScrollTrigger.getAll().forEach((t: globalThis.ScrollTrigger) => t.kill());
+            document.body.classList.remove("light-theme", "dark-theme");
         };
     }, []);
 

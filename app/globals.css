@@ -39,6 +39,48 @@
   --bio-lume: #ccff00;
 }
 
+body.light-theme {
+  --background: #f5f5f7;
+  --foreground: var(--charcoal);
+  --card: var(--stone);
+  --card-foreground: var(--charcoal);
+  --popover: var(--stone);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--charcoal);
+  --primary-foreground: var(--offwhite);
+  --secondary: var(--stone);
+  --secondary-foreground: var(--charcoal);
+  --muted: var(--stone);
+  --muted-foreground: #737373;
+  --accent: var(--sage);
+  --accent-foreground: var(--charcoal);
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: var(--sage);
+  color-scheme: light;
+}
+
+body.dark-theme {
+  --background: #050505;
+  --foreground: var(--offwhite);
+  --card: var(--charcoal);
+  --card-foreground: var(--offwhite);
+  --popover: var(--charcoal);
+  --popover-foreground: var(--offwhite);
+  --primary: var(--offwhite);
+  --primary-foreground: var(--charcoal);
+  --secondary: var(--charcoal);
+  --secondary-foreground: var(--offwhite);
+  --muted: var(--charcoal);
+  --muted-foreground: #bdbdbd;
+  --accent: var(--amber);
+  --accent-foreground: var(--charcoal);
+  --border: #2a2a2a;
+  --input: #2a2a2a;
+  --ring: var(--amber);
+  color-scheme: dark;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -129,8 +171,9 @@
 
   body {
     @apply bg-background text-foreground;
-    background-color: var(--offwhite) !important;
-    color: var(--charcoal) !important;
+    color: var(--foreground);
+    background-color: var(--background);
+    transition: color 0.6s ease, background-color 0.6s ease;
   }
 }
 
