@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import SmoothScroll from "@/components/providers/SmoothScroll"
-import Scene3D from "@/components/Scene3D"
 import Scene3D_particle from "@/components/Scene3D_particle"
 import "./globals.css"
+import Scene3D_hand from "@/components/Scene3D_hand"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -50,7 +50,7 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="font-sans antialiased relative">
         <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none">
-          <Scene3D_particle />
+          <Scene3D_hand />
           {/* eventSource handling might be needed if we want interaction, but for background 'pointer-events-none' is good for the wrapper so it doesn't block clicks.
                If Scene3D needs mouse for parallax, it listens to window by default or we can pass a ref. 
                However, if the wrapper is pointer-events-none, the Canvas might not receive events if it relies on its own DOM element. 
