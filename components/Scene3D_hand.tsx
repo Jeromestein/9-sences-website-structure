@@ -159,8 +159,8 @@ function HandParticles({
         const bases = new Float32Array(sampleCount * 3);
         const colors = new Float32Array(sampleCount * 3);
         const seeds = new Float32Array(sampleCount);
-        const greenColor = new THREE.Color(0x00ff66);
-        const brightWhite = new THREE.Color(0xffffff);
+        const darkGray = new THREE.Color(0x2b2b2b);
+        const gold = new THREE.Color(0xd4af37);
 
         for (let i = 0; i < sampleCount; i += 1) {
             const i3 = i * 3;
@@ -176,7 +176,7 @@ function HandParticles({
             bases[i3 + 1] = y;
             bases[i3 + 2] = z;
 
-            const color = Math.random() > 0.7 ? greenColor : brightWhite;
+            const color = Math.random() > 0.7 ? gold : darkGray;
             colors[i3] = color.r;
             colors[i3 + 1] = color.g;
             colors[i3 + 2] = color.b;

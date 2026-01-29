@@ -62,8 +62,8 @@ function ParticleBackground() {
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(PARTICLE_COUNT * 3);
         const colors = new Float32Array(PARTICLE_COUNT * 3);
-        const greenColor = new THREE.Color(0x00ff66);
-        const brightWhite = new THREE.Color(0xffffff);
+        const darkGray = new THREE.Color(0x2b2b2b);
+        const gold = new THREE.Color(0xd4af37);
 
         for (let i = 0; i < PARTICLE_COUNT; i += 1) {
             const i3 = i * 3;
@@ -79,7 +79,7 @@ function ParticleBackground() {
             positions[i3 + 1] = y;
             positions[i3 + 2] = z;
 
-            const color = Math.random() > 0.7 ? greenColor : brightWhite;
+            const color = Math.random() > 0.7 ? gold : darkGray;
             colors[i3] = color.r;
             colors[i3 + 1] = color.g;
             colors[i3 + 2] = color.b;
