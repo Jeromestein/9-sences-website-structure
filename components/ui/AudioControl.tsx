@@ -65,14 +65,14 @@ export default function AudioControl({ src }: AudioControlProps) {
 
             <motion.button
                 onClick={toggleAudio}
-                className="relative w-12 h-12 flex items-center justify-center rounded-full bg-black/90 text-white backdrop-blur-md border border-white/10 hover:bg-black transition-all duration-500 shadow-md group"
+                className="relative w-12 h-12 flex items-center justify-center rounded-full bg-[#E6D5B8] text-stone-900 backdrop-blur-md border border-white/20 hover:bg-[#F0E0C5] transition-all duration-500 shadow-md group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
                     boxShadow: [
-                        "0 0 0px rgba(255,255,255,0)",
-                        "0 0 40px rgba(255,255,255,0.6)",
-                        "0 0 0px rgba(255,255,255,0)"
+                        "0 0 0px rgba(230,213,184,0)",
+                        "0 0 40px rgba(230,213,184,0.6)",
+                        "0 0 0px rgba(230,213,184,0)"
                     ]
                 }}
                 transition={{
