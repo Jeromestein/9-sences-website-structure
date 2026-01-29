@@ -16,23 +16,23 @@ export default function DreamHunterLayer() {
                     className="order-2 md:order-1 space-y-8"
                 >
                     <div className="space-y-4">
-                        <span className="block text-xs font-bold tracking-widest uppercase text-gray-400">
+                        <span className="block text-xs font-bold tracking-widest uppercase text-muted-foreground">
                             Cultural IP & Narrative Layer
                         </span>
                         <Link href="#" className="block group">
-                            <h2 className="font-serif text-5xl md:text-6xl italic text-white font-medium group-hover:text-amber transition-colors duration-300">
+                            <h2 className="font-serif text-5xl md:text-6xl italic text-foreground font-medium group-hover:text-amber transition-colors duration-300">
                                 Dream Hunter
                             </h2>
                         </Link>
                     </div>
 
-                    <ul className="space-y-4 text-lg font-medium text-gray-200 border-l-2 border-white/20 pl-6">
+                    <ul className="space-y-4 text-lg font-medium text-muted-foreground border-l-2 border-foreground/20 pl-6">
                         <li>Dream Archive</li>
                         <li>Art & Storytelling</li>
                         <li>Long-term Cultural IP</li>
                     </ul>
 
-                    <p className="font-serif text-2xl md:text-3xl italic text-gray-300">
+                    <p className="font-serif text-2xl md:text-3xl italic text-muted-foreground/80">
                         "Culture remembered."
                     </p>
                 </motion.div>
