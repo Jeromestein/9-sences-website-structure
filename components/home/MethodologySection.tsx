@@ -23,7 +23,7 @@ export default function MethodologySection() {
 
     return (
         <section className="w-full py-24 md:py-32 px-8 md:px-12 lg:px-16 text-foreground border-t border-foreground/10">
-            <div className="max-w-screen-xl mx-auto space-y-16">
+            <div className="readable-panel max-w-screen-xl mx-auto space-y-16">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

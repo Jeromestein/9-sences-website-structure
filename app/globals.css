@@ -37,6 +37,10 @@
   --ring: var(--sage);
   --radius: 0rem;
   --bio-lume: #ccff00;
+  --readable-panel-bg: rgba(255, 255, 255, 0.78);
+  --readable-panel-border: rgba(0, 0, 0, 0.06);
+  --readable-panel-shadow: rgba(0, 0, 0, 0.12);
+  --readable-panel-grad: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
 }
 
 body.light-theme {
@@ -58,6 +62,10 @@ body.light-theme {
   --input: #e5e5e5;
   --ring: var(--sage);
   color-scheme: light;
+  --readable-panel-bg: rgba(255, 255, 255, 0.8);
+  --readable-panel-border: rgba(0, 0, 0, 0.06);
+  --readable-panel-shadow: rgba(0, 0, 0, 0.12);
+  --readable-panel-grad: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
 }
 
 body.dark-theme {
@@ -79,6 +87,10 @@ body.dark-theme {
   --input: #2a2a2a;
   --ring: var(--amber);
   color-scheme: dark;
+  --readable-panel-bg: rgba(6, 6, 6, 0.68);
+  --readable-panel-border: rgba(255, 255, 255, 0.08);
+  --readable-panel-shadow: rgba(0, 0, 0, 0.45);
+  --readable-panel-grad: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
 }
 
 .dark {
@@ -180,6 +192,29 @@ body.dark-theme {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+.readable-panel {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  border-radius: 16px;
+  background: var(--readable-panel-bg);
+  border: 1px solid var(--readable-panel-border);
+  box-shadow: 0 12px 40px var(--readable-panel-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.readable-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--readable-panel-grad);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Selection styling */

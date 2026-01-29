@@ -13,7 +13,7 @@ export default function DreamHunterLayer() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="order-2 md:order-1 space-y-8"
+                    className="readable-panel order-2 md:order-1 space-y-8"
                 >
                     <div className="space-y-4">
                         <span className="block text-xs font-bold tracking-widest uppercase text-muted-foreground">

@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 export default function IntroSection() {
     return (
         <section id="intro-section" className="w-full py-24 md:py-32 px-8 md:px-12 lg:px-16 text-foreground border-b border-foreground/10">
-            <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
+            <div className="readable-panel max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
                 <div className="md:col-span-4">
                     <motion.h3
                         initial={{ opacity: 0, y: 20 }}

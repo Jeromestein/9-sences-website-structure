@@ -10,7 +10,7 @@ export default function WellhausLayer() {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-bio-lume/20 blur-[120px] rounded-full pointer-events-none" />
 
             <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-16 items-start justify-between">
-                <div className="md:w-1/2 space-y-10 z-10">
+                <div className="readable-panel md:w-1/2 space-y-10 z-10">
                     <div className="space-y-6">
                         <motion.span
                             initial={{ opacity: 0 }}
