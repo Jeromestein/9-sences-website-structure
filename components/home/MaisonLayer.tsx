@@ -34,7 +34,7 @@ export default function MaisonLayer() {
                         <span className="block text-xs font-bold tracking-widest uppercase text-muted-foreground">
                             Practice & Experience Layer
                         </span>
-                        <Link href="#" className="block group">
+                        <Link href="/maison" className="block group">
                             <h2 className="font-serif text-5xl md:text-6xl border-b-2 border-foreground/20 text-foreground font-medium inline-block pb-2 hover:border-sage transition-colors">
                                 SenceMaison
                             </h2>

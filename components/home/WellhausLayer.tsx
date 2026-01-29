@@ -26,7 +26,7 @@ export default function WellhausLayer() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
                         >
-                            <Link href="#" className="block group">
+                            <Link href="/wellhaus" className="block group">
                                 <h2 className="font-serif text-5xl md:text-6xl text-foreground font-medium group-hover:text-bio-lume transition-colors duration-500">
                                     Sence 91. <br />
                                     <span className="italic text-muted-foreground group-hover:text-foreground transition-colors">Wellhaus</span>

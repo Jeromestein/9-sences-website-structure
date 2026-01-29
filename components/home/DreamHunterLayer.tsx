@@ -19,7 +19,7 @@ export default function DreamHunterLayer() {
                         <span className="block text-xs font-bold tracking-widest uppercase text-muted-foreground">
                             Cultural IP & Narrative Layer
                         </span>
-                        <Link href="#" className="block group">
+                        <Link href="/dream-hunter" className="block group">
                             <h2 className="font-serif text-5xl md:text-6xl italic text-foreground font-medium group-hover:text-amber transition-colors duration-300">
                                 Dream Hunter
                             </h2>
