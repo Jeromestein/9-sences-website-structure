@@ -168,7 +168,7 @@ export default function WellhausPage() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="relative bg-neutral-900 border border-amber/10 overflow-hidden group">
+                        <div className="relative bg-neutral-900 border border-amber/10 overflow-hidden group min-h-[400px] md:min-h-0">
                             <div className="absolute inset-0 bg-gradient-to-t from-void to-transparent opacity-80" />
                             <div className="absolute inset-0 flex items-center justify-center">
                                 {/* <span className="font-serif italic text-6xl text-amber/20 group-hover:text-amber/40 transition-colors duration-700 font-medium">Peer<br />To<br />Peer</span> */}
