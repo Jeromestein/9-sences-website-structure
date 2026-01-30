@@ -6,7 +6,16 @@ import FooterSection from "@/components/FooterSection";
 
 export default function WellhausPage() {
     return (
-        <main className="min-h-screen bg-void text-offwhite selection:bg-amber selection:text-void overflow-x-hidden font-sans">
+        <main
+            // TODO: find out why ???
+            className="min-h-screen bg-void text-offwhite selection:bg-amber selection:text-void overflow-x-hidden font-sans"
+            style={{
+                "--readable-panel-bg": "rgba(6, 6, 6, 0.68)",
+                "--readable-panel-border": "rgba(255, 255, 255, 0.08)",
+                "--readable-panel-shadow": "rgba(0, 0, 0, 0.45)",
+                "--readable-panel-grad": "linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0))",
+            } as React.CSSProperties}
+        >
             <AudioControl src="/neon-dreams-280430.mp3" />
 
             {/* Navigation / Header */}
