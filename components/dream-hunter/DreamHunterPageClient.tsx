@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import DreamHunterHeroScene from "@/components/dream-hunter/DreamHunterHeroScene";
+import DreamHunterContent from "@/components/dream-hunter/DreamHunterContent";
 import AudioControl from "@/components/ui/AudioControl";
+import FooterSection from "@/components/FooterSection";
 
 function LoadingOverlay({ progress }: { progress: number }) {
     const label = useMemo(() => `${Math.round(progress)}%`, [progress]);
@@ -45,7 +47,15 @@ export default function DreamHunterPageClient() {
     }, [active, clampedProgress, ready]);
 
     return (
-        <main className="min-h-screen bg-neutral-900 text-stone-100 selection:bg-stone-100 selection:text-neutral-900 overflow-x-hidden">
+        <main
+            className="min-h-screen bg-neutral-900 text-stone-100 selection:bg-stone-100 selection:text-neutral-900 overflow-x-hidden"
+            style={{
+                "--readable-panel-bg": "rgba(6, 6, 6, 0.68)",
+                "--readable-panel-border": "rgba(255, 255, 255, 0.08)",
+                "--readable-panel-shadow": "rgba(0, 0, 0, 0.45)",
+                "--readable-panel-grad": "linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0))",
+            } as React.CSSProperties}
+        >
             {!ready && <LoadingOverlay progress={clampedProgress} />}
 
             <div className={`transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
@@ -69,41 +79,26 @@ export default function DreamHunterPageClient() {
                     <div className="absolute inset-0 z-[1] bg-gradient-to-b from-neutral-900/30 via-neutral-900/35 to-neutral-900/85" />
                     <div className="absolute inset-0 z-[2] opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
 
-                    <div className="max-w-4xl w-full text-center space-y-8 z-10">
+                    <div className="max-w-5xl w-full text-center space-y-8 z-10 px-4">
                         <span className="block text-xs font-bold tracking-[0.2em] uppercase text-stone-400">
-                            Cultural IP & Narrative Layer
+                            The First Global
                         </span>
-                        <h1 className="font-serif text-6xl md:text-8xl italic leading-tight">Dream Hunter</h1>
-                        <p className="font-serif text-xl md:text-2xl text-stone-300 italic max-w-2xl mx-auto">
-                            "Culture remembered."
-                        </p>
-                    </div>
-                </section>
-
-                <section className="w-full py-32 px-8">
-                    <div className="max-w-3xl mx-auto space-y-24">
-                        <div className="space-y-6">
-                            <h2 className="text-3xl font-serif italic">The Archive</h2>
-                            <p className="text-lg text-stone-400 leading-relaxed">
-                                Dream Hunter serves as the carrier for non-linear narratives, dream symbols, and artistic exploration. It is an
-                                archive of the subconscious, a bridge between the raw and the refined.
+                        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl italic leading-tight text-transparent bg-clip-text bg-gradient-to-b from-stone-100 to-stone-400">
+                            Dream Hunter<br />Initiation System
+                        </h1>
+                        <div className="font-serif text-lg md:text-xl text-stone-300 italic max-w-3xl mx-auto space-y-1 leading-relaxed opacity-90 pt-4">
+                            <p>Dream Hunter is a cultural creation program that begins with dreams,</p>
+                            <p>is grounded in psychology, and shaped through AI and artistic storytelling.</p>
+                            <p className="pt-6 text-stone-100 text-xl md:text-2xl">
+                                "It is not designed to test who you are,<br />but to awaken who you are ready to become."
                             </p>
                         </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="aspect-[4/5] bg-neutral-800 flex items-center justify-center border border-stone-800">
-                                <span className="font-mono text-sm opacity-50">[Dream Archive Vol.1]</span>
-                            </div>
-                            <div className="aspect-[4/5] bg-neutral-800 flex items-center justify-center border border-stone-800 mt-16">
-                                <span className="font-mono text-sm opacity-50">[Art & Storytelling]</span>
-                            </div>
-                        </div>
                     </div>
                 </section>
 
-                <footer className="w-full py-12 px-8 border-t border-stone-800 text-center text-stone-500 text-sm">
-                    <p>&copy; {new Date().getFullYear()} 9Sences. All rights reserved.</p>
-                </footer>
+                <DreamHunterContent />
+
+                <FooterSection className="!bg-neutral-900 !border-stone-800 text-stone-500 hover:[&_span]:text-stone-300" />
                 <AudioControl src="/dark-ambient-soundscape-dreamscape-456642.mp3" />
             </div>
         </main>
