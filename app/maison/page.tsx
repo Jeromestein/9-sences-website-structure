@@ -33,11 +33,11 @@ export default function MaisonPage() {
                         SenceMaison
                     </h1>
                     <div className="max-w-xl mx-auto space-y-6">
-                        <p className="font-serif text-2xl md:text-3xl text-stone-700 italic font-light leading-relaxed">
+                        <p className="font-serif text-xl md:text-3xl text-stone-700 italic font-light leading-relaxed">
                             "Where wellness identity takes form"
                         </p>
                         {/* <div className="w-px h-16 bg-stone-400/50 mx-auto"></div> */}
-                        <p className="text-s font-sans tracking-[0.25em] uppercase text-stone-700 leading-loose">
+                        <p className="text-sm font-sans tracking-[0.25em] uppercase text-stone-700 leading-loose">
                             A creative wellness space<br />
                             at the intersection of aesthetics & community
                         </p>
@@ -223,9 +223,9 @@ export default function MaisonPage() {
 
                 {/* Retreat & Global - High Whitespace */}
                 <section className="w-full py-32 md:py-48 px-8 bg-[#EBE9E3]">
-                    <div className="max-w-4xl mx-auto text-center space-y-16">
-                        <h2 className="text-4xl md:text-5xl font-serif font-light text-stone-800 leading-tight">
-                            Retreats are not escapes,<br />
+                    <div className="max-w-4xl mx-auto text-left space-y-16">
+                        <h2 className="text-[28px] md:text-5xl font-serif text-stone-800">
+                            Retreats are not escapes,
                             but <span className="italic font-normal">intentional pauses.</span>
                         </h2>
 
