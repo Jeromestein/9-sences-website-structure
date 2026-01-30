@@ -79,7 +79,7 @@ export default function WellhausPartnerPage() {
                             {/* Pillar 1 */}
                             <div className="readable-panel group hover:border-amber/30 transition-colors duration-500">
                                 <Link href="/wellhaus" className="block w-full h-full">
-                                    <h3 className="text-2xl font-serif text-white mb-4 group-hover:text-amber transition-colors">Sence 91.Wellhaus</h3>
+                                    <h3 className="text-2xl font-serif text-white mb-4 group-hover:text-amber transition-colors">Sence 91. <span className="text-amber">Wellhaus</span></h3>
                                     <div className="h-px w-12 bg-white/20 mb-4"></div>
                                     <p className="text-offwhite/80 leading-relaxed">
                                         A curated access and cultural context system.
@@ -169,7 +169,7 @@ export default function WellhausPartnerPage() {
                             {/* Wellhaus Criteria */}
                             <div className="space-y-6 p-8 border border-white/10 hover:border-amber/30 transition-all duration-300">
                                 <div>
-                                    <h3 className="text-2xl font-serif text-amber mb-2">① Wellhaus</h3>
+                                    <h3 className="text-2xl font-serif mb-2">Sence 91. <span className="text-amber">Wellhaus</span></h3>
                                     <p className="text-xs uppercase tracking-widest text-offwhite/50">Technology × Systems × Cultural Infrastructure</p>
                                 </div>
                                 <ul className="space-y-4 text-offwhite/80 leading-relaxed">
@@ -183,7 +183,7 @@ export default function WellhausPartnerPage() {
                             {/* Dream Hunter Criteria */}
                             <div className="space-y-6 p-8 border border-white/10 hover:border-amber/30 transition-all duration-300">
                                 <div>
-                                    <h3 className="text-2xl font-serif text-amber mb-2">② Dream Hunter</h3>
+                                    <h3 className="text-2xl font-serif mb-2">Dream Hunter</h3>
                                     <p className="text-xs uppercase tracking-widest text-offwhite/50">Art × Narrative × Consciousness Exploration</p>
                                 </div>
                                 <ul className="space-y-4 text-offwhite/80 leading-relaxed">
@@ -197,7 +197,7 @@ export default function WellhausPartnerPage() {
                             {/* SenceMaison Criteria */}
                             <div className="space-y-6 p-8 border border-white/10 hover:border-amber/30 transition-all duration-300">
                                 <div>
-                                    <h3 className="text-2xl font-serif text-amber mb-2">③ SenceMaison</h3>
+                                    <h3 className="text-2xl font-serif mb-2">SenceMaison</h3>
                                     <p className="text-xs uppercase tracking-widest text-offwhite/50">Practice × Body × Healing Methodologies</p>
                                 </div>
                                 <ul className="space-y-4 text-offwhite/80 leading-relaxed">
