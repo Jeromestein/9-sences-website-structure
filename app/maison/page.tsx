@@ -19,9 +19,9 @@ export default function MaisonPage() {
                         className="h-10 w-auto"
                     />
                 </Link>
-                {/* <div className="text-[10px] tracking-[0.2em] uppercase font-light text-stone-600">
-                    Dimension A: The Sanctuary
-                </div> */}
+                <Link href="/wellhaus/partner" className="text-xs uppercase tracking-[0.2em] text-stone-600 hover:text-stone-900 transition-colors font-medium">
+                    Partners
+                </Link>
             </nav>
 
             {/* Hero Section */}
