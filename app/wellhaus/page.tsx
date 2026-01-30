@@ -36,7 +36,7 @@ export default function WellhausPage() {
                             The Cultural Experience Engine under 9Sences
                         </span>
                         <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl italic leading-none text-white tracking-tight">
-                            Sence 91.<br />Wellhaus
+                            Sence 91.<br /> Wellhaus
                         </h1>
                     </div>
 
@@ -66,7 +66,7 @@ export default function WellhausPage() {
                         <div className="md:col-span-4">
                             {/* <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block mb-4">01 | Definition</span> */}
                             <h2 className="text-4xl md:text-5xl font-serif italic text-white leading-tight">
-                                What Is <br /> Sence 91.Wellhaus
+                                What Is <br /> Sence 91.<span className="text-amber">Wellhaus</span>
                             </h2>
                         </div>
                         <div className="md:col-span-8 md:pl-12 flex flex-col justify-center h-full space-y-8">
@@ -219,7 +219,7 @@ export default function WellhausPage() {
 
                     <div className="max-w-4xl mx-auto space-y-8 relative z-10">
                         <h2 className="text-4xl md:text-6xl font-serif italic text-white leading-tight">
-                            Sence 91.Wellhaus
+                            Sence 91.<span className="text-amber">Wellhaus</span>
                         </h2>
                         <div className="w-12 h-1 bg-amber mx-auto" />
                         <p className="text-xl md:text-3xl font-light text-offwhite/80 leading-relaxed">
