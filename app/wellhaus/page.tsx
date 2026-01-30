@@ -3,6 +3,7 @@ import Image from "next/image";
 import VideoBackground from "@/components/VideoBackground";
 import AudioControl from "@/components/ui/AudioControl";
 import FooterSection from "@/components/FooterSection";
+import ThemeBodyClass from "@/components/ThemeBodyClass";
 
 export default function WellhausPage() {
     return (
@@ -17,6 +18,7 @@ export default function WellhausPage() {
                 "--readable-panel-grad": "linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0))",
             } as React.CSSProperties}
         >
+            <ThemeBodyClass theme="dark" />
             <AudioControl src="/neon-dreams-280430.mp3" />
 
             {/* Navigation / Header */}
@@ -29,6 +31,9 @@ export default function WellhausPage() {
                         height={40}
                         className="h-10 w-auto"
                     />
+                </Link>
+                <Link href="/wellhaus/partner" className="text-xs uppercase tracking-[0.2em] text-offwhite/60 hover:text-amber transition-colors">
+                    Partners
                 </Link>
             </nav>
 
@@ -75,7 +80,7 @@ export default function WellhausPage() {
                 <div className="absolute top-[35%] right-[-20%] w-[1000px] h-[1000px] bg-amber/25 rounded-full blur-[180px] pointer-events-none z-0 mix-blend-screen" />
                 <div className="absolute bottom-[20%] left-[-10%] w-[800px] h-[800px] bg-white/10 rounded-full blur-[150px] pointer-events-none z-0 mix-blend-screen" />
 
-                {/* What Is Sence 91. Wellhaus */}
+                {/* What Is Sence 91.Wellhaus */}
                 <section className="relative z-10 py-32 md:py-48 px-8 md:px-16 border-t border-amber/10">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
                         <div className="md:col-span-4">
@@ -257,7 +262,7 @@ export default function WellhausPage() {
                 </section>
 
                 {/* Footer */}
-                <FooterSection className="!bg-black !border-amber/10 [&_p]:!text-offwhite/40 [&_span]:!text-offwhite/40 hover:[&_span]:!text-amber" />
+                <FooterSection />
             </div>
         </main>
     );

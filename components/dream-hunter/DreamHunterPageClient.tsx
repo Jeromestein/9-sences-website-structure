@@ -8,6 +8,7 @@ import DreamHunterHeroScene from "@/components/dream-hunter/DreamHunterHeroScene
 import DreamHunterContent from "@/components/dream-hunter/DreamHunterContent";
 import AudioControl from "@/components/ui/AudioControl";
 import FooterSection from "@/components/FooterSection";
+import ThemeBodyClass from "@/components/ThemeBodyClass";
 
 function LoadingOverlay({ progress }: { progress: number }) {
     const label = useMemo(() => `${Math.round(progress)}%`, [progress]);
@@ -56,10 +57,11 @@ export default function DreamHunterPageClient() {
                 "--readable-panel-grad": "linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0))",
             } as React.CSSProperties}
         >
+            <ThemeBodyClass theme="dark" />
             {!ready && <LoadingOverlay progress={clampedProgress} />}
 
             <div className={`transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-                <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference">
+                <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-stone-300">
                     <Link href="/" className="hover:opacity-70 transition-opacity">
                         <Image
                             src="/logo_transparent_dark_v3_cropped.png"
@@ -69,7 +71,9 @@ export default function DreamHunterPageClient() {
                             className="h-10 w-auto"
                         />
                     </Link>
-                    {/* <div className="text-xs tracking-widest uppercase opacity-70">Dimension C: The Narrative</div> */}
+                    <Link href="/wellhaus/partner" className="text-xs uppercase tracking-[0.2em] hover:text-white transition-colors font-medium">
+                        Partners
+                    </Link>
                 </nav>
 
                 <section className="relative w-full h-screen flex items-center justify-center p-2 overflow-hidden">
@@ -91,7 +95,7 @@ export default function DreamHunterPageClient() {
 
                 <DreamHunterContent />
 
-                <FooterSection className="!bg-neutral-900 !border-stone-800 text-stone-500 hover:[&_span]:text-stone-300" />
+                <FooterSection />
                 <AudioControl src="/dark-ambient-soundscape-dreamscape-456642.mp3" />
             </div>
         </main>
