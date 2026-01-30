@@ -83,7 +83,7 @@ export default function DreamHunterPageClient() {
                         {/* <span className="block text-xs font-bold tracking-[0.3em] uppercase text-stone-500/80 mb-4">
                             Dimension C
                         </span> */}
-                        <h1 className="font-serif text-5xl md:text-8xl lg:text-9xl italic leading-tight text-transparent bg-clip-text bg-gradient-to-b from-stone-400 via-stone-200 to-stone-700 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap">
+                        <h1 className="font-serif text-5xl md:text-8xl lg:text-9xl italic leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-500 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] drop-shadow-[0_0_20px_rgba(168,85,247,0.4)] whitespace-nowrap">
                             Dream Hunter
                         </h1>
                     </div>
