@@ -49,14 +49,14 @@ export default function DreamHunterContent() {
                     <h2 className="text-3xl md:text-4xl font-serif italic text-center mb-16 text-stone-200">How It Works</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                         <div className="space-y-6 group">
-                            <span className="inline-block text-xs font-mono border border-stone-700 rounded-full px-3 py-1 text-stone-500 group-hover:border-amber-500/50 group-hover:text-amber-500/80 transition-colors">STEP 01</span>
+                            {/* <span className="inline-block text-xs font-mono border border-stone-700 rounded-full px-3 py-1 text-stone-500 group-hover:border-amber-500/50 group-hover:text-amber-500/80 transition-colors">STEP 01</span> */}
                             <h3 className="text-2xl font-serif text-stone-100">Awaken</h3>
                             <p className="text-stone-400 leading-relaxed">
                                 Enter your true inner structure through dream-based awareness.
                             </p>
                         </div>
                         <div className="space-y-6 group">
-                            <span className="inline-block text-xs font-mono border border-stone-700 rounded-full px-3 py-1 text-stone-500 group-hover:border-amber-500/50 group-hover:text-amber-500/80 transition-colors">STEP 02</span>
+                            {/* <span className="inline-block text-xs font-mono border border-stone-700 rounded-full px-3 py-1 text-stone-500 group-hover:border-amber-500/50 group-hover:text-amber-500/80 transition-colors">STEP 02</span> */}
                             <h3 className="text-2xl font-serif text-stone-100">Shape</h3>
                             <p className="text-stone-400 leading-relaxed">
                                 Translate the subconscious into visible future imagery
@@ -64,7 +64,7 @@ export default function DreamHunterContent() {
                             </p>
                         </div>
                         <div className="space-y-6 group">
-                            <span className="inline-block text-xs font-mono border border-stone-700 rounded-full px-3 py-1 text-stone-500 group-hover:border-amber-500/50 group-hover:text-amber-500/80 transition-colors">STEP 03</span>
+                            {/* <span className="inline-block text-xs font-mono border border-stone-700 rounded-full px-3 py-1 text-stone-500 group-hover:border-amber-500/50 group-hover:text-amber-500/80 transition-colors">STEP 03</span> */}
                             <h3 className="text-2xl font-serif text-stone-100">Act</h3>
                             <p className="text-stone-400 leading-relaxed">
                                 Return to reality and allow dreams to begin taking form.
