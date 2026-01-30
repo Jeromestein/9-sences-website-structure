@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import VideoBackground from "@/components/VideoBackground";
 import AudioControl from "@/components/ui/AudioControl";
+import FooterSection from "@/components/FooterSection";
 
 export default function WellhausPage() {
     return (
@@ -9,7 +10,7 @@ export default function WellhausPage() {
             <AudioControl src="/neon-dreams-280430.mp3" />
 
             {/* Navigation / Header */}
-            <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-gradient-to-b from-void/80 to-transparent">
+            <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-gradient-to-b from-void/90 to-transparent backdrop-blur-[2px]">
                 <Link href="/" className="hover:opacity-70 transition-opacity">
                     <Image
                         src="/logo_transparent_dark_v3_cropped.png"
@@ -19,9 +20,6 @@ export default function WellhausPage() {
                         className="h-10 w-auto"
                     />
                 </Link>
-                {/* <div className="text-xs tracking-widest uppercase opacity-70 text-amber/80 font-light">
-                    Dimension B: The Void
-                </div> */}
             </nav>
 
             {/* Hero Section */}
@@ -29,68 +27,213 @@ export default function WellhausPage() {
                 <VideoBackground src="/Abstract_Bioluminescent_Particles_Video.mp4" />
 
                 {/* Gradient Overlay for "Void" Atmosphere */}
-                <div className="absolute inset-0 bg-gradient-to-b from-void/30 via-transparent to-void z-0" />
+                <div className="absolute inset-0 bg-gradient-to-b from-void/40 via-transparent to-void z-10" />
+                <div className="absolute inset-0 bg-void/20 z-10" />
 
-                <div className="max-w-5xl w-full text-center space-y-8 z-10">
-                    <span className="block text-xs font-bold tracking-[0.2em] uppercase text-amber/70">
-                        Experiential Platform
-                    </span>
-                    <h1 className="font-serif text-6xl md:text-8xl italic leading-tight text-white">
-                        Sence 91. <br /> Wellhaus
-                    </h1>
-                    <p className="font-serif text-xl md:text-2xl text-offwhite/80 italic max-w-2xl mx-auto">
-                        "Where selection creates value."
+                <div className="max-w-6xl w-full text-center space-y-12 z-20 relative">
+                    <div className="space-y-4">
+                        <span className="block text-xs font-bold tracking-[0.3em] uppercase text-amber/80">
+                            The Cultural Experience Engine under 9Sences
+                        </span>
+                        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl italic leading-none text-white tracking-tight">
+                            Sence 91.<br />Wellhaus
+                        </h1>
+                    </div>
+
+                    <p className="font-sans font-light text-lg md:text-xl text-offwhite/80 max-w-xl mx-auto tracking-wide leading-relaxed">
+                        Rather than joining the wellness era,<br />
+                        <span className="text-amber/90 italic font-serif">Sence 91.Wellhaus was built to design it.</span>
                     </p>
 
-                    <div className="pt-32">
-                        <button className="px-8 py-3 border border-amber/50 text-amber text-xs uppercase tracking-[0.2em] hover:bg-amber hover:text-void transition-all duration-500 backdrop-blur-sm">
+                    <div className="pt-12 animate-fade-in-up">
+                        <button className="px-10 py-4 border border-amber/40 text-amber text-xs uppercase tracking-[0.25em] hover:bg-amber hover:text-void transition-all duration-700 backdrop-blur-sm">
                             Request Access
                         </button>
                     </div>
                 </div>
 
                 {/* Subtle Amber Glow / Chiaroscuro */}
-                <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-amber/5 rounded-full blur-[150px] mix-blend-screen pointer-events-none"></div>
+                <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-amber/5 rounded-full blur-[120px] mix-blend-screen pointer-events-none z-0"></div>
+                <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-amber/5 rounded-full blur-[150px] mix-blend-screen pointer-events-none z-0"></div>
             </section>
 
-            {/* Content Section */}
-            <section className="relative w-full py-32 px-8 border-t border-amber/10 bg-void">
-                <div className="max-w-4xl mx-auto space-y-32 relative z-10">
+            {/* Content Container - Editorial Layout */}
+            <div className="relative w-full bg-void z-20">
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div className="aspect-[4/5] bg-void/50 border border-amber/20 flex items-center justify-center group overflow-hidden relative backdrop-blur-sm">
-                            <div className="absolute inset-0 bg-amber/10 opacity-0 group-hover:opacity-20 transition-opacity duration-700"></div>
-                            <span className="font-mono text-xs text-amber/60 uppercase tracking-widest z-10">[Deep Void]</span>
+                {/* What Is Sence 91. Wellhaus */}
+                <section className="py-32 md:py-48 px-8 md:px-16 border-t border-amber/10">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+                        <div className="md:col-span-4">
+                            {/* <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block mb-4">01 | Definition</span> */}
+                            <h2 className="text-4xl md:text-5xl font-serif italic text-white leading-tight">
+                                What Is <br /> Sence 91.Wellhaus
+                            </h2>
                         </div>
-                        <div className="space-y-6">
-                            <h2 className="text-3xl font-serif italic text-amber">The Void</h2>
-                            <p className="text-lg text-offwhite/80 leading-relaxed font-light">
-                                An invite-only space that creates a high-end, private, and social atmosphere. It emphasizes the penetration of light through darkness — a sophisticated interpretation of the "Dark Mode."
+                        <div className="md:col-span-8 md:pl-12 flex flex-col justify-center h-full space-y-8">
+                            <p className="text-xl md:text-2xl font-light text-offwhite/90 leading-relaxed max-w-3xl">
+                                Sence 91.Wellhaus is not a venue. <br />
+                                It is a <span className="text-amber">cultural positioning platform</span>.
                             </p>
-                            <ul className="space-y-4 text-offwhite/60 pt-4 border-l border-amber/30 pl-6">
-                                <li className="uppercase text-xs tracking-widest">Strategic Collaborations</li>
-                                <li className="uppercase text-xs tracking-widest">Pop-up Environments</li>
-                                <li className="uppercase text-xs tracking-widest">Long-term Value</li>
+                            <p className="text-offwhite/60 font-light leading-relaxed max-w-2xl">
+                                A space where wellness, identity, and visibility converge, placing brands inside the right cultural context rather than in front of an audience.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 02 | Why Brands Are Here */}
+                <section className="py-32 md:py-48 px-8 md:px-16 relative overflow-hidden">
+                    <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-amber/5 to-transparent pointer-events-none" />
+
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
+                        <div className="md:col-span-5 md:col-start-8">
+                            <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block mb-4">02 | Context</span>
+                            <h2 className="text-4xl md:text-5xl font-serif italic text-white leading-tight mb-8">
+                                Why Brands <br /> Are Here
+                            </h2>
+                            <div className="space-y-6 text-lg font-light text-offwhite/80">
+                                <p>This is not paid exposure. This is <span className="text-white italic font-serif">contextual presence</span>.</p>
+                                <p>Brands are not displayed. They are embedded within a carefully curated social ecosystem — where credibility is inherited, not purchased.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 03 | A Wellness Red Carpet */}
+                <section className="py-32 md:py-48 px-8 md:px-16 border-t border-amber/10 bg-void/50">
+                    <div className="max-w-5xl mx-auto text-center space-y-12">
+                        <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block">03 | The Stage</span>
+                        <h2 className="text-5xl md:text-7xl font-serif italic text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 leading-tight">
+                            A Wellness Red Carpet
+                        </h2>
+
+                        <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-sm md:text-base font-serif italic text-amber/80 tracking-widest uppercase">
+                            <span>Celebrities</span>
+                            <span className="text-offwhite/30">×</span>
+                            <span>Gymfluencers</span>
+                            <span className="text-offwhite/30">×</span>
+                            <span>Tastemakers</span>
+                        </div>
+
+                        <div className="pt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-offwhite/60 font-light text-sm tracking-wide uppercase border-t border-amber/10 w-full max-w-3xl mx-auto">
+                            <div className="py-4">Not for press</div>
+                            <div className="py-4 border-l-0 md:border-l border-r-0 md:border-r border-dashed border-amber/20">Not for performance</div>
+                            <div className="py-4 text-white">But for presence and alignment</div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 04 | Who You Are Seen With Matters */}
+                <section className="py-32 md:py-48 px-8 md:px-16">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+                        <div className="relative aspect-[3/4] md:aspect-[4/5] bg-neutral-900 border border-amber/10 overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-t from-void to-transparent opacity-80" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="font-serif italic text-6xl text-amber/10 group-hover:text-amber/20 transition-colors duration-700">Peer<br />To<br />Peer</span>
+                            </div>
+                        </div>
+                        <div className="space-y-8">
+                            <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block">04 | Curation</span>
+                            <h2 className="text-4xl md:text-6xl font-serif italic text-white leading-tight">
+                                Who You Are <br /> Seen With Matters
+                            </h2>
+                            <ul className="space-y-6 text-lg md:text-xl font-light text-offwhite/80">
+                                <li className="flex items-start gap-4">
+                                    <span className="text-amber text-xs mt-2">✦</span>
+                                    <span>Every guest is curated.</span>
+                                </li>
+                                <li className="flex items-start gap-4">
+                                    <span className="text-amber text-xs mt-2">✦</span>
+                                    <span>Every interaction compounds brand perception.</span>
+                                </li>
+                                <li className="flex items-start gap-4">
+                                    <span className="text-amber text-xs mt-2">✦</span>
+                                    <span>Visibility here is peer-to-peer, not top-down.</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
+                </section>
 
-                    {/* Privacy Note */}
-                    <div className="text-center space-y-4 pt-16 border-t border-amber/10">
-                        <span className="text-2xl text-amber/40">✦</span>
-                        <p className="text-sm text-offwhite/50 max-w-md mx-auto">
-                            Usage of this space is strictly limited. Photography is restricted to ensure privacy and immersion.
+                {/* 05 | Sponsor & Brand Value */}
+                <section className="py-32 md:py-48 px-8 md:px-16 bg-neutral-900/50 border-y border-amber/5">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="mb-16">
+                            <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block mb-4">05 | Value Proposition</span>
+                            <h2 className="text-4xl md:text-5xl font-serif italic text-white">Sponsor & Brand Value</h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {[
+                                "Organic, creator-led visibility",
+                                "Cultural relevance without hard selling",
+                                "High-trust, private social environments",
+                                "Long-term brand association with identity and taste"
+                            ].map((item, i) => (
+                                <div key={i} className="p-8 border border-white/5 bg-void/50 hover:border-amber/30 transition-colors duration-500 group">
+                                    <span className="block text-2xl font-serif text-amber/40 mb-4 group-hover:text-amber transition-colors">0{i + 1}</span>
+                                    <p className="text-offwhite/90 font-light leading-relaxed">{item}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-16 text-center">
+                            <p className="text-2xl md:text-3xl font-serif italic text-offwhite/80">
+                                "Brands are not promoted. <span className="text-amber">They are positioned.</span>"
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 06 | Collaboration Philosophy */}
+                <section className="py-32 md:py-48 px-8 md:px-16">
+                    <div className="max-w-4xl mx-auto text-center space-y-12">
+                        <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block">06 | Philosophy</span>
+                        <h2 className="text-4xl md:text-5xl font-serif italic text-white">Collaboration Philosophy</h2>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 font-light text-lg tracking-wide text-offwhite/50">
+                            <div className="space-y-2 group">
+                                <span className="block text-white group-hover:text-red-500 transition-colors duration-300">No Banners</span>
+                            </div>
+                            <div className="space-y-2 group">
+                                <span className="block text-white group-hover:text-red-500 transition-colors duration-300">No Booths</span>
+                            </div>
+                            <div className="space-y-2 group">
+                                <span className="block text-white group-hover:text-red-500 transition-colors duration-300">No One-off Campaigns</span>
+                            </div>
+                        </div>
+
+                        <div className="h-px w-24 bg-amber/30 mx-auto" />
+
+                        <div className="space-y-4 text-xl md:text-2xl text-offwhite/90 font-serif italic">
+                            <p>Only integrated moments,</p>
+                            <p>invitation-based exposure,</p>
+                            <p>and story-driven presence.</p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 07 | Closing */}
+                <section className="py-48 px-8 text-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-amber/5 via-transparent to-transparent opacity-50 pointer-events-none" />
+
+                    <div className="max-w-4xl mx-auto space-y-8 relative z-10">
+                        <h2 className="text-4xl md:text-6xl font-serif italic text-white leading-tight">
+                            Sence 91.Wellhaus
+                        </h2>
+                        <div className="w-12 h-1 bg-amber mx-auto" />
+                        <p className="text-xl md:text-3xl font-light text-offwhite/80 leading-relaxed">
+                            Where brands don’t advertise — <span className="text-amber italic font-serif">they belong</span>.
+                        </p>
+                        <p className="text-sm tracking-[0.3em] uppercase text-offwhite/40 pt-8">
+                            The epicenter of wellness identity
                         </p>
                     </div>
+                </section>
 
-                </div>
-            </section>
-
-            {/* Footer */}
-            <footer className="w-full py-12 px-8 border-t border-amber/10 text-center text-offwhite/40 text-sm bg-void">
-                <p>&copy; {new Date().getFullYear()} 9Sences. All rights reserved.</p>
-            </footer>
+                {/* Footer */}
+                <FooterSection />
+            </div>
         </main>
     );
 }
