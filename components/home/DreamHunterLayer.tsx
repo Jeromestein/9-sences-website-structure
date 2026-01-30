@@ -26,13 +26,16 @@ export default function DreamHunterLayer() {
                         </Link>
                     </div>
 
-                    <ul className="space-y-4 text-lg font-medium text-muted-foreground border-l-2 border-foreground/20 pl-6">
-                        <li>Dream Archive</li>
-                        <li>Art & Storytelling</li>
-                        <li>Long-term Cultural IP</li>
+                    <ul className="space-y-4 text-lg font-medium text-muted-foreground">
+                        <li className="flex items-center gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sage"></span>Dream Archive</li>
+                        <li className="flex items-center gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sage"></span>Art & Storytelling</li>
+                        <li className="flex items-center gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sage"></span>Long-term Cultural IP</li>
                     </ul>
 
-                    <p className="font-serif text-2xl md:text-3xl italic text-muted-foreground/80">
+                    <p className="font-serif text-2xl md:text-3xl italic text-sage/90">
                         "Culture remembered."
                     </p>
                 </motion.div>
