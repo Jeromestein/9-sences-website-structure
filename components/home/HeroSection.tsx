@@ -57,8 +57,8 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="flex flex-col items-center gap-2 text-xs md:text-sm font-medium text-foreground/80 uppercase tracking-widest"
                 >
-                    Scroll
-                    <ArrowDown className="w-4 h-4 animate-bounce" />
+                    {/* Scroll
+                    <ArrowDown className="w-4 h-4 animate-bounce" /> */}
                 </motion.div>
             </div>
         </section>
