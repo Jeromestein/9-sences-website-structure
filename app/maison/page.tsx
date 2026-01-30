@@ -104,6 +104,125 @@ export default function MaisonPage() {
                     </div>
                 </section>
 
+                {/* Offerings / Curated Formats */}
+                <section className="w-full py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+                    <div className="text-center mb-20 space-y-4">
+                        <span className="block text-[10px] tracking-[0.25em] uppercase text-stone-400">02 — Offerings</span>
+                        <h2 className="text-4xl md:text-5xl font-serif font-light text-stone-900 italic">Curated Formats</h2>
+                    </div>
+
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16">
+                        {/* 1. Access Practice */}
+                        <div className="space-y-6 group cursor-pointer">
+                            <div className="relative aspect-[3/4] bg-stone-200 overflow-hidden">
+                                {/* Image Placeholder: Close up of hands or meditation cushion (Intimacy) */}
+                                <div className="absolute inset-0 bg-[#F0EFEB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
+                                    {/* [Image: Close-up of hands / texture] */}
+                                    <Image src="/timothee-geenens-ZYNg5xkuDts-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                </div>
+                                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                            </div>
+                            <div className="text-center space-y-3">
+                                <h3 className="text-2xl font-serif font-light text-stone-800">Access Practice</h3>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Contribution-based · Supported</p>
+                                    <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
+                                        Guided with presence by Cindy.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 2. Global Collaboration */}
+                        <div className="space-y-6 group cursor-pointer">
+                            <div className="relative aspect-[3/4] bg-stone-200 overflow-hidden">
+                                {/* Image Placeholder: Horizon line or abstract connecting lines (Breadth) */}
+                                <div className="absolute inset-0 bg-[#E8E6E1] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
+                                    {/* [Image: Abstract horizon / lines] */}
+                                    <Image src="/a-chosen-soul-yjRE4-gAnkk-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                </div>
+                                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                            </div>
+                            <div className="text-center space-y-3">
+                                <h3 className="text-2xl font-serif font-light text-stone-800">Global Collaboration</h3>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Paid Experience</p>
+                                    <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
+                                        A shared field of practice with global practitioners and cultural lineages.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 3. Event */}
+                        <div className="space-y-6 group cursor-pointer">
+                            <div className="relative aspect-[3/4] bg-stone-200 overflow-hidden">
+                                {/* Image Placeholder: Gathering space with warm light (Community) */}
+                                <div className="absolute inset-0 bg-[#F5F2EB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
+                                    {/* [Image: Warm gathering space] */}
+                                    <Image src="/hoi-an-and-da-nang-photographer-Nt1xUopfQEU-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                </div>
+                                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                            </div>
+                            <div className="text-center space-y-3">
+                                <h3 className="text-2xl font-serif font-light text-stone-800">Event</h3>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Ticketed</p>
+                                    <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
+                                        Curated in-person moments where practice becomes collective.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Second Row (Adjusted Width) */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 mt-16 max-w-4xl mx-auto">
+                        {/* 4. Dear Me */}
+                        <div className="space-y-6 group cursor-pointer">
+                            <div className="relative aspect-[4/3] bg-stone-200 overflow-hidden">
+                                {/* Image Placeholder: Abstract reflection / water / journal (Reflection) */}
+                                <div className="absolute inset-0 bg-[#EBE9E3] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
+                                    {/* [Image: Reflection / Water surface] */}
+                                    <Image src="/istockphoto-1299754707-612x612.webp" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                </div>
+                                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                            </div>
+                            <div className="text-center space-y-3">
+                                <h3 className="text-2xl font-serif font-light text-stone-800">Dear Me</h3>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">In-Person Workshop</p>
+                                    <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
+                                        An inner dialogue space for reflection, inquiry, and emotional clarity.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 5. Retreat */}
+                        <div className="space-y-6 group cursor-pointer">
+                            <div className="relative aspect-[4/3] bg-stone-200 overflow-hidden">
+                                {/* Image Placeholder: Nature landscape / sanctuary (Sanctuary) */}
+                                <div className="absolute inset-0 bg-[#F0EFEB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
+                                    {/* [Image: Nature / Wide landscape] */}
+                                    <Image src="/artem-zhyzhyn-L0m-ukSCjcg-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                </div>
+                                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                            </div>
+                            <div className="text-center space-y-3">
+                                <h3 className="text-2xl font-serif font-light text-stone-800">Retreat</h3>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Destination & Local</p>
+                                    <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
+                                        Immersive pauses designed to recalibrate rhythm and presence.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Retreat & Global - High Whitespace */}
                 <section className="w-full py-32 md:py-48 px-8 bg-[#EBE9E3]">
                     <div className="max-w-4xl mx-auto text-center space-y-16">
