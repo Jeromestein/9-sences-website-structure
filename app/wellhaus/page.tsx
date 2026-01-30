@@ -7,7 +7,8 @@ import FooterSection from "@/components/FooterSection";
 export default function WellhausPage() {
     return (
         <main
-            // TODO: find out why ???
+            // Force dark mode CSS variables to ensure glassmorphism works correctly on this dark page,
+            // overriding any default light-theme variables from globals.css root.
             className="min-h-screen bg-void text-offwhite selection:bg-amber selection:text-void overflow-x-hidden font-sans"
             style={{
                 "--readable-panel-bg": "rgba(6, 6, 6, 0.68)",
@@ -49,7 +50,7 @@ export default function WellhausPage() {
                         </h1>
                     </div>
 
-                    <p className="font-sans font-normal text-xl md:text-2xl text-offwhite/90 max-w-2xl mx-auto tracking-wide leading-relaxed">
+                    <p className="font-sans font-normal text-lg md:text-2xl text-offwhite/90 max-w-2xl mx-auto tracking-normal md:tracking-wide leading-relaxed">
                         Rather than joining the wellness era,<br />
                         <span className="text-amber italic font-serif font-medium">Sence 91.Wellhaus was built to design it.</span>
                     </p>
@@ -67,10 +68,15 @@ export default function WellhausPage() {
             </section>
 
             {/* Content Container - Editorial Layout */}
-            <div className="relative w-full bg-void z-20">
+            <div className="relative w-full bg-void z-20 overflow-hidden">
+
+                {/* Ambient Background Glows - Increased intensity */}
+                <div className="absolute top-[10%] left-[-20%] w-[900px] h-[900px] bg-amber/20 rounded-full blur-[150px] pointer-events-none z-0 mix-blend-screen" />
+                <div className="absolute top-[35%] right-[-20%] w-[1000px] h-[1000px] bg-amber/25 rounded-full blur-[180px] pointer-events-none z-0 mix-blend-screen" />
+                <div className="absolute bottom-[20%] left-[-10%] w-[800px] h-[800px] bg-white/10 rounded-full blur-[150px] pointer-events-none z-0 mix-blend-screen" />
 
                 {/* What Is Sence 91. Wellhaus */}
-                <section className="py-32 md:py-48 px-8 md:px-16 border-t border-amber/10">
+                <section className="relative z-10 py-32 md:py-48 px-8 md:px-16 border-t border-amber/10">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
                         <div className="md:col-span-4">
                             {/* <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block mb-4">01 | Definition</span> */}
@@ -93,7 +99,7 @@ export default function WellhausPage() {
                 </section>
 
                 {/* 02 | Why Brands Are Here */}
-                <section className="py-32 md:py-48 px-8 md:px-16 relative overflow-hidden">
+                <section className="relative z-10 py-32 md:py-48 px-8 md:px-16 overflow-hidden">
                     <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-amber/5 to-transparent pointer-events-none" />
 
                     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
@@ -114,11 +120,11 @@ export default function WellhausPage() {
                 </section>
 
                 {/* 03 | A Wellness Red Carpet */}
-                <section className="py-32 md:py-48 px-8 md:px-16 border-t border-amber/10 bg-void/50">
+                <section className="relative z-10 py-32 md:py-48 px-8 md:px-16 border-t border-amber/10 bg-void/50">
                     <div className="max-w-5xl mx-auto text-center space-y-12">
                         {/* <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block">03 | The Stage</span> */}
                         <h2 className="text-5xl md:text-7xl font-serif italic text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 leading-tight font-medium">
-                            A Wellness Red Carpet
+                            A Wellness <span className="text-red-800">Red Carpet</span>
                         </h2>
 
                         <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-base md:text-lg font-serif italic text-amber/90 tracking-widest uppercase font-medium">
@@ -138,7 +144,7 @@ export default function WellhausPage() {
                 </section>
 
                 {/* 04 | Who You Are Seen With Matters */}
-                <section className="py-32 md:py-48 px-8 md:px-16">
+                <section className="relative z-10 py-32 md:py-48 px-8 md:px-16">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
                         <div className="space-y-8">
                             {/* <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block">04 | Curation</span> */}
@@ -173,11 +179,13 @@ export default function WellhausPage() {
                 </section>
 
                 {/* 05 | Sponsor & Brand Value */}
-                <section className="py-32 md:py-48 px-8 md:px-16 bg-neutral-900/50 border-y border-amber/5">
+                <section className="relative z-10 py-32 md:py-48 px-8 md:px-16 bg-neutral-900/50 border-y border-amber/5">
                     <div className="max-w-7xl mx-auto">
                         <div className="mb-16">
                             {/* <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block mb-4">05 | Value Proposition</span> */}
-                            <h2 className="text-4xl md:text-5xl font-serif italic text-white font-medium">Sponsor & Brand Value</h2>
+                            <h2 className="text-4xl md:text-5xl font-serif italic text-white font-medium">
+                                Sponsor & <br className="md:hidden" /> Brand Value
+                            </h2>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -203,7 +211,7 @@ export default function WellhausPage() {
                 </section>
 
                 {/* 06 | Collaboration Philosophy */}
-                <section className="py-32 md:py-48 px-8 md:px-16">
+                <section className="relative z-10 py-32 md:py-48 px-8 md:px-16">
                     <div className="max-w-4xl mx-auto text-center space-y-12">
                         {/* <span className="text-amber/60 font-mono text-xs tracking-widest uppercase block">06 | Philosophy</span> */}
                         <h2 className="text-4xl md:text-5xl font-serif italic text-white font-medium">Collaboration Philosophy</h2>
@@ -231,19 +239,19 @@ export default function WellhausPage() {
                 </section>
 
                 {/* 07 | Closing */}
-                <section className="py-48 px-8 text-center relative overflow-hidden">
+                <section className="relative z-10 py-48 px-8 text-center overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-amber/5 via-transparent to-transparent opacity-50 pointer-events-none" />
 
                     <div className="max-w-4xl mx-auto space-y-8 relative z-10">
                         <h2 className="text-5xl md:text-7xl font-serif italic text-white leading-tight font-medium">
-                            Sence 91.<span className="text-amber">Wellhaus</span>
+                            Sence 91.<br /><span className="text-amber">Wellhaus</span>
                         </h2>
                         <div className="w-16 h-1 bg-amber mx-auto" />
                         <p className="text-2xl md:text-4xl font-normal text-offwhite/90 leading-relaxed">
                             Where brands don’t advertise — <span className="text-amber italic font-serif font-medium">they belong</span>.
                         </p>
-                        <p className="text-sm tracking-[0.3em] uppercase text-offwhite/60 pt-8 font-bold">
-                            The epicenter of wellness identity
+                        <p className="text-xs md:text-sm tracking-[0.2em] md:tracking-[0.3em] uppercase text-offwhite/60 pt-8 font-bold">
+                            The epicenter of <br className="md:hidden" /> wellness identity
                         </p>
                     </div>
                 </section>
