@@ -14,7 +14,7 @@ function DreamModel() {
         const size = new THREE.Vector3();
         box.getSize(size);
         const maxAxis = Math.max(size.x, size.y, size.z) || 1;
-        return (3.2 / maxAxis) * 8;
+        return (3.2 / maxAxis) * 3.5;
     }, [scene]);
 
     useFrame((state) => {
