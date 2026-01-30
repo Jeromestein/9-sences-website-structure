@@ -167,45 +167,51 @@ export default function WellhausPartnerPage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {/* Wellhaus Criteria */}
-                            <div className="space-y-6 p-8 border border-white/10 hover:border-amber/30 transition-all duration-300">
-                                <div>
-                                    <h3 className="text-2xl font-serif mb-2">Sence 91. <span className="text-amber">Wellhaus</span></h3>
-                                    <p className="text-xs uppercase tracking-widest text-offwhite/50">Technology × Systems × Cultural Infrastructure</p>
-                                </div>
-                                <ul className="space-y-4 text-offwhite/80 leading-relaxed">
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Sleep and nervous system regulation</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>AI × mental/psychological states / mind-body data</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Sound, frequency, and immersive experience technologies</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Experiential systems</li>
-                                </ul>
+                            <div className="border border-white/10 hover:border-amber/30 transition-all duration-300 group">
+                                <Link href="/wellhaus" className="block w-full h-full p-8 space-y-6">
+                                    <div>
+                                        <h3 className="text-2xl font-serif mb-2 group-hover:text-amber transition-colors">Sence 91. <span className="text-amber">Wellhaus</span></h3>
+                                        <p className="text-xs uppercase tracking-widest text-offwhite/50">Technology × Systems × Cultural Infrastructure</p>
+                                    </div>
+                                    <ul className="space-y-4 text-offwhite/80 leading-relaxed">
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Sleep and nervous system regulation</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>AI × mental/psychological states / mind-body data</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Sound, frequency, and immersive experience technologies</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Experiential systems</li>
+                                    </ul>
+                                </Link>
                             </div>
 
                             {/* Dream Hunter Criteria */}
-                            <div className="space-y-6 p-8 border border-white/10 hover:border-amber/30 transition-all duration-300">
-                                <div>
-                                    <h3 className="text-2xl font-serif mb-2">Dream Hunter</h3>
-                                    <p className="text-xs uppercase tracking-widest text-offwhite/50">Art × Narrative × Consciousness Exploration</p>
-                                </div>
-                                <ul className="space-y-4 text-offwhite/80 leading-relaxed">
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Immersive installations / performance or behavioral art</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Archetypal dream narratives</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Cross-disciplinary creation at the intersection of art, technology, and healing</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Dreams and cultural memory</li>
-                                </ul>
+                            <div className="border border-white/10 hover:border-amber/30 transition-all duration-300 group">
+                                <Link href="/dream-hunter" className="block w-full h-full p-8 space-y-6">
+                                    <div>
+                                        <h3 className="text-2xl font-serif mb-2 group-hover:text-amber transition-colors">Dream Hunter</h3>
+                                        <p className="text-xs uppercase tracking-widest text-offwhite/50">Art × Narrative × Consciousness Exploration</p>
+                                    </div>
+                                    <ul className="space-y-4 text-offwhite/80 leading-relaxed">
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Immersive installations / performance or behavioral art</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Archetypal dream narratives</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Cross-disciplinary creation at the intersection of art, technology, and healing</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Dreams and cultural memory</li>
+                                    </ul>
+                                </Link>
                             </div>
 
                             {/* SenceMaison Criteria */}
-                            <div className="space-y-6 p-8 border border-white/10 hover:border-amber/30 transition-all duration-300">
-                                <div>
-                                    <h3 className="text-2xl font-serif mb-2">SenceMaison</h3>
-                                    <p className="text-xs uppercase tracking-widest text-offwhite/50">Practice × Body × Healing Methodologies</p>
-                                </div>
-                                <ul className="space-y-4 text-offwhite/80 leading-relaxed">
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Founders of body-based or healing practices</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Backgrounds in psychology, neuroscience, or expressive arts therapy</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Practice-led, long-term orientation (not personal-IP-driven monetization)</li>
-                                    <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Repeatable, embodied healing practices</li>
-                                </ul>
+                            <div className="border border-white/10 hover:border-amber/30 transition-all duration-300 group">
+                                <Link href="/maison" className="block w-full h-full p-8 space-y-6">
+                                    <div>
+                                        <h3 className="text-2xl font-serif mb-2 group-hover:text-amber transition-colors">SenceMaison</h3>
+                                        <p className="text-xs uppercase tracking-widest text-offwhite/50">Practice × Body × Healing Methodologies</p>
+                                    </div>
+                                    <ul className="space-y-4 text-offwhite/80 leading-relaxed">
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Founders of body-based or healing practices</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Backgrounds in psychology, neuroscience, or expressive arts therapy</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Practice-led, long-term orientation (not personal-IP-driven monetization)</li>
+                                        <li className="flex items-start gap-3"><span className="text-amber mt-1">✦</span>Repeatable, embodied healing practices</li>
+                                    </ul>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -263,7 +269,7 @@ export default function WellhausPartnerPage() {
                 </section>
 
                 {/* Closing / Inquiry */}
-                <section className="relative z-10 py-32 px-8 text-center">
+                <section id="application" className="relative z-10 py-32 px-8 text-center">
                     <div className="max-w-3xl mx-auto space-y-12">
                         <h2 className="text-4xl md:text-6xl font-serif italic text-white leading-tight">
                             Application / <br /> <span className="text-amber">Collaboration Inquiry</span>

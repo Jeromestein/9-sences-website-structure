@@ -61,9 +61,9 @@ export default function WellhausPage() {
                     </p>
 
                     <div className="pt-12 animate-fade-in-up">
-                        <button className="px-10 py-4 border border-amber/60 text-amber text-sm font-bold uppercase tracking-[0.25em] hover:bg-amber hover:text-void transition-all duration-700 backdrop-blur-sm">
+                        <Link href="/wellhaus/partner#application" className="px-10 py-4 border border-amber/60 text-amber text-sm font-bold uppercase tracking-[0.25em] hover:bg-amber hover:text-void transition-all duration-700 backdrop-blur-sm">
                             Request Access
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

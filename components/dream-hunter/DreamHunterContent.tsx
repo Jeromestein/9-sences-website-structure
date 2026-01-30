@@ -232,7 +232,7 @@ export default function DreamHunterContent() {
                         </p>
                     </div>
                     <div className="space-y-6 border-t md:border-t-0 md:border-l border-stone-800 pt-8 md:pt-0 md:pl-16">
-                        <h3 className="text-xl font-serif text-stone-200 uppercase tracking-widest">Request Access</h3>
+                        <Link href="/wellhaus/partner#a pplication"><h3 className="text-xl font-serif text-stone-200 uppercase tracking-widest">Request Access</h3></Link>
                         <div className="p-6 bg-stone-900/50 border border-dashed border-stone-800 text-stone-500 text-sm">
                             <p className="mb-2 uppercase tracking-wide">Coming Later</p>
                             <p>Collaborative IP Products / Art / Derivatives</p>

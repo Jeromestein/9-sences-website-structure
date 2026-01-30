@@ -352,7 +352,7 @@ export default function MaisonPage() {
 
                         <div>
                             <Link
-                                href="/contact"
+                                href="/wellhaus/partner#application"
                                 className="group relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-transparent border border-stone-600 rounded-full transition-all duration-300 ease-out hover:border-[#F5F2EB] hover:bg-stone-800/50"
                             >
                                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#F5F2EB] rounded-full group-hover:w-80 group-hover:h-80 opacity-10"></span>

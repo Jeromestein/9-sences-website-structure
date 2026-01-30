@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { motion } from "framer-motion"
 
 export default function AccessInquirySection() {
@@ -37,15 +38,19 @@ export default function AccessInquirySection() {
 
                     {/* Right Column: Button */}
                     <div className="flex md:justify-end items-center h-full">
-                        <motion.button
+                        <motion.div
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="px-8 py-4 border border-amber/50 hover:bg-amber hover:text-void transition-all text-sm tracking-widest uppercase font-bold text-amber duration-500"
                         >
-                            Request Access
-                        </motion.button>
+                            <Link
+                                href="/wellhaus/partner#application"
+                                className="px-8 py-4 border border-amber/50 hover:bg-amber hover:text-void transition-all text-sm tracking-widest uppercase font-bold text-amber duration-500 inline-block"
+                            >
+                                Request Access
+                            </Link>
+                        </motion.div>
                     </div>
 
                 </div>
