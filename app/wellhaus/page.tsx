@@ -19,9 +19,9 @@ export default function WellhausPage() {
                         className="h-10 w-auto"
                     />
                 </Link>
-                <div className="text-xs tracking-widest uppercase opacity-70 text-amber/80 font-light">
+                {/* <div className="text-xs tracking-widest uppercase opacity-70 text-amber/80 font-light">
                     Dimension B: The Void
-                </div>
+                </div> */}
             </nav>
 
             {/* Hero Section */}

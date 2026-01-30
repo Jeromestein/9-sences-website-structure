@@ -59,7 +59,7 @@ export default function DreamHunterPageClient() {
                             className="h-10 w-auto"
                         />
                     </Link>
-                    <div className="text-xs tracking-widest uppercase opacity-70">Dimension C: The Narrative</div>
+                    {/* <div className="text-xs tracking-widest uppercase opacity-70">Dimension C: The Narrative</div> */}
                 </nav>
 
                 <section className="relative w-full h-screen flex items-center justify-center p-8 overflow-hidden">
