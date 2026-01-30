@@ -134,22 +134,22 @@ export default function MaisonPage() {
                             </div>
                         </div>
 
-                        {/* 2. Global Collaboration */}
+                        {/* 2. Retreat (Swapped from Row 2, aspect updated to 3/4) */}
                         <div className="space-y-6 group cursor-pointer">
                             <div className="relative aspect-[3/4] bg-stone-200 overflow-hidden">
-                                {/* Image Placeholder: Horizon line or abstract connecting lines (Breadth) */}
-                                <div className="absolute inset-0 bg-[#E8E6E1] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
-                                    {/* [Image: Abstract horizon / lines] */}
-                                    <Image src="/a-chosen-soul-yjRE4-gAnkk-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                {/* Image Placeholder: Nature landscape / sanctuary (Sanctuary) */}
+                                <div className="absolute inset-0 bg-[#F0EFEB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
+                                    {/* [Image: Nature / Wide landscape] */}
+                                    <Image src="/artem-zhyzhyn-L0m-ukSCjcg-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
                                 </div>
                                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                             </div>
                             <div className="text-center space-y-3">
-                                <h3 className="text-2xl font-serif font-light text-stone-800">Global Collaboration</h3>
+                                <h3 className="text-2xl font-serif font-light text-stone-800">Retreat</h3>
                                 <div className="space-y-1">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Paid Experience</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Destination & Local</p>
                                     <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
-                                        A shared field of practice with global practitioners and cultural lineages.
+                                        Immersive pauses designed to recalibrate rhythm and presence.
                                     </p>
                                 </div>
                             </div>
@@ -200,22 +200,22 @@ export default function MaisonPage() {
                             </div>
                         </div>
 
-                        {/* 5. Retreat */}
+                        {/* 5. Global Collaboration (Swapped from Row 1, aspect updated to 4/3) */}
                         <div className="space-y-6 group cursor-pointer">
                             <div className="relative aspect-[4/3] bg-stone-200 overflow-hidden">
-                                {/* Image Placeholder: Nature landscape / sanctuary (Sanctuary) */}
-                                <div className="absolute inset-0 bg-[#F0EFEB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
-                                    {/* [Image: Nature / Wide landscape] */}
-                                    <Image src="/artem-zhyzhyn-L0m-ukSCjcg-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                {/* Image Placeholder: Horizon line or abstract connecting lines (Breadth) */}
+                                <div className="absolute inset-0 bg-[#E8E6E1] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
+                                    {/* [Image: Abstract horizon / lines] */}
+                                    <Image src="/a-chosen-soul-yjRE4-gAnkk-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
                                 </div>
                                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                             </div>
                             <div className="text-center space-y-3">
-                                <h3 className="text-2xl font-serif font-light text-stone-800">Retreat</h3>
+                                <h3 className="text-2xl font-serif font-light text-stone-800">Global Collaboration</h3>
                                 <div className="space-y-1">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Destination & Local</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Paid Experience</p>
                                     <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
-                                        Immersive pauses designed to recalibrate rhythm and presence.
+                                        A shared field of practice with global practitioners and cultural lineages.
                                     </p>
                                 </div>
                             </div>
