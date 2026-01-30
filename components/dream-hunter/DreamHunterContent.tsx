@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Twitter, Instagram } from "lucide-react";
+import DreamHunterCeremony from "./DreamHunterCeremony";
 
 export default function DreamHunterContent() {
     return (
@@ -138,6 +139,9 @@ export default function DreamHunterContent() {
                     </div>
                 </div>
             </section>
+
+            {/* Ceremony Section */}
+            <DreamHunterCeremony />
 
             {/* Dream Pool */}
             <section className="w-full py-32 px-8 relative overflow-hidden">
