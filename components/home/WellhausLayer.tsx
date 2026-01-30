@@ -27,9 +27,9 @@ export default function WellhausLayer() {
                             transition={{ duration: 0.8 }}
                         >
                             <Link href="/wellhaus" className="block group">
-                                <h2 className="font-serif text-5xl md:text-6xl text-amber font-medium transition-colors duration-500 drop-shadow-[0_0_15px_rgba(212,165,116,0.3)]">
-                                    Sence 91. <br />
-                                    <span className="italic text-offwhite/80 group-hover:text-amber transition-colors">Wellhaus</span>
+                                <h2 className="font-serif text-5xl md:text-6xl font-medium text-offwhite/80 group-hover:text-amber transition-colors">
+                                    Sence 91.<br />
+                                    <span className="italic text-amber transition-colors duration-500 drop-shadow-[0_0_15px_rgba(212,165,116,0.3)]">Wellhaus</span>
                                 </h2>
                             </Link>
                         </motion.div>
