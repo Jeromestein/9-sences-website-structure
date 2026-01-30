@@ -134,7 +134,16 @@ function OrbitingOrbs() {
     );
 }
 
-export default function DreamHunterHeroScene() {
+function OrbitingAccents() {
+    return (
+        <>
+            <OrbitingHalo />
+            <OrbitingOrbs />
+        </>
+    );
+}
+
+export default function DreamHunterHeroScene({ showOrbit = true }: { showOrbit?: boolean }) {
     return (
         <Canvas
             camera={{ position: [0, 0.6, 4.6], fov: 35, near: 0.1, far: 100 }}
@@ -149,8 +158,7 @@ export default function DreamHunterHeroScene() {
                 <directionalLight position={[-5, -3, 3]} intensity={0.6} color={0xbda07a} />
                 <pointLight position={[0, 2, 6]} intensity={0.6} color={0xfff1d6} />
 
-                <OrbitingHalo />
-                <OrbitingOrbs />
+                {showOrbit ? <OrbitingAccents /> : null}
 
                 <Float speed={0.9} rotationIntensity={0.15} floatIntensity={0.3} floatingRange={[-0.15, 0.2]}>
                     <DreamModel />

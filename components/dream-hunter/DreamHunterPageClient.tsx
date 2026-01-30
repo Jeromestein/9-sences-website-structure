@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import DreamHunterHeroScene from "@/components/dream-hunter/DreamHunterHeroScene";
+import AudioControl from "@/components/ui/AudioControl";
 
 function LoadingOverlay({ progress }: { progress: number }) {
     const label = useMemo(() => `${Math.round(progress)}%`, [progress]);
@@ -63,7 +64,7 @@ export default function DreamHunterPageClient() {
 
                 <section className="relative w-full h-screen flex items-center justify-center p-8 overflow-hidden">
                     <div className="absolute inset-0 z-0">
-                        <DreamHunterHeroScene />
+                        <DreamHunterHeroScene showOrbit={false} />
                     </div>
                     <div className="absolute inset-0 z-[1] bg-gradient-to-b from-neutral-900/30 via-neutral-900/35 to-neutral-900/85" />
                     <div className="absolute inset-0 z-[2] opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
@@ -103,6 +104,7 @@ export default function DreamHunterPageClient() {
                 <footer className="w-full py-12 px-8 border-t border-stone-800 text-center text-stone-500 text-sm">
                     <p>&copy; {new Date().getFullYear()} 9Sences. All rights reserved.</p>
                 </footer>
+                <AudioControl src="/dark-ambient-soundscape-dreamscape-456642.mp3" />
             </div>
         </main>
     );
