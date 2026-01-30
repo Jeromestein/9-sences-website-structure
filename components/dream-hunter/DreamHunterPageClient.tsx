@@ -79,20 +79,13 @@ export default function DreamHunterPageClient() {
                     <div className="absolute inset-0 z-[1] bg-gradient-to-b from-neutral-900/30 via-neutral-900/35 to-neutral-900/85" />
                     <div className="absolute inset-0 z-[2] opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
 
-                    <div className="max-w-5xl w-full text-center space-y-8 z-10 px-4">
-                        <span className="block text-xs font-bold tracking-[0.2em] uppercase text-stone-400">
-                            The First Global
+                    <div className="max-w-5xl w-full text-center space-y-2 z-10 px-4 pointer-events-none select-none mix-blend-difference">
+                        <span className="block text-xs font-bold tracking-[0.3em] uppercase text-stone-500/80 mb-4">
+                            Dimension C
                         </span>
-                        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl italic leading-tight text-transparent bg-clip-text bg-gradient-to-b from-stone-100 to-stone-400">
-                            Dream Hunter<br />Initiation System
+                        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl italic leading-tight text-stone-200/90 opacity-80">
+                            Dream Hunter
                         </h1>
-                        <div className="font-serif text-lg md:text-xl text-stone-300 italic max-w-3xl mx-auto space-y-1 leading-relaxed opacity-90 pt-4">
-                            <p>Dream Hunter is a cultural creation program that begins with dreams,</p>
-                            <p>is grounded in psychology, and shaped through AI and artistic storytelling.</p>
-                            <p className="pt-6 text-stone-100 text-xl md:text-2xl">
-                                "It is not designed to test who you are,<br />but to awaken who you are ready to become."
-                            </p>
-                        </div>
                     </div>
                 </section>
 

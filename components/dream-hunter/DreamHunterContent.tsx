@@ -5,6 +5,24 @@ import { ArrowRight, Twitter, Instagram } from "lucide-react";
 export default function DreamHunterContent() {
     return (
         <div className="w-full relative z-10">
+            {/* Introduction - Moved from Hero */}
+            <section className="w-full py-24 px-8 md:px-16 lg:px-24 border-b border-stone-800/30">
+                <div className="max-w-4xl mx-auto text-center space-y-12">
+                    <span className="block text-xs font-bold tracking-[0.2em] uppercase text-stone-400">
+                        The First Global
+                    </span>
+                    <h2 className="text-4xl md:text-6xl font-serif italic text-transparent bg-clip-text bg-gradient-to-b from-stone-100 to-stone-400 leading-tight">
+                        Dream Hunter<br />Initiation System
+                    </h2>
+                    <div className="readable-panel space-y-6 text-lg md:text-xl text-stone-300 leading-relaxed font-light p-8 md:p-12">
+                        <p>Dream Hunter is a cultural creation program that begins with dreams, is grounded in psychology, and shaped through AI and artistic storytelling.</p>
+                        <p className="text-stone-100 text-xl md:text-2xl pt-4">
+                            "It is not designed to test who you are,<br />but to awaken who you are ready to become."
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             {/* What Is Dream Hunter */}
             <section className="w-full py-24 px-8 md:px-16 lg:px-24">
                 <div className="max-w-4xl mx-auto text-center space-y-12">
