@@ -50,7 +50,7 @@ export default function DreamHunterLayer() {
                     className="order-1 md:order-2 relative aspect-[4/5] bg-neutral-900 overflow-hidden shadow-2xl"
                 >
                     <Image
-                        src="/dream-hunter.png"
+                        src="/dream-hunter-1.png"
                         alt="Dream Hunter"
                         fill
                         className="object-cover"

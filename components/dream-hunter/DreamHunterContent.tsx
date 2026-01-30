@@ -115,24 +115,24 @@ export default function DreamHunterContent() {
                                 <li className="flex gap-4">
                                     <span className="w-1.5 h-1.5 mt-2.5 rounded-full bg-stone-600/60 shrink-0" />
                                     <span className="text-stone-300">
-                                        <strong className="text-stone-100 block mb-1">AI × Art</strong>
+                                        <strong className="text-stone-100 block mb-1">AI × Art x Artist</strong>
                                         Personalized dream creation
                                     </span>
                                 </li>
                                 <li className="flex gap-4">
                                     <span className="w-1.5 h-1.5 mt-2.5 rounded-full bg-stone-600/60 shrink-0" />
                                     <span className="text-stone-300">
-                                        <strong className="text-stone-100 block mb-1">Multi-city Pop-ups</strong>
-                                        Museum pop-ups & open ticketed experiences
+                                        <strong className="text-stone-100 block mb-1">Pop ups × Exhibition</strong>
+                                        Museum pop-ups, open ticketed experiences & private extensions at Sence 91.Wellhaus
                                     </span>
                                 </li>
-                                <li className="flex gap-4">
+                                {/* <li className="flex gap-4">
                                     <span className="w-1.5 h-1.5 mt-2.5 rounded-full bg-stone-600/60 shrink-0" />
                                     <span className="text-stone-300">
                                         <strong className="text-stone-100 block mb-1">Private Extensions</strong>
                                         At Sence 91 · Wellhaus
                                     </span>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>
