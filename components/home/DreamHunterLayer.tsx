@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function DreamHunterLayer() {
     return (
@@ -48,12 +49,12 @@ export default function DreamHunterLayer() {
                     transition={{ duration: 1 }}
                     className="order-1 md:order-2 relative aspect-[4/5] bg-neutral-900 overflow-hidden shadow-2xl"
                 >
-                    {/* Placeholder for "Raw Material / Abstract Art" */}
-                    <div className="absolute inset-0 bg-stone/10 flex items-center justify-center opacity-30">
-                        <span className="font-mono text-sm">[Raw Material / Texture]</span>
-                    </div>
-                    {/* Decorative element resembling 'Raw' aesthetic */}
-                    <div className="absolute top-10 right-10 w-24 h-24 bg-white mix-blend-overlay opacity-10 rotate-12 blur-xl"></div>
+                    <Image
+                        src="/dream-hunter.png"
+                        alt="Dream Hunter"
+                        fill
+                        className="object-cover"
+                    />
                 </motion.div>
             </div>
         </section>

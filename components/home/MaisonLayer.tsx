@@ -18,8 +18,14 @@ export default function MaisonLayer() {
                     transition={{ duration: 1 }}
                     className="relative aspect-square md:aspect-[4/3] bg-white/50 backdrop-blur-sm border border-foreground/10 shadow-sm flex items-center justify-center overflow-hidden"
                 >
-                    <span className="font-mono text-sm text-sage">[Diffused Light / Sanctuary]</span>
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-transparent"></div>
+                    <video
+                        src="/Meditative_Water_Ripples_Video.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply"
+                    />
                 </motion.div>
 
                 {/* Content Side */}

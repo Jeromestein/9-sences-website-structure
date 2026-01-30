@@ -9,8 +9,8 @@ export default function WellhausLayer() {
             {/* Ambient Amber Glow - Theme B */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
 
-            <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-16 items-start justify-between relative z-10">
-                <div className="readable-panel md:w-1/2 space-y-10 z-10 bg-void/40 border-amber/10 backdrop-blur-md">
+            <div className="max-w-screen-xl mx-auto relative z-10">
+                <div className="readable-panel w-full space-y-10 z-10 bg-void/40 border-amber/10 backdrop-blur-md">
                     <div className="space-y-6">
                         <motion.span
                             initial={{ opacity: 0 }}
@@ -34,22 +34,24 @@ export default function WellhausLayer() {
                             </Link>
                         </motion.div>
 
-                        <p className="text-xl font-normal text-offwhite/70 max-w-md">
+                        <p className="text-xl font-normal text-offwhite/70 max-w-2xl">
                             An invite-only cultural and experiential platform.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm text-offwhite/60 font-medium">
-                        <ul className="space-y-2">
-                            <li>Strategic Collaborations</li>
-                            <li>Pop-up Environments</li>
-                            <li>Long-term Brand Value</li>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 text-sm text-offwhite/60 font-medium">
+                        <ul className="space-y-4 text-lg">
+                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-amber/50 rounded-full"></span>Strategic Collaborations</li>
+                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-amber/50 rounded-full"></span>Pop-up Environments</li>
+                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-amber/50 rounded-full"></span>Long-term Brand Value</li>
                         </ul>
 
-                        <div className="border-l border-amber/30 pl-6">
-                            <p className="uppercase tracking-widest text-xs mb-2 text-amber font-bold">Exclusivity</p>
-                            <p>Not public-facing.</p>
-                            <p>Not ticketed.</p>
+                        <div className="border-l border-amber/30 pl-8">
+                            <p className="uppercase tracking-widest text-xs mb-4 text-amber font-bold">Exclusivity</p>
+                            <div className="space-y-2 text-lg">
+                                <p>Not public-facing.</p>
+                                <p>Not ticketed.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -57,43 +59,22 @@ export default function WellhausLayer() {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.4 }}
-                        className="pt-2"
+                        className="pt-8 border-t border-white/5 flex flex-col md:flex-row md:items-end justify-between gap-6"
                     >
-                        {/* <button className="px-8 py-4 border border-amber/50 hover:bg-amber hover:text-void transition-all text-sm tracking-widest uppercase font-bold text-amber duration-500">
-                            Request Access
-                        </button> */}
-                        <p className="font-serif text-2xl md:text-3xl italic text-amber/80">
-                            "Where selection creates value."
-                        </p>
-                        <p className="mt-4 text-xs text-offwhite/50">
-                            Based on curated access, cultural positioning, brand & creator alignment.
+                        <div>
+                            <p className="font-serif text-2xl md:text-3xl italic text-amber/80">
+                                "Where selection creates value."
+                            </p>
+                            <p className="mt-4 text-xs text-offwhite/50">
+                                Based on curated access, cultural positioning, brand & creator alignment.
+                            </p>
+                        </div>
+
+                        <p className="text-xs text-offwhite/30 md:text-right max-w-xs">
+                            Each operates independently, yet compounds value within the 9Sences ecosystem.
                         </p>
                     </motion.div>
                 </div>
-
-                {/* Tagline / Visual */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2 }}
-                    className="md:w-1/3 md:ml-auto md:text-right mt-12 md:mt-0"
-                >
-                    <div className="aspect-[3/4] bg-void/50 border border-amber/20 relative overflow-hidden group backdrop-blur-sm">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            {/* <span className="font-serif text-3xl md:text-4xl text-center px-6 italic text-amber/80 group-hover:text-amber transition-colors">
-                                "Where selection creates value."
-                            </span> */}
-                        </div>
-                        {/* Void Light Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent opacity-80" />
-                        <div className="absolute inset-0 bg-amber/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                    </div>
-                    <p className="mt-4 text-xs text-offwhite/30">
-                        Each operates independently, yet compounds value within the 9Sences ecosystem.
-                    </p>
-
-                </motion.div>
             </div>
         </section>
     )
