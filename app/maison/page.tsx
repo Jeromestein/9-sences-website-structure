@@ -29,14 +29,14 @@ export default function MaisonPage() {
                 <VideoBackground src="/Meditative_Water_Ripples_Video.mp4" opacity={0.6} className="grayscale-[20%] contrast-[90%]" />
 
                 <div className="max-w-5xl w-full text-center space-y-12 z-10 pt-20">
-                    <h1 className="font-serif text-7xl md:text-9xl font-light italic tracking-tight text-stone-900 opacity-90">
+                    <h1 className="font-serif text-5xl sm:text-7xl md:text-9xl font-light italic tracking-tight text-stone-900 opacity-90">
                         SenceMaison
                     </h1>
                     <div className="max-w-xl mx-auto space-y-6">
                         <p className="font-serif text-2xl md:text-3xl text-stone-700 italic font-light leading-relaxed">
                             "Where wellness identity takes form"
                         </p>
-                        <div className="w-px h-16 bg-stone-400/50 mx-auto"></div>
+                        {/* <div className="w-px h-16 bg-stone-400/50 mx-auto"></div> */}
                         <p className="text-s font-sans tracking-[0.25em] uppercase text-stone-700 leading-loose">
                             A creative wellness space<br />
                             at the intersection of aesthetics & community
@@ -57,7 +57,6 @@ export default function MaisonPage() {
                         {/* Left: Text */}
                         <div className="lg:col-span-5 space-y-16 pt-12">
                             <div className="space-y-6">
-                                <span className="block text-[10px] tracking-[0.25em] uppercase text-stone-400">01 — Experience</span>
                                 <h2 className="text-5xl md:text-6xl font-serif font-light text-stone-900 leading-[1.1]">
                                     Practice-led <br />
                                     <span className="italic text-stone-500">healing.</span>
@@ -107,7 +106,6 @@ export default function MaisonPage() {
                 {/* Offerings / Curated Formats */}
                 <section className="w-full py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
                     <div className="text-center mb-20 space-y-4">
-                        <span className="block text-[10px] tracking-[0.25em] uppercase text-stone-400">02 — Offerings</span>
                         <h2 className="text-4xl md:text-5xl font-serif font-light text-stone-900 italic">Curated Formats</h2>
                     </div>
 
@@ -126,7 +124,7 @@ export default function MaisonPage() {
                             <div className="text-center space-y-3">
                                 <h3 className="text-2xl font-serif font-light text-stone-800">Access Practice</h3>
                                 <div className="space-y-1">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Contribution-based · Supported</p>
+                                    {/* <p className="text-[10px] uppercase tracking-widest text-stone-500">Contribution-based · Supported</p> */}
                                     <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
                                         Guided with presence by Cindy.
                                     </p>
@@ -147,7 +145,7 @@ export default function MaisonPage() {
                             <div className="text-center space-y-3">
                                 <h3 className="text-2xl font-serif font-light text-stone-800">Retreat</h3>
                                 <div className="space-y-1">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Destination & Local</p>
+                                    {/* <p className="text-[10px] uppercase tracking-widest text-stone-500">Destination & Local</p> */}
                                     <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
                                         Immersive pauses designed to recalibrate rhythm and presence.
                                     </p>
@@ -168,7 +166,7 @@ export default function MaisonPage() {
                             <div className="text-center space-y-3">
                                 <h3 className="text-2xl font-serif font-light text-stone-800">Event</h3>
                                 <div className="space-y-1">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Ticketed</p>
+                                    {/* <p className="text-[10px] uppercase tracking-widest text-stone-500">Ticketed</p> */}
                                     <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
                                         Curated in-person moments where practice becomes collective.
                                     </p>
@@ -190,11 +188,11 @@ export default function MaisonPage() {
                                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                             </div>
                             <div className="text-center space-y-3">
-                                <h3 className="text-2xl font-serif font-light text-stone-800">Dear Me</h3>
+                                <h3 className="text-2xl font-serif font-light text-stone-800">The Inner Light</h3>
                                 <div className="space-y-1">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">In-Person Workshop</p>
+                                    {/* <p className="text-[10px] uppercase tracking-widest text-stone-500">Inner Workshop</p> */}
                                     <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
-                                        An inner dialogue space for reflection, inquiry, and emotional clarity.
+                                        An inner workshop for reflection, inquiry, and emotional clarity.
                                     </p>
                                 </div>
                             </div>
@@ -213,7 +211,7 @@ export default function MaisonPage() {
                             <div className="text-center space-y-3">
                                 <h3 className="text-2xl font-serif font-light text-stone-800">Global Collaboration</h3>
                                 <div className="space-y-1">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-500">Paid Experience</p>
+                                    {/* <p className="text-[10px] uppercase tracking-widest text-stone-500">Paid Experience</p> */}
                                     <p className="text-sm font-light text-stone-600 leading-relaxed max-w-xs mx-auto">
                                         A shared field of practice with global practitioners and cultural lineages.
                                     </p>
@@ -226,8 +224,6 @@ export default function MaisonPage() {
                 {/* Retreat & Global - High Whitespace */}
                 <section className="w-full py-32 md:py-48 px-8 bg-[#EBE9E3]">
                     <div className="max-w-4xl mx-auto text-center space-y-16">
-                        <span className="block text-[10px] tracking-[0.25em] uppercase text-stone-400">02 — Global</span>
-
                         <h2 className="text-4xl md:text-5xl font-serif font-light text-stone-800 leading-tight">
                             Retreats are not escapes,<br />
                             but <span className="italic font-normal">intentional pauses.</span>
@@ -252,7 +248,6 @@ export default function MaisonPage() {
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-stone-300 pt-12">
                         <div className="md:col-span-4">
                             <h2 className="text-3xl font-serif font-light italic text-stone-900">Collaboration</h2>
-                            <p className="mt-4 text-[10px] uppercase tracking-widest text-stone-400">03 — Formats</p>
                         </div>
 
                         <div className="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
@@ -288,7 +283,6 @@ export default function MaisonPage() {
                     <div className="max-w-6xl mx-auto">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
                             <div className="space-y-8 order-2 md:order-1">
-                                <div className="w-12 h-px bg-stone-400"></div>
                                 <h2 className="text-3xl font-serif font-light text-stone-900">
                                     SenceMaison • <br />
                                     <span className="italic text-stone-500">Wellhaus Partner</span>
