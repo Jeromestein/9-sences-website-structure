@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Twitter, Instagram } from "lucide-react";
 
 export default function DreamHunterContent() {
@@ -123,43 +124,56 @@ export default function DreamHunterContent() {
             {/* Dream Pool */}
             <section className="w-full py-32 px-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-amber-900/5 mix-blend-plus-lighter pointer-events-none" />
-                <div className="max-w-4xl mx-auto text-center relative z-10 space-y-10">
-                    <h2 className="text-4xl md:text-6xl font-serif italic text-stone-200">Dream Pool</h2>
-                    <div className="readable-panel inline-block text-left p-8 md:p-12">
-                        <div className="text-lg md:text-xl text-stone-300 space-y-6 leading-relaxed font-light text-center">
-                            <p>
-                                Dream Pool is the collaborative core of Dream Hunter.<br className="hidden md:block" />
-                                Here, Dreamers do not simply share dreams—<br className="hidden md:block" />
-                                they become anchors for one another in reality.
-                            </p>
-                            <p>
-                                Dreams are not measured by their scale,<br className="hidden md:block" />
-                                but by the sincerity of action.<br className="hidden md:block" />
-                                Step by step, they are held, supported,<br className="hidden md:block" />
-                                and gradually brought into being together.
-                            </p>
+
+                <div className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div className="order-2 md:order-1 space-y-10 text-center md:text-left">
+                        <h2 className="text-4xl md:text-6xl font-serif italic text-stone-200">Dream Pool</h2>
+
+                        <div className="readable-panel inline-block text-left p-8 md:p-12 w-full">
+                            <div className="text-lg md:text-xl text-stone-300 space-y-6 leading-relaxed font-light">
+                                <p>
+                                    Dream Pool is the collaborative core of Dream Hunter.<br className="hidden md:block" />
+                                    Here, Dreamers do not simply share dreams—<br className="hidden md:block" />
+                                    they become anchors for one another in reality.
+                                </p>
+                                <p>
+                                    Dreams are not measured by their scale,<br className="hidden md:block" />
+                                    but by the sincerity of action.<br className="hidden md:block" />
+                                    Step by step, they are held, supported,<br className="hidden md:block" />
+                                    and gradually brought into being together.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-6 pt-4">
+                            <button className="px-8 py-4 bg-amber-900/20 border border-amber-800/40 text-amber-100 hover:bg-amber-900/30 transition-all duration-500 uppercase tracking-widest text-sm">
+                                Dreamer Entry
+                            </button>
+                            <a href="#" className="flex items-center gap-3 text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-widest text-xs">
+                                <span className="p-2 border border-stone-800 rounded-full">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                    </svg>
+                                </span>
+                                <span>Join the Community</span>
+                            </a>
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-8">
-                        <button className="px-8 py-4 bg-amber-900/20 border border-amber-800/40 text-amber-100 hover:bg-amber-900/30 transition-all duration-500 uppercase tracking-widest text-sm">
-                            Dreamer Entry
-                        </button>
-                        <a href="#" className="flex items-center gap-3 text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-widest text-xs">
-                            <span className="p-2 border border-stone-800 rounded-full">
-                                {/* Placeholder icon for social media */}
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                </svg>
-                            </span>
-                            <span>Join the Community</span>
-                        </a>
+                    <div className="order-1 md:order-2 h-full min-h-[500px] relative rounded-2xl overflow-hidden border border-stone-800/50">
+                        <Image
+                            src="/dream-pool.jpeg"
+                            alt="Dream Pool Illustration"
+                            fill
+                            className="object-cover hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-neutral-900/10 mix-blend-multiply" />
                     </div>
                 </div>
             </section>
 
             {/* What Emerges */}
-            <section className="w-full py-24 px-8 border-t border-stone-800/30">
+            < section className="w-full py-24 px-8 border-t border-stone-800/30" >
                 <div className="max-w-3xl mx-auto text-center space-y-12">
                     <span className="block text-xs font-bold tracking-[0.2em] uppercase text-stone-500">
                         What Emerges
@@ -182,10 +196,10 @@ export default function DreamHunterContent() {
                         </p>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Access & Request */}
-            <section className="w-full py-24 px-8 bg-neutral-950">
+            < section className="w-full py-24 px-8 bg-neutral-950" >
                 <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 text-center md:text-left">
                     <div className="space-y-6">
                         <h3 className="text-xl font-serif text-stone-200 uppercase tracking-widest">Access</h3>
@@ -203,7 +217,7 @@ export default function DreamHunterContent() {
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     );
 }
