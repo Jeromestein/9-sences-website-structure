@@ -80,10 +80,10 @@ export default function DreamHunterPageClient() {
                     <div className="absolute inset-0 z-[2] opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
 
                     <div className="max-w-5xl w-full text-center space-y-2 z-10 px-4 pointer-events-none select-none mix-blend-difference">
-                        <span className="block text-xs font-bold tracking-[0.3em] uppercase text-stone-500/80 mb-4">
+                        {/* <span className="block text-xs font-bold tracking-[0.3em] uppercase text-stone-500/80 mb-4">
                             Dimension C
-                        </span>
-                        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl italic leading-tight text-stone-200/90 opacity-80">
+                        </span> */}
+                        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl italic leading-tight text-purple-200/90 opacity-80">
                             Dream Hunter
                         </h1>
                     </div>
