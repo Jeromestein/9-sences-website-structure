@@ -115,15 +115,6 @@ export default function MethodologySection() {
                 </div>
             </Carousel>
 
-            <div className="px-8 md:px-12 lg:px-16 mt-8 max-w-screen-xl mx-auto">
-                <div className="border-t border-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-muted-foreground uppercase tracking-widest gap-4">
-                    <p>© {new Date().getFullYear()} 9Sences. All rights reserved.</p>
-                    <div className="flex gap-6">
-                        <span className="cursor-pointer hover:text-foreground transition-colors">Privacy</span>
-                        <span className="cursor-pointer hover:text-foreground transition-colors">Contact</span>
-                    </div>
-                </div>
-            </div>
         </section>
     )
 }

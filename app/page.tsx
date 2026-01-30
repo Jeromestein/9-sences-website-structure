@@ -2,6 +2,8 @@ import HeroSection from "@/components/home/HeroSection"
 import IntroSection from "@/components/home/IntroSection"
 import EcosystemSection from "@/components/home/EcosystemSection"
 import MethodologySection from "@/components/home/MethodologySection"
+import AccessInquirySection from "@/components/home/AccessInquirySection"
+import FooterSection from "@/components/home/FooterSection"
 import BackgroundManager from "@/components/BackgroundManager"
 import Scene3DHand from "@/components/Scene3D_hand"
 import Scene3DParticle from "@/components/Scene3D_particle"
@@ -25,6 +27,8 @@ export default function Home() {
         <IntroSection />
         <EcosystemSection />
         <MethodologySection />
+        <AccessInquirySection />
+        <FooterSection />
       </div>
     </main>
   )
