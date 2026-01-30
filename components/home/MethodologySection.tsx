@@ -8,6 +8,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 export default function MethodologySection() {
     const pillars = [
@@ -37,7 +38,7 @@ export default function MethodologySection() {
     return (
         <section className="w-full py-24 md:py-32 border-t border-foreground/10 overflow-hidden">
 
-            <Carousel className="w-full max-w-screen-xl mx-auto px-8 md:px-12 lg:px-16" opts={{ align: "start", loop: false }}>
+            <Carousel className="w-full max-w-screen-xl mx-auto px-8 md:px-12 lg:px-16" opts={{ align: "start", loop: true }} plugins={[Autoplay({ delay: 5000 })]}>
                 <CarouselContent className="-ml-4 md:-ml-8">
                     {/* SLIDE 1: How We Work */}
                     <CarouselItem className="pl-4 md:pl-8 basis-[85%] md:basis-full lg:basis-full">
@@ -71,7 +72,7 @@ export default function MethodologySection() {
                         </div>
                     </CarouselItem>
 
-                    {/* SLIDE 2: Who It's For */}
+                    {/* SLIDE 2: For Those Aligned */}
                     <CarouselItem className="pl-4 md:pl-8 basis-[85%] md:basis-full lg:basis-full">
                         <div className="readable-panel space-y-16 h-full">
                             <div className="flex flex-col h-full">
@@ -81,7 +82,7 @@ export default function MethodologySection() {
                                     viewport={{ once: true }}
                                     className="font-serif text-3xl md:text-4xl text-foreground font-medium mb-12"
                                 >
-                                    Who It's For
+                                    For Those Aligned
                                 </motion.h2>
 
                                 <div className="border-t border-foreground/10 pt-12 flex-grow">
