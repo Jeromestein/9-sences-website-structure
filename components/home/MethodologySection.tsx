@@ -49,6 +49,39 @@ export default function MethodologySection() {
                     ))}
                 </div>
 
+                <div className="space-y-12">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="font-serif text-3xl md:text-4xl text-foreground font-medium"
+                    >
+                        Who It's For
+                    </motion.h2>
+                    <div className="border-t border-foreground/10 pt-12">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="space-y-6"
+                        >
+                            <p className="text-xl text-foreground font-normal">We work with aligned partners:</p>
+                            <ul className="space-y-4 pl-8 md:pl-16">
+                                {[
+                                    "Culture-led founders & creators",
+                                    "Wellness & lifestyle brands",
+                                    "Institutions seeking long-term cultural value"
+                                ].map((item, index) => (
+                                    <li key={index} className="flex items-center gap-4 text-muted-foreground text-lg list-disc">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" />
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                    </div>
+                </div>
+
                 <div className="border-t border-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-muted-foreground uppercase tracking-widest gap-4">
                     <p>© {new Date().getFullYear()} 9Sences. All rights reserved.</p>
                     <div className="flex gap-6">
