@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
+import Link from "next/link"
 import Image from "next/image"
 
 export default function HeroSection() {
@@ -18,6 +19,13 @@ export default function HeroSection() {
                         sizes="(min-width: 1024px) 15rem, (min-width: 768px) 13rem, 9rem"
                     />
                 </div>
+            </div>
+
+            {/* Navigation Link */}
+            <div className="absolute top-8 right-8 md:top-12 md:right-12 z-20">
+                <Link href="/wellhaus/partner" className="text-xs md:text-sm uppercase tracking-[0.2em] font-medium text-foreground/80 hover:text-foreground transition-colors">
+                    Partners
+                </Link>
             </div>
 
             {/* Main Content Areas */}
