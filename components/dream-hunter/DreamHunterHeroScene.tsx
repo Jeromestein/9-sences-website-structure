@@ -14,7 +14,7 @@ function DreamModel() {
         const size = new THREE.Vector3();
         box.getSize(size);
         const maxAxis = Math.max(size.x, size.y, size.z) || 1;
-        return (3.2 / maxAxis);
+        return (3.2 / maxAxis) * 8;
     }, [scene]);
 
     useFrame((state) => {
@@ -25,7 +25,7 @@ function DreamModel() {
     });
 
     return (
-        <group ref={groupRef} position={[0, -0.2, 0]}>
+        <group ref={groupRef} position={[0, 0.55, 0]}>
             <Center>
                 <primitive object={scene} scale={normalizedScale} />
             </Center>
@@ -47,7 +47,7 @@ function OrbitingHalo() {
     return (
         <group ref={groupRef}>
             <mesh rotation={[Math.PI / 2, 0, 0]}>
-                <torusGeometry args={[2.6, 0.035, 20, 240]} />
+                <torusGeometry args={[3.4, 0.035, 20, 240]} />
                 <meshStandardMaterial
                     color="#d4a574"
                     emissive="#d4a574"
@@ -59,7 +59,7 @@ function OrbitingHalo() {
                 />
             </mesh>
             <mesh rotation={[Math.PI / 3, Math.PI / 7, 0]}>
-                <torusGeometry args={[2.1, 0.02, 16, 220]} />
+                <torusGeometry args={[2.9, 0.02, 16, 220]} />
                 <meshStandardMaterial
                     color="#8c7355"
                     emissive="#8c7355"
@@ -71,7 +71,7 @@ function OrbitingHalo() {
                 />
             </mesh>
             <mesh rotation={[Math.PI / 2.6, -Math.PI / 5, Math.PI / 10]}>
-                <torusGeometry args={[3.0, 0.015, 12, 180]} />
+                <torusGeometry args={[4.0, 0.015, 12, 180]} />
                 <meshStandardMaterial
                     color="#bfa17b"
                     emissive="#bfa17b"
@@ -90,9 +90,9 @@ function OrbitingOrbs() {
     const orbRefs = useRef<Array<THREE.Mesh | null>>([]);
     const orbs = useMemo(
         () => [
-            { radius: 2.4, speed: 0.5, offset: 0, tilt: 0.4, color: "#f2d3a7" },
-            { radius: 3.1, speed: -0.35, offset: Math.PI * 0.6, tilt: 0.6, color: "#d4a574" },
-            { radius: 2.8, speed: 0.28, offset: Math.PI * 1.2, tilt: 0.5, color: "#bfa17b" },
+            { radius: 3.2, speed: 0.5, offset: 0, tilt: 0.45, color: "#f2d3a7" },
+            { radius: 4.1, speed: -0.35, offset: Math.PI * 0.6, tilt: 0.7, color: "#d4a574" },
+            { radius: 3.6, speed: 0.28, offset: Math.PI * 1.2, tilt: 0.6, color: "#bfa17b" },
         ],
         []
     );
@@ -137,7 +137,7 @@ function OrbitingOrbs() {
 export default function DreamHunterHeroScene() {
     return (
         <Canvas
-            camera={{ position: [0, 0.4, 7.2], fov: 35, near: 0.1, far: 100 }}
+            camera={{ position: [0, 0.6, 4.6], fov: 35, near: 0.1, far: 100 }}
             gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
             dpr={[1, 2]}
             className="h-full w-full"

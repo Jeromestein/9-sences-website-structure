@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import VideoBackground from "@/components/VideoBackground";
 import AudioControl from "@/components/ui/AudioControl";
 
@@ -8,8 +9,14 @@ export default function MaisonPage() {
             <AudioControl src="/meditation-yoga-relaxing-music-380330.mp3" />
             {/* Navigation / Header */}
             <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center">
-                <Link href="/" className="text-xl font-serif italic hover:opacity-70 transition-opacity">
-                    9Sences
+                <Link href="/" className="hover:opacity-70 transition-opacity">
+                    <Image
+                        src="/logo_transparent_dark_v3_cropped.png"
+                        alt="9Sences Logo"
+                        width={120}
+                        height={40}
+                        className="h-10 w-auto"
+                    />
                 </Link>
                 <div className="text-xs tracking-widest uppercase opacity-70">
                     Dimension A: The Sanctuary
