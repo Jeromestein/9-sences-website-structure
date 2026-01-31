@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import DreamHunterHeroScene from "@/components/dream-hunter/DreamHunterHeroScene";
 import DreamHunterContent from "@/components/dream-hunter/DreamHunterContent";
-import AudioControl from "@/components/ui/AudioControl";
+import DreamHunterAudioControl from "@/components/dream-hunter/DreamHunterAudioControl";
 import FooterSection from "@/components/FooterSection";
 import ThemeBodyClass from "@/components/ThemeBodyClass";
 
@@ -96,7 +96,7 @@ export default function DreamHunterPageClient() {
                 <DreamHunterContent />
 
                 <FooterSection />
-                <AudioControl src="/dark-ambient-soundscape-dreamscape-456642.mp3" />
+                <DreamHunterAudioControl src="/dark-ambient-soundscape-dreamscape-456642.mp3" />
             </div>
         </main>
     );

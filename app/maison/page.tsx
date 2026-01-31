@@ -89,8 +89,8 @@ export default function MaisonPage() {
                         <div className="lg:col-span-6 lg:col-start-7 lg:mt-24">
                             <div className="relative aspect-[4/5] overflow-hidden grayscale-[10%]">
                                 <Image
-                                    src="/abstract-dreamlike-ethereal-portrait-shadow-silhou.jpg"
-                                    alt="Abstract ethereal portrait"
+                                    src="/water-wave.jpeg"
+                                    alt="Water wave"
                                     fill
                                     className="object-cover transition-transform duration-[2s] hover:scale-105"
                                 />
@@ -117,7 +117,7 @@ export default function MaisonPage() {
                                 {/* Image Placeholder: Close up of hands or meditation cushion (Intimacy) */}
                                 <div className="absolute inset-0 bg-[#F0EFEB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
                                     {/* [Image: Close-up of hands / texture] */}
-                                    <Image src="/timothee-geenens-ZYNg5xkuDts-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                    <Image src="/woman-kneeling.jpeg" alt="Woman kneeling" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
                                 </div>
                                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                             </div>
@@ -138,7 +138,7 @@ export default function MaisonPage() {
                                 {/* Image Placeholder: Nature landscape / sanctuary (Sanctuary) */}
                                 <div className="absolute inset-0 bg-[#F0EFEB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
                                     {/* [Image: Nature / Wide landscape] */}
-                                    <Image src="/artem-zhyzhyn-L0m-ukSCjcg-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                    <Image src="/window-empty-room.jpeg" alt="Window empty room" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
                                 </div>
                                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                             </div>
@@ -159,7 +159,7 @@ export default function MaisonPage() {
                                 {/* Image Placeholder: Gathering space with warm light (Community) */}
                                 <div className="absolute inset-0 bg-[#F5F2EB] flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest text-center px-4">
                                     {/* [Image: Warm gathering space] */}
-                                    <Image src="/hoi-an-and-da-nang-photographer-Nt1xUopfQEU-unsplash.jpg" alt="Abstract ethereal portrait" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
+                                    <Image src="/green-plant.jpeg" alt="Green plant" fill className="object-cover transition-transform duration-[2s] hover:scale-105" />
                                 </div>
                                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                             </div>

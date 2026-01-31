@@ -3,23 +3,27 @@
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
-interface AudioControlProps {
+interface DreamHunterAudioControlProps {
     src: string
 }
 
-export default function AudioControl({ src }: AudioControlProps) {
+export default function DreamHunterAudioControl({ src }: DreamHunterAudioControlProps) {
     const audioRef = useRef<HTMLAudioElement>(null)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [isMuted, setIsMuted] = useState(true)
     const [hasInteracted, setHasInteracted] = useState(false)
 
     useEffect(() => {
-        // Attempt to autoplay muted on mount
+        // Attempt to autoplay muted on mount to ensure audio is ready
         if (audioRef.current) {
             audioRef.current.volume = 0.5
             audioRef.current.muted = true
             audioRef.current.play().then(() => {
-                setIsPlaying(true)
+                // We don't set isPlaying to true here because visually we want it to look "stopped" (.MOOD) 
+                // until the user interacts or we decide to show "playing" state for muted autoplay.
+                // However, the prompt implies "Stopped = .MOOD", "Playing = ( .MOOD )".
+                // Usually web Autoplay is Muted. If it's muted, is it "playing"? usage varies.
+                // Let's stick to: If user hasn't interacted, show .MOOD (which entices click).
+                // Once clicked, it plays with sound -> ( .MOOD ).
             }).catch(err => {
                 console.log("Autoplay blocked:", err)
             })
@@ -27,7 +31,11 @@ export default function AudioControl({ src }: AudioControlProps) {
 
         return () => {
             if (audioRef.current) {
-                audioRef.current.pause()
+                try {
+                    audioRef.current.pause()
+                } catch (e) {
+                    console.error("Error modifying audio:", e)
+                }
             }
         }
     }, [])
