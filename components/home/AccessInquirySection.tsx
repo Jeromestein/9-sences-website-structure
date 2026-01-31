@@ -7,7 +7,7 @@ export default function AccessInquirySection() {
     return (
         <section className="w-full py-24 md:py-32 border-t border-foreground/10">
             <div className="w-full max-w-screen-xl mx-auto px-8 md:px-12 lg:px-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
+                <div className="readable-panel grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
 
                     {/* Left Column: Title & Text */}
                     <div className="space-y-8">
