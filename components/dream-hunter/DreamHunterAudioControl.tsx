@@ -95,7 +95,8 @@ export default function DreamHunterAudioControl({ src }: DreamHunterAudioControl
                     </AnimatePresence>
 
                     {/* .MOOD Text */}
-                    <span className="relative z-10">.MOOD</span>
+                    <span className="relative z-10">Aura.</span>
+
 
                     {/* Right Parenthesis */}
                     <AnimatePresence>
