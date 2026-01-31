@@ -49,11 +49,21 @@ export default function WellhausPartnerPage() {
                         </h1>
                     </div>
 
-                    <div className="w-24 h-px bg-amber/50 mx-auto my-8"></div>
 
-                    <p className="font-sans text-xl md:text-2xl text-offwhite/90 max-w-3xl mx-auto leading-relaxed">
+                    {/* Desktop Layout */}
+                    <p className="hidden md:block font-sans text-xl md:text-2xl text-offwhite/90 max-w-3xl mx-auto leading-relaxed">
                         Sence 91.Wellhaus <span className="text-amber mx-2">×</span> Dream Hunter <span className="text-amber mx-2">×</span> SenceMaison
                     </p>
+
+                    {/* Mobile Layout */}
+                    <div className="md:hidden font-sans text-xl text-offwhite/90 max-w-3xl mx-auto leading-relaxed flex flex-col items-center justify-center gap-1">
+                        <span className="whitespace-nowrap">
+                            Dream Hunter <span className="text-amber mx-2">×</span> SenceMaison
+                        </span>
+                        <span className="whitespace-nowrap">
+                            Sence 91.Wellhaus
+                        </span>
+                    </div>
                     <p className="font-serif italic text-lg md:text-xl text-offwhite/70 max-w-2xl mx-auto">
                         A long-term co-creation system grounded in real experience—<br />
                         spanning cultural context, dream-based narrative, and practice-led healing.

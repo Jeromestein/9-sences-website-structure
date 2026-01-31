@@ -32,7 +32,7 @@ export default function HeroSection() {
             <div className="relative z-10 h-full w-full pointer-events-none">
 
                 {/* Headline - Top Right */}
-                <div className="absolute top-[18%] right-8 md:right-16 lg:right-20 max-w-xl text-right pointer-events-auto">
+                <div className="absolute top-[18%] w-full md:w-auto left-0 md:left-auto md:right-16 lg:right-20 px-8 md:px-0 max-w-xl md:max-w-3xl mx-auto md:mx-0 text-center md:text-right pointer-events-auto">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -44,12 +44,12 @@ export default function HeroSection() {
                 </div>
 
                 {/* Subtitle - Bottom Left */}
-                <div className="absolute bottom-[20%] left-8 md:left-16 lg:left-20 max-w-md text-left pointer-events-auto">
+                <div className="absolute bottom-[20%] w-full md:w-auto left-0 md:left-16 lg:left-20 px-4 md:px-0 max-w-full md:max-w-md mx-auto md:mx-0 text-center md:text-left pointer-events-auto">
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-xl md:text-2xl font-bold tracking-wide text-muted-foreground uppercase"
+                        className="text-lg sm:text-xl md:text-2xl font-bold tracking-wide text-muted-foreground uppercase whitespace-nowrap"
                     >
                         A Cultural Venture Platform
                     </motion.p>
